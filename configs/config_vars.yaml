@@ -1,0 +1,9 @@
+worker-threads: 4
+worker-fs-threads: 2
+logger-level: debug
+
+is-testing: false
+
+server-port: 8080
+
+dbconnection: 'postgresql://d_korotov:Votorok228@localhost:5432/miet_video_db'
