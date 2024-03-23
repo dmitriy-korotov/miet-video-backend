@@ -1,34 +1,48 @@
 cmake_minimum_required(VERSION 3.12)
 project(miet-video-backend CXX)
 
-# Enable userver libraries that are needed in this project
 set(USERVER_FEATURE_POSTGRESQL ON CACHE BOOL "" FORCE)
 
-# Compatibility mode: some systems don't support these features
 set(USERVER_FEATURE_CRYPTOPP_BLAKE2 OFF CACHE BOOL "" FORCE)
 set(USERVER_FEATURE_GRPC_CHANNELZ OFF CACHE BOOL "" FORCE)
 set(USERVER_FEATURE_REDIS_HI_MALLOC ON CACHE BOOL "" FORCE)
 
 
-# Adding userver dependency
+
 add_subdirectory(third_party/userver)
 userver_setup_environment()
 
 
-# Common sources
+
+set(MIET_VIDEO_HANDLERS_DIR src/miet/handlers)
+set(MIET_VIDEO_DB_DIR src/miet/db)
+
+set(MIET_VIDEO_HANDLERS_SOURCE
+    ${MIET_VIDEO_HANDLERS_DIR}/registration_handler.hpp
+    ${MIET_VIDEO_HANDLERS_DIR}/registration_handler.cpp
+)
+
+set(MIET_VIDEO_DB_SOURCE
+    ${MIET_VIDEO_DB_DIR}/db_component.hpp
+    ${MIET_VIDEO_DB_DIR}/db_component.cpp
+)
+
+
+
 add_library(${PROJECT_NAME}_objs OBJECT
-    src/hello.hpp
-    src/hello.cpp
+    ${MIET_VIDEO_HANDLERS_SOURCE}
+    ${MIET_VIDEO_DB_SOURCE}    
 )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-postgresql)
 
 
-# The Service
+
 add_executable(${PROJECT_NAME} src/main.cpp)
+target_include_directories(${PROJECT_NAME} PRIVATE src)
 target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}_objs)
 
 
-# Unit Tests
+
 add_executable(${PROJECT_NAME}_unittest
     src/hello_test.cpp
 )
@@ -44,13 +58,13 @@ target_link_libraries(${PROJECT_NAME}_benchmark PRIVATE ${PROJECT_NAME}_objs use
 add_google_benchmark_tests(${PROJECT_NAME}_benchmark)
 
 
-# Functional Tests
+
 include(UserverTestsuite)
 
 userver_testsuite_add_simple()
 
 
-# Install
+
 include(GNUInstallDirs)
 
 if(DEFINED ENV{PREFIX})
