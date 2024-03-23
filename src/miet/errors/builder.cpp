@@ -14,12 +14,6 @@ namespace miet_video
         return *this;
     }
 
-    auto ErrorBuilder::setErrorCode(uint64_t error_code) noexcept -> ErrorBuilder&
-    {
-        m_error_code = error_code;
-        return *this;
-    }
-
     auto ErrorBuilder::build() const noexcept -> std::string
     {
         ValueBuilder result_builder;
@@ -28,12 +22,5 @@ namespace miet_video
         error_bulder.EmplaceNocheck("error_message", m_error_message);
         result_builder.EmplaceNocheck("error", error_bulder);
         return ToString(result_builder.ExtractValue());
-    }
-
-    std::string BuildError(uint64_t error_code, std::string error_message) noexcept
-    {
-        return ErrorBuilder().setErrorCode(error_code)
-                             .setErrorMessage(std::move(error_message))
-                             .build();
     }
 }

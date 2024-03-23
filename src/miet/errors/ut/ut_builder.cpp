@@ -40,3 +40,18 @@ TEST(ErrorsBuilderTest, ErrorBuilderFunction)
     std::string expect2 = R"({"error":{"error_code":200,"error_message":"No error"}})";
     EXPECT_EQ(miet_video::BuildError(error_code, error_message), expect2);
 }
+
+enum class EnumCode : uint16_t
+{
+    One = 1, 
+    Two,
+    Three
+};
+
+TEST(ErrorsBuilderTest, BuildWithEnumErrorCode)
+{
+    auto error_code = EnumCode::Three;
+    auto error_message = "No error";
+    std::string expect2 = R"({"error":{"error_code":3,"error_message":"No error"}})";
+    EXPECT_EQ(miet_video::BuildError(error_code, error_message), expect2);
+}
