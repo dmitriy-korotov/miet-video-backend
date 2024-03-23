@@ -29,4 +29,11 @@ namespace miet_video
         result_builder.EmplaceNocheck("error", error_bulder);
         return ToString(result_builder.ExtractValue());
     }
+
+    std::string BuildError(uint64_t error_code, std::string error_message) noexcept
+    {
+        return ErrorBuilder().setErrorCode(error_code)
+                             .setErrorMessage(std::move(error_message))
+                             .build();
+    }
 }

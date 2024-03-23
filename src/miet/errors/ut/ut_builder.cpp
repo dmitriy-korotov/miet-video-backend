@@ -32,3 +32,11 @@ TEST(ErrorsBuilderTest, DoubleSetErrorBuild)
     std::string expect2 = R"({"error":{"error_code":200,"error_message":"No error"}})";
     EXPECT_EQ(builder.build(), expect2);
 }
+
+TEST(ErrorsBuilderTest, ErrorBuilderFunction)
+{
+    auto error_code = 200;
+    auto error_message = "No error";
+    std::string expect2 = R"({"error":{"error_code":200,"error_message":"No error"}})";
+    EXPECT_EQ(miet_video::BuildError(error_code, error_message), expect2);
+}

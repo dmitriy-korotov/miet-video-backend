@@ -22,4 +22,6 @@ namespace miet_video
         uint64_t m_error_code = 0;
 
     };
+
+    std::string BuildError(uint64_t error_code, std::string error_message) noexcept;
 }
