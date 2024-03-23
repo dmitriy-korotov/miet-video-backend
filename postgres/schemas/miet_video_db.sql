@@ -1,0 +1,13 @@
+DROP SCHEMA IF EXISTS miet_video CASCADE;
+
+CREATE SCHEMA IF NOT EXISTS miet_video;
+
+CREATE TABLE IF NOT EXISTS miet_video.users (
+    user_id VARCHAR(100) PRIMARY KEY,
+    login INTEGER PRIMARY KEY,
+    password VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS miet_video.students_data (
+    user_id VARCHAR(100) PRIMARY KEY
+);
