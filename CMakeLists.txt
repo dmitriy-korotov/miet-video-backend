@@ -31,6 +31,8 @@ set(MIET_VIDEO_HANDLERS_SOURCE
 set(MIET_VIDEO_DB_SOURCE
     ${MIET_VIDEO_DB_DIR}/db_component.hpp
     ${MIET_VIDEO_DB_DIR}/db_component.cpp
+    
+    ${MIET_VIDEO_DB_DIR}/tables/users_table.hpp
 )
 
 
@@ -40,12 +42,12 @@ add_library(${PROJECT_NAME}_objs OBJECT
     ${MIET_VIDEO_DB_SOURCE}    
     ${MIET_VIDEO_ERRORS_SOURCE}    
 )
+target_include_directories(${PROJECT_NAME}_objs PUBLIC src)
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-postgresql)
 
 
 
 add_executable(${PROJECT_NAME} src/main.cpp)
-target_include_directories(${PROJECT_NAME} PRIVATE src)
 target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}_objs)
 
 
