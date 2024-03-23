@@ -1,5 +1,7 @@
 __pycache__
 build*
+!build*.cpp
+!build*.hpp
 compile_commands.json
 .cache/
 .ccache/

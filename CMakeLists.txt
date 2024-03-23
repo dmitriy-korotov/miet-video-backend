@@ -16,6 +16,12 @@ userver_setup_environment()
 
 set(MIET_VIDEO_HANDLERS_DIR src/miet/handlers)
 set(MIET_VIDEO_DB_DIR src/miet/db)
+set(MIET_VIDEO_ERRORS_DIR src/miet/errors)
+
+set(MIET_VIDEO_ERRORS_SOURCE
+    ${MIET_VIDEO_ERRORS_DIR}/builder.hpp
+    ${MIET_VIDEO_ERRORS_DIR}/builder.cpp
+)
 
 set(MIET_VIDEO_HANDLERS_SOURCE
     ${MIET_VIDEO_HANDLERS_DIR}/registration_handler.hpp
@@ -32,6 +38,7 @@ set(MIET_VIDEO_DB_SOURCE
 add_library(${PROJECT_NAME}_objs OBJECT
     ${MIET_VIDEO_HANDLERS_SOURCE}
     ${MIET_VIDEO_DB_SOURCE}    
+    ${MIET_VIDEO_ERRORS_SOURCE}    
 )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-postgresql)
 
@@ -44,6 +51,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}_objs)
 
 
 add_executable(${PROJECT_NAME}_unittest
+    ${MIET_VIDEO_ERRORS_DIR}/ut/ut_builder.cpp
     src/hello_test.cpp
 )
 target_link_libraries(${PROJECT_NAME}_unittest PRIVATE ${PROJECT_NAME}_objs userver-utest)
