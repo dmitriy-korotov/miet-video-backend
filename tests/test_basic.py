@@ -1,39 +1,17 @@
 import pytest
+import json
 
 from testsuite.databases import pgsql
 
 
-# Start the tests via `make test-debug` or `make test-release`
-
-
-async def test_first_time_users(service_client):
-    response = await service_client.post(
-        '/v1/hello',
-        params={'name': 'userver'},
-    )
+async def test_service_ping(service_client):
+    response = await service_client.get('/ping')
     assert response.status == 200
-    assert response.text == 'Hello, userver!\n'
 
 
-async def test_db_updates(service_client):
-    response = await service_client.post('/v1/hello', params={'name': 'World'})
-    assert response.status == 200
-    assert response.text == 'Hello, World!\n'
-
-    response = await service_client.post('/v1/hello', params={'name': 'World'})
-    assert response.status == 200
-    assert response.text == 'Hi again, World!\n'
-
-    response = await service_client.post('/v1/hello', params={'name': 'World'})
-    assert response.status == 200
-    assert response.text == 'Hi again, World!\n'
-
-
-@pytest.mark.pgsql('db_1', files=['initial_data.sql'])
-async def test_db_initial_data(service_client):
-    response = await service_client.post(
-        '/v1/hello',
-        params={'name': 'user-from-initial_data.sql'},
-    )
-    assert response.status == 200
-    assert response.text == 'Hi again, user-from-initial_data.sql!\n'
+async def test_invalid_user_json(service_client):
+    response = await service_client.post('/v1/users')
+    assert response.status == 400
+    responseJson = json.loads(response.text)
+    assert responseJson["error"]["error_code"] == 400
+    assert responseJson["error"]["error_message"] == "Invalid JSON format"

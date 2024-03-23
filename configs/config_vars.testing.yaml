@@ -4,5 +4,6 @@ logger-level: debug
 
 is-testing: true
 
-# pg_service_template_db_1 is the service name + _ + filename of the db_1.sql
-dbconnection: 'postgresql://d_korotov:Votorok228@localhost:5432/miet_video_db_1'
+server-port: 8080
+
+dbconnection: 'postgresql://d_korotov:Votorok228@localhost:5432/miet_video_db'
