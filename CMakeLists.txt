@@ -1,4 +1,9 @@
 cmake_minimum_required(VERSION 3.12)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 project(miet-video-backend CXX)
 
 set(USERVER_FEATURE_POSTGRESQL ON CACHE BOOL "" FORCE)
@@ -14,13 +19,25 @@ userver_setup_environment()
 
 
 
+set(MIET_VIDEO_CLIENTS_DIR src/miet/clients)
 set(MIET_VIDEO_HANDLERS_DIR src/miet/handlers)
 set(MIET_VIDEO_DB_DIR src/miet/db)
 set(MIET_VIDEO_ERRORS_DIR src/miet/errors)
+set(MIET_VIDEO_MODELS_DIR src/miet/models)
 
 set(MIET_VIDEO_ERRORS_SOURCE
     ${MIET_VIDEO_ERRORS_DIR}/builder.hpp
     ${MIET_VIDEO_ERRORS_DIR}/builder.cpp
+)
+
+set(MIET_VIDEO_MODELS_SOURCE
+    ${MIET_VIDEO_MODELS_DIR}/user_registration_data.hpp
+    ${MIET_VIDEO_MODELS_DIR}/user_registration_data.cpp
+)
+
+set(MIET_VIDEO_CLIENTS_SOURCE
+    ${MIET_VIDEO_CLIENTS_DIR}/orioks_client.hpp
+    ${MIET_VIDEO_CLIENTS_DIR}/orioks_client.cpp
 )
 
 set(MIET_VIDEO_HANDLERS_SOURCE
@@ -38,8 +55,10 @@ set(MIET_VIDEO_DB_SOURCE
 
 
 add_library(${PROJECT_NAME}_objs OBJECT
+    ${MIET_VIDEO_CLIENTS_SOURCE}
     ${MIET_VIDEO_HANDLERS_SOURCE}
     ${MIET_VIDEO_DB_SOURCE}    
+    ${MIET_VIDEO_MODELS_SOURCE}
     ${MIET_VIDEO_ERRORS_SOURCE}    
 )
 target_include_directories(${PROJECT_NAME}_objs PUBLIC src)
@@ -54,7 +73,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}_objs)
 
 add_executable(${PROJECT_NAME}_unittest
     ${MIET_VIDEO_ERRORS_DIR}/ut/ut_builder.cpp
-    src/hello_test.cpp
 )
 target_link_libraries(${PROJECT_NAME}_unittest PRIVATE ${PROJECT_NAME}_objs userver-utest)
 add_google_tests(${PROJECT_NAME}_unittest)

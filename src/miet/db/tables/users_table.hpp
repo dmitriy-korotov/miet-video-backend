@@ -22,6 +22,12 @@ namespace miet_video
         static std::string UserIdFieldName() {
             return "user_id";
         }
+        static std::string AuthTokenFieldName() {
+            return "auth_token";
+        }
+        static std::string UsernameFieldName() {
+            return "auth_token";
+        }
         static std::string LoginFieldName() {
             return "login";
         }
