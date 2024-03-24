@@ -43,6 +43,8 @@ set(MIET_VIDEO_CLIENTS_SOURCE
 set(MIET_VIDEO_HANDLERS_SOURCE
     ${MIET_VIDEO_HANDLERS_DIR}/registration_handler.hpp
     ${MIET_VIDEO_HANDLERS_DIR}/registration_handler.cpp
+    ${MIET_VIDEO_HANDLERS_DIR}/authorization_handler.hpp
+    ${MIET_VIDEO_HANDLERS_DIR}/authorization_handler.cpp
 )
 
 set(MIET_VIDEO_DB_SOURCE
