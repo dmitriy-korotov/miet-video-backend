@@ -12,5 +12,5 @@ CREATE TABLE IF NOT EXISTS miet_video.users (
 );
 
 CREATE TABLE IF NOT EXISTS miet_video.students_data (
-    user_id VARCHAR(100) PRIMARY KEY
+    user_id VARCHAR(128) FOREIGN KEY ON miet_video.users.user_id
 );
