@@ -16,3 +16,5 @@ cmake-build-*
 Testing/
 .DS_Store
 Makefile.local
+pgutils
+configs/config_vars*

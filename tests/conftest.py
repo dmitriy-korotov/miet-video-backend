@@ -24,6 +24,6 @@ def initial_data_path(service_source_dir):
 def pgsql_local(service_source_dir, pgsql_local_create):
     databases = discover.find_schemas(
         'miet_video_db',
-        [service_source_dir.joinpath('postgres/schemas')],
+        [service_source_dir.joinpath('postgres/schemas/test')],
     )
     return pgsql_local_create(list(databases.values()))
