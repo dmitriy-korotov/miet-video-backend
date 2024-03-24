@@ -35,11 +35,10 @@ components_manager:
         testsuite-support: {}
 
         http-client:
-            load-enabled: $is-testing
             fs-task-processor: fs-task-processor
 
         orioks-client:
-            load-enabled: $is-testing
+            load-enabled: true
 
         tests-control:
             load-enabled: $is-testing

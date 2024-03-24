@@ -20,6 +20,7 @@ namespace miet_video
             return utils::unexpected(BuildError(RegistrationDataParseError::IncorrectUsernameFormat,
                                                 "'username' field must be in string format"));
         }
+        userData.username = jsonUserData["username"].As<std::string>();
         if (!jsonUserData.HasMember("login")) {
             return utils::unexpected(BuildError(RegistrationDataParseError::MissedLoginField,
                                     "user must have 'login' field"));
