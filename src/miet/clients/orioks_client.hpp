@@ -2,13 +2,22 @@
 
 #include <userver/components/component_list.hpp>
 
+#include <userver/components/component.hpp>
+#include <userver/components/loggable_component_base.hpp>
+#include <userver/clients/http/component.hpp>
+#include <userver/utils/expected.hpp>
+
 
 
 namespace miet_video
 {
-    class OrioksClient final : components::LoggableComponentBase
+    using namespace userver;
+
+    class OrioksClient final : public components::LoggableComponentBase
     {
     public:
+
+        static constexpr std::string_view kName = "orioks-client";
 
         static constexpr std::string_view s_orioks_api = "https://orioks.miet.ru";
 

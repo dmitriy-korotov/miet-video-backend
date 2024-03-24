@@ -38,11 +38,15 @@ components_manager:
             load-enabled: $is-testing
             fs-task-processor: fs-task-processor
 
+        orioks-client:
+            load-enabled: $is-testing
+
         tests-control:
             load-enabled: $is-testing
             path: /tests/{action}
             method: POST
             task_processor: main-task-processor
+            
         handler-ping:
             path: /ping
             method: GET

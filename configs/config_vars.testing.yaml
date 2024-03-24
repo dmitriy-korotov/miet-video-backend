@@ -6,4 +6,4 @@ is-testing: true
 
 server-port: 8080
 
-dbconnection: 'postgresql://d_korotov:Votorok228@localhost:5432/miet_video_db_test'
+dbconnection: 'postgresql://testsuite@localhost:15433/miet_video_test_db'

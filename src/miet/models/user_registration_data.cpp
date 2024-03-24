@@ -1,6 +1,6 @@
 #include "user_registration_data.hpp"
 
-#include <miet/errors/builder.cpp>
+#include <miet/errors/builder.hpp>
 #include <userver/utils/expected.hpp>
 
 
@@ -9,15 +9,15 @@ using namespace userver;
 
 namespace miet_video
 {
-    auto UserRegistrationData::ParseFromJSON(const formats::json::Value& jsonUserData) -> utils::expected<UserRegistrationData, std::string>
+    auto UserRegistrationData::ParseFromJSON(const formats::json::Value& jsonUserData) -> expect_user_data_t
     {
         UserRegistrationData userData;
         if (!jsonUserData.HasMember("username")) {
-            return utils::unexpected(BuildError(RegistrationDataParseError::MissedLoginField,
+            return utils::unexpected(BuildError(RegistrationDataParseError::MissedUsernameField,
                                     "user must have 'username' field"));
         }
         if (!jsonUserData["username"].IsString()) {
-            return utils::unexpected(BuildError(RegistrationDataParseError::IncorrectLoginFormat,
+            return utils::unexpected(BuildError(RegistrationDataParseError::IncorrectUsernameFormat,
                                                 "'username' field must be in string format"));
         }
         if (!jsonUserData.HasMember("login")) {

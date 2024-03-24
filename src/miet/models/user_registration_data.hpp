@@ -1,16 +1,21 @@
 #pragma once
 
+#include <userver/formats/json/value.hpp>
+#include <userver/utils/expected.hpp>
+
 #include <string>
 
 
 
 namespace miet_video
 {
-     enum class RegistrationDataParseError : uint8_t
+    enum class RegistrationDataParseError : uint8_t
     {
         InvalidJSONFormat = 1,
+        MissedUsernameField,
         MissedLoginField,
         MissedPasswordField,
+        IncorrectUsernameFormat,
         IncorrectLoginFormat,
         IncorrectPasswordFormat
     };
@@ -24,7 +29,8 @@ namespace miet_video
         std::string password;
         std::string registration_timestamp;
 
-        static utils::expected<UserRegistrationData, std::string> ParseFromJSON(const formats::json::Value& jsonUserData);
+        using expect_user_data_t = userver::utils::expected<UserRegistrationData, std::string>;
+        static expect_user_data_t ParseFromJSON(const userver::formats::json::Value& jsonUserData);
 
     };
     

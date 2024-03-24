@@ -3,10 +3,6 @@
 #include <miet/errors/builder.hpp>
 #include <miet/models/user_registration_data.hpp>
 
-#include <userver/components/component.hpp>
-#include <userver/components/loggable_component_base.hpp>
-#include <userver/clients/http/component.hpp>
-#include <userver/utils/expected.hpp>
 #include <userver/crypto/base64.hpp>
 #include <userver/formats/json/parser/parser.hpp>
 
@@ -16,8 +12,6 @@
 
 namespace miet_video
 {
-using namespace userver;
-
     auto OrioksClient::AuntificateUser(const std::string& login, const std::string& password) -> utils::expected<AuthToken, std::string>
     {
         using header_t = std::pair<std::string, std::string>;
@@ -46,5 +40,12 @@ using namespace userver;
         }
 
         return response_body["token"].As<std::string>();
+    }
+
+
+
+    void AddOrioksClientComponent(userver::components::ComponentList& component_list)
+    {
+        component_list.Append<OrioksClient>();
     }
 }

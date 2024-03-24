@@ -6,6 +6,7 @@
 #include <userver/utils/daemon_run.hpp>
 
 #include <miet/db/db_component.hpp>
+#include <miet/clients/orioks_client.hpp>
 #include <miet/handlers/registration_handler.hpp>
 
 
@@ -18,6 +19,7 @@ int main(int argc, char* argv[]) {
                             .Append<userver::server::handlers::TestsControl>();
 
   miet_video::AddPostgresDBComponent(component_list);
+  miet_video::AddOrioksClientComponent(component_list);
   miet_video::AddRegistrationHandler(component_list);
 
   return userver::utils::DaemonMain(argc, argv, component_list);
