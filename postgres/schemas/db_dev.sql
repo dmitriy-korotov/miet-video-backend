@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS miet_video.users (
     username VARCHAR(32) UNIQUE NOT NULL,
     login VARCHAR(16) UNIQUE NOT NULL,
     password VARCHAR(128) NOT NULL,
-    registration_timestamp TIMESTAMP DEFAULT NOW()
+    registration_timestamp TIMESTAMPTZ DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS miet_video.students_data (
