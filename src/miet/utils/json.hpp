@@ -14,12 +14,12 @@ namespace miet::utils
 
     template <typename T>
     concept deserializable = requires (T object) {
-        { object.deserializeFromJson(formats::json::Value()) } -> std::convertible_to<bool>;
+        { object.DeserializeFromJson(formats::json::Value()) } -> std::convertible_to<bool>;
     };
 
     template <typename T>
     concept serializable = requires (T object, formats::json::ValueBuilder json) {
-        { object.serializeToJson(json) } -> std::convertible_to<bool>;
+        { object.SerializeToJson(json) } -> std::convertible_to<bool>;
     };
 
     class JsonProcessor
@@ -61,7 +61,7 @@ namespace miet::utils
         if (!json.IsObject()) {
             return false;
         }
-        return result.deserializeFromJson(json);
+        return result.DeserializeFromJson(json);
     }
 
     template <template<typename...> typename Container, typename T>
@@ -91,7 +91,7 @@ namespace miet::utils
     bool JsonProcessor::PutValue(formats::json::ValueBuilder& json, std::string_view key, const T& value) noexcept
     {
         formats::json::ValueBuilder json_value;
-        if (!value.serializeToJson(json_value)) {
+        if (!value.SerializeToJson(json_value)) {
             return false;
         }
         json.EmplaceNocheck(key, std::move(json_value));
