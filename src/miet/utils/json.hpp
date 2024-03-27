@@ -5,6 +5,7 @@
 
 #include <string>
 #include <concepts>
+#include <optional>
 
 
 
@@ -29,6 +30,8 @@ namespace miet::utils
         template <typename T>
         static bool Read(const formats::json::Value& json, std::string_view key, T& result) noexcept;
         template <typename T>
+        static bool Read(const formats::json::Value& json, std::string_view key, std::optional<T>& result) noexcept;
+        template <typename T>
         static bool Read(const formats::json::Value& json, T& result) noexcept;
 
         template <typename T>
@@ -43,6 +46,9 @@ namespace miet::utils
 
         template <template<typename...> typename Container, typename T>
         static bool GetValue(const formats::json::Value& json, Container<T>& result) noexcept;
+
+        template <typename T>
+        static bool GetValue(const formats::json::Value& json, std::optional<T>& result) noexcept;
 
         template <std::signed_integral T>
         static bool GetValue(const formats::json::Value& json, T& result) noexcept;
@@ -140,6 +146,16 @@ namespace miet::utils
             return false;
         }
         return GetValue(json[key], result);
+    }
+
+    template <typename T>
+    auto JsonProcessor::Read(const formats::json::Value& json, std::string_view key, std::optional<T>& result) noexcept -> bool
+    {
+        if (!json.HasMember(key)) {
+            return true;
+        }
+        result.emplace(T{});
+        return GetValue(json[key], result.value());
     }
 
     template <typename T>

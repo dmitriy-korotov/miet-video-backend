@@ -85,3 +85,35 @@ UTEST(JsonProcessorTest, DeserizalizeAllArifmaticTypes)
     EXPECT_FLOAT_EQ(f_v, 3.14);
     EXPECT_FLOAT_EQ(d_v, 3.14141414);
 }
+
+UTEST(JsonProcessorTest, DeserizalizeOptionalValues)
+{
+    formats::json::ValueBuilder builder;
+    builder.EmplaceNocheck("string_opt", "value");
+    builder.EmplaceNocheck("int_opt", 256);
+    builder.EmplaceNocheck("float_opt", 3.14f);
+
+    auto json = builder.ExtractValue();
+
+    std::optional<std::string> s_v;
+    std::optional<int> i_v;
+    std::optional<float> f_v;
+    std::optional<double> d_v;
+    std::optional<uint16_t> ui16_v;
+
+    EXPECT_TRUE(JsonProcessor::Read(json, "string_opt", s_v));
+    EXPECT_TRUE(JsonProcessor::Read(json, "int_opt", i_v));
+    EXPECT_TRUE(JsonProcessor::Read(json, "float_opt", f_v));
+    EXPECT_TRUE(JsonProcessor::Read(json, "ui16_opt", ui16_v));
+    EXPECT_TRUE(JsonProcessor::Read(json, "double_opt", d_v));
+
+    ASSERT_TRUE(s_v.has_value());
+    ASSERT_TRUE(i_v.has_value());
+    ASSERT_TRUE(f_v.has_value());
+    ASSERT_FALSE(ui16_v.has_value());
+    ASSERT_FALSE(d_v.has_value());
+
+    EXPECT_EQ(s_v.value(), "value");
+    EXPECT_EQ(i_v.value(), 256);
+    EXPECT_FLOAT_EQ(f_v.value(), 3.14f);
+}
