@@ -35,3 +35,53 @@ UTEST(JsonProcessorTest, DeserizalizeStandardTypes)
     EXPECT_EQ(ui_value, 123456789000);
     EXPECT_EQ(d_value, 3.14);
 }
+
+UTEST(JsonProcessorTest, DeserizalizeAllArifmaticTypes)
+{
+    formats::json::ValueBuilder builder;
+    builder.EmplaceNocheck("int8_t", static_cast<int8_t>(-111));
+    builder.EmplaceNocheck("int16_t", static_cast<int16_t>(300));
+    builder.EmplaceNocheck("int32_t", static_cast<int32_t>(-123456789));
+    builder.EmplaceNocheck("int64_t", static_cast<uint64_t>(123456789000));
+    builder.EmplaceNocheck("uint8_t", static_cast<uint8_t>(111));
+    builder.EmplaceNocheck("uint16_t", static_cast<uint16_t>(300));
+    builder.EmplaceNocheck("uint32_t", static_cast<uint32_t>(123456789));
+    builder.EmplaceNocheck("uint64_t", static_cast<uint64_t>(123456789000));
+    builder.EmplaceNocheck("float", static_cast<float>(3.14f));
+    builder.EmplaceNocheck("double", static_cast<double>(3.14141414));
+
+    auto json = builder.ExtractValue();
+
+    int8_t i8_v;
+    int16_t i16_v;
+    int32_t i32_v;
+    int64_t i64_v;
+    uint8_t ui8_v;
+    uint16_t ui16_v;
+    uint32_t ui32_v;
+    uint64_t ui64_v;
+    float f_v;
+    double d_v;
+
+    EXPECT_TRUE(JsonProcessor::Read(json, "int8_t", i8_v));
+    EXPECT_TRUE(JsonProcessor::Read(json, "int16_t", i16_v));
+    EXPECT_TRUE(JsonProcessor::Read(json, "int32_t", i32_v));
+    EXPECT_TRUE(JsonProcessor::Read(json, "int64_t", i64_v));
+    EXPECT_TRUE(JsonProcessor::Read(json, "uint8_t", ui8_v));
+    EXPECT_TRUE(JsonProcessor::Read(json, "uint16_t", ui16_v));
+    EXPECT_TRUE(JsonProcessor::Read(json, "uint32_t", ui32_v));
+    EXPECT_TRUE(JsonProcessor::Read(json, "uint64_t", ui64_v));
+    EXPECT_TRUE(JsonProcessor::Read(json, "float", f_v));
+    EXPECT_TRUE(JsonProcessor::Read(json, "double", d_v));
+
+    EXPECT_EQ(i8_v, -111);
+    EXPECT_EQ(i16_v, 300);
+    EXPECT_EQ(i32_v, -123456789);
+    EXPECT_EQ(i64_v, 123456789000);
+    EXPECT_EQ(ui8_v, 111);
+    EXPECT_EQ(ui16_v, 300);
+    EXPECT_EQ(ui32_v, 123456789);
+    EXPECT_EQ(ui64_v, 123456789000);
+    EXPECT_FLOAT_EQ(f_v, 3.14);
+    EXPECT_FLOAT_EQ(d_v, 3.14141414);
+}
