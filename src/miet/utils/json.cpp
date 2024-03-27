@@ -4,7 +4,7 @@
 
 namespace miet::utils
 {
-    bool JsonProcessor::GetValue(const formats::json::Value& json, std::string& result) noexcept
+    auto JsonProcessor::GetValue(const formats::json::Value& json, std::string& result) noexcept -> bool
     {
         if (!json.IsString()) {
             return false;
@@ -13,7 +13,7 @@ namespace miet::utils
         return true;
     }
 
-    bool JsonProcessor::GetValue(const formats::json::Value& json, bool& result) noexcept
+    auto JsonProcessor::GetValue(const formats::json::Value& json, bool& result) noexcept -> bool
     {
         if (!json.IsBool()) {
             return false;

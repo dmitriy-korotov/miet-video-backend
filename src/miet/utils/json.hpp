@@ -73,7 +73,7 @@ namespace miet::utils
     }
 
     template <template<typename...> typename Container, typename T>
-    bool JsonProcessor::GetValue(const formats::json::Value& json, Container<T>& result) noexcept
+    auto JsonProcessor::GetValue(const formats::json::Value& json, Container<T>& result) noexcept -> bool
     {
         if (!json.IsArray()) {
             return false;
@@ -89,7 +89,7 @@ namespace miet::utils
     }
 
     template <std::signed_integral T>
-    bool JsonProcessor::GetValue(const formats::json::Value& json, T& result) noexcept
+    auto JsonProcessor::GetValue(const formats::json::Value& json, T& result) noexcept -> bool
     {
         if (!json.IsInt64()) {
             return false;
@@ -109,7 +109,7 @@ namespace miet::utils
     }
 
     template <std::floating_point T>
-    bool JsonProcessor::GetValue(const formats::json::Value& json, T& result) noexcept
+    auto JsonProcessor::GetValue(const formats::json::Value& json, T& result) noexcept -> bool
     {
         if (!json.IsDouble()) {
             return false;
@@ -120,21 +120,21 @@ namespace miet::utils
     
 
     template <typename T>
-    bool JsonProcessor::PutValue(formats::json::ValueBuilder& json, const T& value) noexcept
+    auto JsonProcessor::PutValue(formats::json::ValueBuilder& json, const T& value) noexcept -> bool
     {
         json = value;
         return true;
     }
 
     template <serializable T>
-    bool JsonProcessor::PutValue(formats::json::ValueBuilder& json, const T& value) noexcept
+    auto JsonProcessor::PutValue(formats::json::ValueBuilder& json, const T& value) noexcept -> bool
     {
         static_assert(serializable<T>, "Type must be serializable and have method 'SerializeFromJson'");
         return value.SerializeToJson(json);
     }
 
     template <typename T>
-    bool JsonProcessor::Read(const formats::json::Value& json, std::string_view key, T& result) noexcept
+    auto JsonProcessor::Read(const formats::json::Value& json, std::string_view key, T& result) noexcept -> bool
     {
         if (!json.HasMember(key)) {
             return false;
@@ -143,13 +143,13 @@ namespace miet::utils
     }
 
     template <typename T>
-    bool JsonProcessor::Read(const formats::json::Value& json, T& result) noexcept
+    auto JsonProcessor::Read(const formats::json::Value& json, T& result) noexcept -> bool
     {
         return GetValue(json, result);
     }
 
     template <typename T>
-    bool JsonProcessor::Write(formats::json::ValueBuilder& json, std::string_view key, const T& value) noexcept
+    auto JsonProcessor::Write(formats::json::ValueBuilder& json, std::string_view key, const T& value) noexcept -> bool
     {
         if (json.HasMember(key)) {
             return false;
@@ -163,7 +163,7 @@ namespace miet::utils
     }
 
     template <typename T>
-    bool JsonProcessor::Write(formats::json::ValueBuilder& json, const T& value) noexcept
+    auto JsonProcessor::Write(formats::json::ValueBuilder& json, const T& value) noexcept -> bool
     {
         return PutValue(json, value);
     }
