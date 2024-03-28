@@ -6,6 +6,7 @@
 #include <string>
 #include <concepts>
 #include <optional>
+#include <deque>
 
 
 
@@ -23,6 +24,9 @@ namespace miet::utils
         { object.SerializeToJson(json) } -> std::convertible_to<bool>;
     };
 
+    template <template<typename...> typename Container, typename T>
+    concept container = std::is_same_v<Container<T>, std::vector<T>> || std::is_same_v<Container<T>, std::deque<T>>;
+
     class JsonProcessor
     {
     public:
@@ -37,6 +41,8 @@ namespace miet::utils
         template <typename T>
         static bool Write(formats::json::ValueBuilder& json, std::string_view key, const T& value) noexcept;
         template <typename T>
+        static bool Write(formats::json::ValueBuilder& json, std::string_view key, const std::optional<T>& value) noexcept;
+        template <typename T>
         static bool Write(formats::json::ValueBuilder& json, const T& value) noexcept;
 
     private:
@@ -45,6 +51,7 @@ namespace miet::utils
         static bool GetValue(const formats::json::Value& json, T& result) noexcept;
 
         template <template<typename...> typename Container, typename T>
+        requires container<Container, T>
         static bool GetValue(const formats::json::Value& json, Container<T>& result) noexcept;
 
         template <typename T>
@@ -66,6 +73,10 @@ namespace miet::utils
         template <serializable T>
         static bool PutValue(formats::json::ValueBuilder& json, const T& value) noexcept;
 
+        template <template<typename...> typename Container, typename T>
+        requires container<Container, T>
+        static bool PutValue(formats::json::ValueBuilder& json, const Container<T>& value) noexcept;
+
     };
 
     template <deserializable T>
@@ -79,6 +90,7 @@ namespace miet::utils
     }
 
     template <template<typename...> typename Container, typename T>
+    requires container<Container, T>
     auto JsonProcessor::GetValue(const formats::json::Value& json, Container<T>& result) noexcept -> bool
     {
         if (!json.IsArray()) {
@@ -139,6 +151,20 @@ namespace miet::utils
         return value.SerializeToJson(json);
     }
 
+    template <template<typename...> typename Container, typename T>
+    requires container<Container, T>
+    auto JsonProcessor::PutValue(formats::json::ValueBuilder& json, const Container<T>& value) noexcept -> bool
+    {
+        for (auto&& elem : value) {
+            formats::json::ValueBuilder jsonElem;
+            if (!Write(jsonElem, elem)) {
+                return false;
+            }
+            json.PushBack(std::move(jsonElem));
+        }
+        return true;
+    }
+
     template <typename T>
     auto JsonProcessor::Read(const formats::json::Value& json, std::string_view key, T& result) noexcept -> bool
     {
@@ -176,6 +202,15 @@ namespace miet::utils
         }
         json.EmplaceNocheck(key, std::move(json_value));
         return true;
+    }
+
+    template <typename T>
+    auto JsonProcessor::Write(formats::json::ValueBuilder& json, std::string_view key, const std::optional<T>& value) noexcept -> bool
+    {
+        if (!value.has_value()) {
+            return true;
+        }
+        return Write(json, key, value.value());
     }
 
     template <typename T>

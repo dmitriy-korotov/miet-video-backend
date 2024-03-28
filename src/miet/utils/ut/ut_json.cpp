@@ -117,3 +117,33 @@ UTEST(JsonProcessorTest, DeserizalizeOptionalValues)
     EXPECT_EQ(i_v.value(), 256);
     EXPECT_FLOAT_EQ(f_v.value(), 3.14f);
 }
+
+UTEST(JsonProcessorTest, SerizalizeOptionalValues)
+{
+    std::optional<std::string> s_opt = "string";
+    std::optional<int> i_opt;
+    std::optional<double> d_opt = 3.14;
+
+    formats::json::ValueBuilder builder;
+    
+    EXPECT_TRUE(JsonProcessor::Write(builder, "s_opt", s_opt));
+    EXPECT_TRUE(JsonProcessor::Write(builder, "i_opt", i_opt));
+    EXPECT_TRUE(JsonProcessor::Write(builder, "d_opt", d_opt));
+
+    auto json = builder.ExtractValue();
+
+    ASSERT_TRUE(json.HasMember("s_opt"));
+    EXPECT_FALSE(json.HasMember("i_opt"));
+    ASSERT_TRUE(json.HasMember("d_opt"));
+
+    std::string s_res;
+    int i_res;
+    double d_res;
+
+    ASSERT_TRUE(JsonProcessor::Read(json, "s_opt", s_res));
+    EXPECT_FALSE(JsonProcessor::Read(json, "i_opt", i_res));
+    ASSERT_TRUE(JsonProcessor::Read(json, "d_opt", d_res));
+
+    EXPECT_EQ(s_res, "string");
+    EXPECT_EQ(d_res, 3.14);
+}
