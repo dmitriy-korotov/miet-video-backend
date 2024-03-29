@@ -20,7 +20,7 @@ namespace miet::models
 
     };
 
-    struct UserData final : protected UserRegistrationData
+    struct UserData final : public UserRegistrationData
     {
         std::string user_id;
         std::string auth_token;
