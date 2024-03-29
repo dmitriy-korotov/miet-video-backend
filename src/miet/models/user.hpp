@@ -30,5 +30,10 @@ namespace miet::models
         bool DeserializeFromJson(const userver::formats::json::Value& json) noexcept;
         
     };
+
+    struct UserRights
+    {
+        // TODO
+    };
     
 }
