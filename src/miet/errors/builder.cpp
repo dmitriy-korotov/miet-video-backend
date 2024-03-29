@@ -6,7 +6,7 @@
 
 using namespace userver::formats::json;
 
-namespace miet_video
+namespace miet::errors
 {
     auto ErrorBuilder::setErrorMessage(std::string error_message) noexcept -> ErrorBuilder&
     {

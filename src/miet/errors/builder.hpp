@@ -5,7 +5,7 @@
 
 
 
-namespace miet_video
+namespace miet::errors
 {
     class ErrorBuilder
     {
