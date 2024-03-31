@@ -7,6 +7,8 @@
 #include <userver/storages/postgres/component.hpp>
 #include <userver/storages/postgres/cluster.hpp>
 
+#include <optional>
+
 
 
 namespace miet::db::managers
@@ -17,6 +19,19 @@ namespace miet::db::managers
     {
     public:
 
+        static constexpr std::string_view kName = "users-manager";
+
+        enum class Error : uint8_t
+        {
+            UserWithSuchLoginAlreadyExists = 1,
+            UserWithSuchUsernameAlreadyExists,
+            CantCreateUser,
+            UserWithSuchIdNotFound,
+            UserWithSuchLoginNotFound,
+            IncorrectUserPassword
+        };     
+        using user_id_t = std::string;
+
         UsersManager(const components::ComponentConfig& config,
                      const components::ComponentContext& component_context)
                 : LoggableComponentBase(config, component_context)
@@ -25,17 +40,10 @@ namespace miet::db::managers
                                 .GetCluster())
         { }
 
-        bool RegistrateUser(models::UserData userData);
-        utils::expected<
-                std::string, // user_id
-                std::string>
-        AuthificateUser(const std::string& login, const std::string& password);
-        utils::expected<
-                models::UserRights,
-                std::string>
-        AuthorizateUser(const std::string& user_id);
-
-        bool DeleteUser(const std::string& user_id);
+        std::optional<Error> RegistrateUser(models::UserData userData);
+        std::optional<Error> DeleteUser(const std::string& user_id);
+        utils::expected<user_id_t, Error> AuthificateUser(const std::string& login, const std::string& password);
+        utils::expected<models::UserRights, Error> AuthorizateUser(const std::string& user_id);
 
     private:
 

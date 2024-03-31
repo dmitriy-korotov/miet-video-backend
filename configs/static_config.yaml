@@ -54,7 +54,10 @@ components_manager:
             throttling_enabled: false
             url_trailing_slash: strict-match
 
-        session-manager:
+        sessions-manager:
+            load-enabled: true
+        
+        users-manager:
             load-enabled: true
 
         #registration-handler:                   
