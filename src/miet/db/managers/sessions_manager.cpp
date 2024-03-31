@@ -20,7 +20,7 @@ namespace
     const auto kGetUserIdQuery = storages::Query(R"(
         SELECT user_id
         FROM miet_video.sessions
-        WHERE session_id = %1
+        WHERE session_id = %1 AND end_timestamp IS NULL
     )", storages::Query::Name("create_session"));
 
     const auto kCloseSessionQuery = storages::Query(R"(
@@ -30,42 +30,39 @@ namespace
     )", storages::Query::Name("close_session"));
 }
     
-    auto SessionsManager::StartSession(const std::string& user_id, const std::string& device, std::string& session_id) -> bool
+    auto SessionsManager::StartSession(const std::string& user_id, const std::string& device) -> utils::expected<session_id_t, Error>
     {
         auto generated_session_id = utils::generators::GenerateUuidV7();
         auto transaction = m_pg_cluster->Begin("Start session transaction",
                                                storages::postgres::ClusterHostType::kMaster, {});
         auto result = transaction.Execute(kCreateSessionQuery, generated_session_id, user_id, device);
         if (result.RowsAffected() != 1) {
-            return false;
+            return utils::unexpected(Error::CantStartSession);
         }
         transaction.Commit();
-        session_id = generated_session_id;
-        return true;
+        return generated_session_id;
     }
 
-    auto SessionsManager::GetUserIDIfSessionAlive(const std::string& session_id, std::string& user_id) -> bool
+    auto SessionsManager::GetUserIDIfSessionAlive(const std::string& session_id) -> utils::expected<session_id_t, Error>
     {
-        auto end_timestamp = utils::datetime::LocalTimezoneTimestring(utils::datetime::Now());
         auto transaction = m_pg_cluster->Begin("Get user_id transaction",
                                                storages::postgres::ClusterHostType::kSlave, {});
         auto result = transaction.Execute(kGetUserIdQuery, session_id);
         if (result.Size() != 1) {
-            return false;
+            return utils::unexpected(Error::SessionAlreadyClosed);
         }
-        user_id = result.Back().As<std::string>();
-        return true;
+        return result.Back().As<std::string>();
     }
 
-    auto SessionsManager::CloseSession(const std::string& session_id) -> bool
+    auto SessionsManager::CloseSession(const std::string& session_id) -> std::optional<Error>
     {
         auto end_timestamp = utils::datetime::LocalTimezoneTimestring(utils::datetime::Now());
         auto transaction = m_pg_cluster->Begin("Close session transaction",
                                                storages::postgres::ClusterHostType::kMaster, {});
         auto result = transaction.Execute(kCloseSessionQuery, end_timestamp, session_id);
         if (result.RowsAffected() != 1) {
-            return false;
+            return Error::CantCloseSession;
         }
-        return true;
+        return std::nullopt;
     }
 }
