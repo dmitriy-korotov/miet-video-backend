@@ -8,8 +8,10 @@
 
 namespace miet::handlers::helpers
 {
-    enum class HandleError : uint8_t
+    enum class HandleError : uint16_t
     {
+        CantParseRequestBody = 400,
+        CantReadSessionToken,
         CantBuildResponse
     };
 

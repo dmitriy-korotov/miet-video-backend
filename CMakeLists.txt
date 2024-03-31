@@ -59,9 +59,13 @@ set(MIET_VIDEO_HANDLERS_SOURCE
     ${MIET_VIDEO_HANDLERS_DIR}/registration_handler.cpp
     ${MIET_VIDEO_HANDLERS_DIR}/authorization_handler.hpp
     ${MIET_VIDEO_HANDLERS_DIR}/authorization_handler.cpp
+    ${MIET_VIDEO_HANDLERS_DIR}/user_info_handler.hpp
+    ${MIET_VIDEO_HANDLERS_DIR}/user_info_handler.cpp
 )
 
 set(MIET_VIDEO_DB_SOURCE
+    ${MIET_VIDEO_DB_DIR}/managers/auth_tokens_manager.hpp
+    ${MIET_VIDEO_DB_DIR}/managers/auth_tokens_manager.cpp
     ${MIET_VIDEO_DB_DIR}/managers/users_manager.hpp
     ${MIET_VIDEO_DB_DIR}/managers/users_manager.cpp
     ${MIET_VIDEO_DB_DIR}/managers/sessions_manager.hpp

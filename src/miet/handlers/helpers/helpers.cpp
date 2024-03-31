@@ -12,7 +12,7 @@ namespace miet::handlers::helpers
     {
         formats::json::ValueBuilder jsonResponse;
         if (!utils::JsonProcessor::Write(jsonResponse, "session_token", session_token)) {
-            return userver::utils::unexpected(HelpersError::CantBuildResponse);
+            return userver::utils::unexpected(HandleError::CantBuildResponse);
         }
         return formats::json::ToString(jsonResponse.ExtractValue());
     }

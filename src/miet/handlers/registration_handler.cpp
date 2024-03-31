@@ -45,6 +45,8 @@ namespace
             return errors::BuildError(Error::CantReadUserRegistrationData, "Can't read user registration data");
         }
 
+        // TODO Checking is already registrated
+
         auto auntificate_result = m_orioks_client.AuntificateStudent(registrationData.login, registrationData.password);
         if (!auntificate_result.has_value()) {
             request.SetResponseStatus(server::http::HttpStatus::kUnauthorized);
