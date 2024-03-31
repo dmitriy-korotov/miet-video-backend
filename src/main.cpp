@@ -25,10 +25,8 @@ int main(int argc, char* argv[]) {
                             .Append<userver::clients::dns::Component>()
                             .Append<userver::components::HttpClient>()
                             .Append<miet::clients::OrioksClient>()
+                            .Append<miet::handlers::RegistrationHandler>()
                             .Append<userver::server::handlers::TestsControl>();
-
-  //miet_video::AddRegistrationHandler(component_list);
-  miet_video::AddAuthorizationHandler(component_list);
 
   return userver::utils::DaemonMain(argc, argv, component_list);
 }
