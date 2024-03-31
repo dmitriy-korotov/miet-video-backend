@@ -26,6 +26,7 @@ int main(int argc, char* argv[]) {
                             .Append<userver::components::HttpClient>()
                             .Append<miet::clients::OrioksClient>()
                             .Append<miet::handlers::RegistrationHandler>()
+                            .Append<miet::handlers::AuthorizationHandler>()
                             .Append<userver::server::handlers::TestsControl>();
 
   return userver::utils::DaemonMain(argc, argv, component_list);
