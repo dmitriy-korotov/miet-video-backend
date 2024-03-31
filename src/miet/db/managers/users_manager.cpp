@@ -103,7 +103,7 @@ namespace
         return user_id;
     }
 
-    auto UsersManager::AuthorizateUser(const std::string& user_id) -> utils::expected<models::UserRights, Error>
+    auto UsersManager::AuthorizateUser([[maybe_unused]] const std::string& user_id) -> utils::expected<models::UserRights, Error>
     {
         return models::UserRights(); // TODO
     }

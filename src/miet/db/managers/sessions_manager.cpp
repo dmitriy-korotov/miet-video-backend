@@ -30,26 +30,26 @@ namespace
     )", storages::Query::Name("close_session"));
 }
     
-    auto SessionsManager::StartSession(const std::string& user_id, const std::string& device) -> utils::expected<session_id_t, Error>
+    auto SessionsManager::StartSession(const std::string& user_id, const std::string& device) -> expected<session_id_t, Error>
     {
         auto generated_session_id = utils::generators::GenerateUuidV7();
         auto transaction = m_pg_cluster->Begin("Start session transaction",
                                                storages::postgres::ClusterHostType::kMaster, {});
         auto result = transaction.Execute(kCreateSessionQuery, generated_session_id, user_id, device);
         if (result.RowsAffected() != 1) {
-            return utils::unexpected(Error::CantStartSession);
+            return unexpected(Error::CantStartSession);
         }
         transaction.Commit();
         return generated_session_id;
     }
 
-    auto SessionsManager::GetUserIDIfSessionAlive(const std::string& session_id) -> utils::expected<session_id_t, Error>
+    auto SessionsManager::GetUserIDIfSessionAlive(const std::string& session_id) -> expected<session_id_t, Error>
     {
         auto transaction = m_pg_cluster->Begin("Get user_id transaction",
                                                storages::postgres::ClusterHostType::kSlave, {});
         auto result = transaction.Execute(kGetUserIdQuery, session_id);
         if (result.Size() != 1) {
-            return utils::unexpected(Error::SessionAlreadyClosed);
+            return unexpected(Error::SessionAlreadyClosed);
         }
         return result.Back().As<std::string>();
     }
