@@ -23,6 +23,7 @@ namespace miet::handlers
         {
             CantParseRequestBody,
             CantReadUserRegistrationData,
+            SuchUserAlreadyExists,
             CantBuildResponse
         };
 

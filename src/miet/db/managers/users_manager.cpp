@@ -47,6 +47,20 @@ namespace
     }
 }
 
+    auto UsersManager::UserExists(const std::string& login) -> bool
+    {
+        storages::postgres::TransactionOptions options;
+        options.mode = storages::postgres::TransactionOptions::kReadOnly;
+        auto transaction = m_pg_cluster->Begin("Check user existing tranaction",
+                                               storages::postgres::ClusterHostType::kSlave,
+                                               options);
+        auto result = transaction.Execute(kGetUserIdQuery, login);
+        if (result.Size() != 1) {
+            return false;
+        }
+        return true;
+    }
+
     auto UsersManager::RegistrateUser(models::UserData userData) -> std::optional<Error>
     {
         auto hashed_password = GetHashedPassword(userData.password);

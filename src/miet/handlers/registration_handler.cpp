@@ -45,7 +45,10 @@ namespace
             return errors::BuildError(Error::CantReadUserRegistrationData, "Can't read user registration data");
         }
 
-        // TODO Checking is already registrated
+        if (m_users_manager.UserExists(registrationData.login)) {
+            request.SetResponseStatus(server::http::HttpStatus::kConflict);
+            return errors::BuildError(Error::SuchUserAlreadyExists, "User with such login already exists");
+        }
 
         auto auntificate_result = m_orioks_client.AuntificateStudent(registrationData.login, registrationData.password);
         if (!auntificate_result.has_value()) {
@@ -58,7 +61,7 @@ namespace
         auto reg_result = m_users_manager.RegistrateUser(userData);
         if (reg_result.has_value()) {
             request.SetResponseStatus(server::http::HttpStatus::kConflict);
-            return errors::BuildError(reg_result.value(), "Can't registrate user");   
+            return errors::BuildError(reg_result.value(), "Can't registrate user, user with such username alreay exits");   
         }
 
         auto session_result = m_sessions_manager.StartSession(userData.user_id, "Yandex browser"); // TODO Get registration device

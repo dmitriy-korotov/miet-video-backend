@@ -41,6 +41,7 @@ namespace miet::db::managers
                                 .GetCluster())
         { }
 
+        bool UserExists(const std::string& login);
         std::optional<Error> RegistrateUser(models::UserData userData);
         std::optional<Error> DeleteUser(const std::string& user_id);
         expected<user_id_t, Error> AuthificateUser(const std::string& login, const std::string& password);
