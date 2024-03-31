@@ -8,10 +8,10 @@
 
 namespace miet::handlers::helpers
 {
-    enum class HelpersError : uint8_t
+    enum class HandleError : uint8_t
     {
         CantBuildResponse
     };
 
-    userver::utils::expected<std::string, HelpersError> BuildResponse(const db::managers::SessionsManager::session_id_t& session_token);
+    userver::utils::expected<std::string, HandleError> BuildResponse(const db::managers::SessionsManager::session_id_t& session_token);
 }

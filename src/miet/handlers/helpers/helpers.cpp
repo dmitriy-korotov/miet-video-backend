@@ -8,7 +8,7 @@ namespace miet::handlers::helpers
 {
     using namespace userver;
 
-    auto BuildResponse(const db::managers::SessionsManager::session_id_t& session_token) -> userver::utils::expected<std::string, HelpersError>
+    auto BuildResponse(const db::managers::SessionsManager::session_id_t& session_token) -> userver::utils::expected<std::string, HandleError>
     {
         formats::json::ValueBuilder jsonResponse;
         if (!utils::JsonProcessor::Write(jsonResponse, "session_token", session_token)) {
