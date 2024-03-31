@@ -67,10 +67,10 @@ components_manager:
             method: POST                 
             task_processor: main-task-processor
 
-        #authorization-handler:                   
-        #    path: /v1/auth              
-        #    method: POST               
-        #    task_processor: main-task-processor
+        authorization-handler:                   
+            path: /v1/auth              
+            method: POST               
+            task_processor: main-task-processor
 
         postgres-miet-video-db:
             dbconnection: $dbconnection

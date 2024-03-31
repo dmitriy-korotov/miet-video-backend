@@ -3,6 +3,7 @@
 #include <miet/errors/builder.hpp>
 #include <miet/models/user.hpp>
 #include <miet/utils/json.hpp>
+#include <miet/handlers/helpers/helpers.hpp>
 
 #include <userver/utils/uuid7.hpp>
 #include <userver/utils/datetime.hpp>
@@ -25,15 +26,6 @@ namespace
         userData.user_id = userver::utils::generators::GenerateUuidV7();
         userData.registration_timestamp = userver::utils::datetime::LocalTimezoneTimestring(userver::utils::datetime::Now());
         return userData;
-    }
-
-    auto BuildResponse(const db::managers::SessionsManager::session_id_t& session_token) -> userver::utils::expected<std::string, RegistrationHandler::Error>
-    {
-        formats::json::ValueBuilder jsonResponse;
-        if (!utils::JsonProcessor::Write(jsonResponse, "session_token", session_token)) {
-            return userver::utils::unexpected(RegistrationHandler::Error::CantBuildResponse);
-        }
-        return formats::json::ToString(jsonResponse.ExtractValue());
     }
 }
 
@@ -73,7 +65,7 @@ namespace
             return errors::BuildError(session_result.error(), "Can't start user session");
         }
         auto session_token = session_result.value();
-        auto response = BuildResponse(session_token);
+        auto response = helpers::BuildResponse(session_token);
         if (!response.has_value()) {
             request.SetResponseStatus(server::http::HttpStatus::kServiceUnavailable);
             return errors::BuildError(response.error(), "Can't build response body");

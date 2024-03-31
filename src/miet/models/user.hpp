@@ -9,11 +9,19 @@
 
 namespace miet::models
 {
-    struct UserRegistrationData
+    struct UserAuthorizationData
     {
-        std::string username;
         std::string login;
         std::string password;
+
+        bool SerializeToJson(userver::formats::json::ValueBuilder& json) noexcept;
+        bool DeserializeFromJson(const userver::formats::json::Value& json) noexcept;
+
+    };
+
+    struct UserRegistrationData : public UserAuthorizationData
+    {
+        std::string username;
 
         bool SerializeToJson(userver::formats::json::ValueBuilder& json) noexcept;
         bool DeserializeFromJson(const userver::formats::json::Value& json) noexcept;

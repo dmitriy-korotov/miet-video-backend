@@ -8,11 +8,8 @@ using namespace userver;
 
 namespace miet::models
 {
-    auto UserRegistrationData::SerializeToJson(userver::formats::json::ValueBuilder& json) noexcept -> bool
+    auto UserAuthorizationData::SerializeToJson(userver::formats::json::ValueBuilder& json) noexcept -> bool
     {
-        if (!utils::JsonProcessor::Write(json, "username", username)) {
-            return false;
-        }
         if (!utils::JsonProcessor::Write(json, "login", login)) {
             return false;
         }
@@ -22,15 +19,34 @@ namespace miet::models
         return true;
     }
 
-    auto UserRegistrationData::DeserializeFromJson(const userver::formats::json::Value& json) noexcept -> bool
+    auto UserAuthorizationData::DeserializeFromJson(const userver::formats::json::Value& json) noexcept -> bool
     {
-        if (!utils::JsonProcessor::Read(json, "username", username)) {
-            return false;
-        }
         if (!utils::JsonProcessor::Read(json, "login", login)) {
             return false;
         }
         if (!utils::JsonProcessor::Read(json, "password", password)) {
+            return false;
+        }
+        return true;
+    }
+
+    auto UserRegistrationData::SerializeToJson(userver::formats::json::ValueBuilder& json) noexcept -> bool
+    {
+        if (!UserAuthorizationData::SerializeToJson(json)) {
+            return false;
+        }
+        if (!utils::JsonProcessor::Write(json, "username", username)) {
+            return false;
+        }
+        return true;
+    }
+
+    auto UserRegistrationData::DeserializeFromJson(const userver::formats::json::Value& json) noexcept -> bool
+    {
+        if (!UserAuthorizationData::DeserializeFromJson(json)) {
+            return false;
+        }
+        if (!utils::JsonProcessor::Read(json, "username", username)) {
             return false;
         }
         return true;

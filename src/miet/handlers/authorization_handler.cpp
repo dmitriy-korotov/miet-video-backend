@@ -1,46 +1,47 @@
 #include "authorization_handler.hpp"
 
-#include <userver/components/component.hpp>
-#include <userver/server/handlers/http_handler_base.hpp>
-#include <userver/storages/postgres/component.hpp>
+#include <miet/errors/builder.hpp>
+#include <miet/utils/json.hpp>
+#include <miet/handlers/helpers/helpers.hpp>
 
 
 
-namespace miet_video
+namespace miet::handlers
 {
-namespace
-{
-    using namespace userver;
-
-    class AuthorizationHandler final : public server::handlers::HttpHandlerBase
+    auto AuthorizationHandler::HandleRequestThrow(const server::http::HttpRequest& request,
+                                                  server::request::RequestContext&) const -> std::string
     {
-    public:
+        models::UserAuthorizationData authorizationData;
+        formats::json::Value requestJsonBody;
+        try {
+            requestJsonBody = formats::json::FromString(request.RequestBody());
+        } catch (const std::exception& ex) {
+            request.SetResponseStatus(server::http::HttpStatus::kBadRequest);
+            return errors::BuildError(Error::CantParseRequestBody, "Can't parse request body");
+        }
+        if (!utils::JsonProcessor::Read(requestJsonBody, authorizationData)) {
+            request.SetResponseStatus(server::http::HttpStatus::kBadRequest);
+            return errors::BuildError(Error::CantReadUserAuthorizationData, "Can't read user authorization data");
+        }
 
-        static constexpr std::string_view kName = "authorization-handler";
+        auto auth_result = m_users_manager.AuthificateUser(authorizationData.login, authorizationData.password);
+        if (!auth_result.has_value()) {
+            errors::BuildError(auth_result.error(), "Can't auntificate user");
+        }
+        auto user_id = auth_result.value();
 
-        AuthorizationHandler(const components::ComponentConfig& config,
-                             const components::ComponentContext& component_context)
-                : HttpHandlerBase(config, component_context)
-                , m_pg_cluster(component_context
-                                .FindComponent<components::Postgres>("postgres-miet-video-db")
-                                .GetCluster())
-        { }
-
-        std::string HandleRequestThrow(const server::http::HttpRequest& request,
-                                       server::request::RequestContext&) const override;
-
-    private:
-
-        storages::postgres::ClusterPtr m_pg_cluster;
-
-    };
-
-
-
-    std::string AuthorizationHandler::HandleRequestThrow(const server::http::HttpRequest& request,
-                                                         server::request::RequestContext&) const                                         
-    {
-        return "Authorization";
+         auto session_result = m_sessions_manager.StartSession(user_id, "Yandex browser"); // TODO Get registration device
+        if (!session_result.has_value()) {
+            request.SetResponseStatus(server::http::HttpStatus::kForbidden);
+            return errors::BuildError(session_result.error(), "Can't start user session");
+        }
+        auto session_token = session_result.value();
+        auto response = helpers::BuildResponse(session_token);
+        if (!response.has_value()) {
+            request.SetResponseStatus(server::http::HttpStatus::kServiceUnavailable);
+            return errors::BuildError(response.error(), "Can't build response body");
+        }
+        request.SetResponseStatus(server::http::HttpStatus::kCreated);
+        return response.value();
     }
-}
 }

@@ -53,6 +53,8 @@ set(MIET_VIDEO_CLIENTS_SOURCE
 )
 
 set(MIET_VIDEO_HANDLERS_SOURCE
+    ${MIET_VIDEO_HANDLERS_DIR}/helpers/helpers.hpp
+    ${MIET_VIDEO_HANDLERS_DIR}/helpers/helpers.cpp
     ${MIET_VIDEO_HANDLERS_DIR}/registration_handler.hpp
     ${MIET_VIDEO_HANDLERS_DIR}/registration_handler.cpp
     ${MIET_VIDEO_HANDLERS_DIR}/authorization_handler.hpp
