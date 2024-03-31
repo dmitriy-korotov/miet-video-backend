@@ -8,7 +8,7 @@ using namespace userver;
 
 namespace miet::models
 {
-    auto UserAuthorizationData::SerializeToJson(userver::formats::json::ValueBuilder& json) noexcept -> bool
+    auto UserAuthorizationData::SerializeToJson(userver::formats::json::ValueBuilder& json) const noexcept -> bool
     {
         if (!utils::JsonProcessor::Write(json, "login", login)) {
             return false;
@@ -30,7 +30,7 @@ namespace miet::models
         return true;
     }
 
-    auto UserRegistrationData::SerializeToJson(userver::formats::json::ValueBuilder& json) noexcept -> bool
+    auto UserRegistrationData::SerializeToJson(userver::formats::json::ValueBuilder& json) const noexcept -> bool
     {
         if (!UserAuthorizationData::SerializeToJson(json)) {
             return false;
@@ -52,7 +52,7 @@ namespace miet::models
         return true;
     }
 
-    auto UserData::SerializeToJson(userver::formats::json::ValueBuilder& json) noexcept -> bool
+    auto UserData::SerializeToJson(userver::formats::json::ValueBuilder& json) const noexcept -> bool
     {
         if (!UserRegistrationData::SerializeToJson(json)) {
             return false;

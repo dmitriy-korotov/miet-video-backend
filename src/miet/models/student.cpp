@@ -6,7 +6,7 @@
 
 namespace miet::models
 {
-    bool StudentInfo::SerializeToJson(userver::formats::json::ValueBuilder& json) noexcept
+    auto StudentInfo::SerializeToJson(userver::formats::json::ValueBuilder& json) const noexcept -> bool
     {
         if (!utils::JsonProcessor::Write(json, "course", course))
             return false;
@@ -29,7 +29,7 @@ namespace miet::models
         return true;
     }
 
-    bool StudentInfo::DeserializeFromJson(const userver::formats::json::Value& json) noexcept
+    auto StudentInfo::DeserializeFromJson(const userver::formats::json::Value& json) noexcept -> bool
     {
         if (!utils::JsonProcessor::Read(json, "course", course))
             return false;

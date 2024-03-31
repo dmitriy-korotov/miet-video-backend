@@ -6,7 +6,7 @@
 
 namespace miet::models
 {
-    auto StudyDiscipline::SerializeToJson(userver::formats::json::ValueBuilder& json) noexcept -> bool
+    auto StudyDiscipline::SerializeToJson(userver::formats::json::ValueBuilder& json) const noexcept -> bool
     {
         if (!utils::JsonProcessor::Write(json, "control_form", control_form))
             return false;

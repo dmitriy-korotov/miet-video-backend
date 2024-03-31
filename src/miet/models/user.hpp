@@ -14,7 +14,7 @@ namespace miet::models
         std::string login;
         std::string password;
 
-        bool SerializeToJson(userver::formats::json::ValueBuilder& json) noexcept;
+        bool SerializeToJson(userver::formats::json::ValueBuilder& json) const noexcept;
         bool DeserializeFromJson(const userver::formats::json::Value& json) noexcept;
 
     };
@@ -23,7 +23,7 @@ namespace miet::models
     {
         std::string username;
 
-        bool SerializeToJson(userver::formats::json::ValueBuilder& json) noexcept;
+        bool SerializeToJson(userver::formats::json::ValueBuilder& json) const noexcept;
         bool DeserializeFromJson(const userver::formats::json::Value& json) noexcept;
 
     };
@@ -34,7 +34,7 @@ namespace miet::models
         std::string auth_token;
         std::string registration_timestamp;
 
-        bool SerializeToJson(userver::formats::json::ValueBuilder& json) noexcept;
+        bool SerializeToJson(userver::formats::json::ValueBuilder& json) const noexcept;
         bool DeserializeFromJson(const userver::formats::json::Value& json) noexcept;
         
     };
