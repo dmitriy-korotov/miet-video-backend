@@ -19,8 +19,11 @@ namespace
 
     auto AuthTokensManager::GetOrioksAuthTokenFromSessionID(const session_id_t& session_id) -> expected<auth_token_t, Error>
     {
+        storages::postgres::TransactionOptions options;
+        options.mode = storages::postgres::TransactionOptions::kReadOnly;
         auto transaction = m_pg_cluster->Begin("Get auth token transaction",
-                                               storages::postgres::ClusterHostType::kSlave, {});
+                                               storages::postgres::ClusterHostType::kSlave,
+                                               options);
         auto result = transaction.Execute(kGetAuthTokenFromSessionId, session_id);
         if (result.Size() != 1) {
             return unexpected(Error::CantGetAuthToken);
