@@ -84,7 +84,7 @@ namespace
         return std::nullopt;
     }
 
-    auto UsersManager::AuthificateUser(const std::string& login, const std::string& password) -> utils::expected<user_id_t, Error>
+    auto UsersManager::AuthificateUser(const std::string& login, const std::string& password) -> expected<user_id_t, Error>
     {
         storages::postgres::TransactionOptions options;
         options.mode = storages::postgres::TransactionOptions::kReadOnly;
@@ -93,17 +93,17 @@ namespace
                                                options);
         auto result = transaction.Execute(kGetUserIdQuery, login);
         if (result.Size() != 1) {
-            return utils::unexpected(Error::UserWithSuchLoginNotFound);
+            return unexpected(Error::UserWithSuchLoginNotFound);
         }
         auto [ user_id, user_password ] = result.Back().As<std::string, std::string>();
         auto hashed_password = GetHashedPassword(password);
         if (user_password != hashed_password) {
-            return utils::unexpected(Error::IncorrectUserPassword);
+            return unexpected(Error::IncorrectUserPassword);
         }
         return user_id;
     }
 
-    auto UsersManager::AuthorizateUser([[maybe_unused]] const std::string& user_id) -> utils::expected<models::UserRights, Error>
+    auto UsersManager::AuthorizateUser([[maybe_unused]] const std::string& user_id) -> expected<models::UserRights, Error>
     {
         return models::UserRights(); // TODO
     }
