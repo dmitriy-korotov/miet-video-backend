@@ -13,6 +13,7 @@
 namespace miet::db::managers
 {
     using namespace userver;
+    using namespace userver::utils;
 
     class SessionsManager final : public components::LoggableComponentBase
     {
@@ -37,8 +38,8 @@ namespace miet::db::managers
                                 .GetCluster())
         { }
 
-        utils::expected<session_id_t, Error> StartSession(const std::string& user_id, const std::string& device);
-        utils::expected<user_id_t, Error> GetUserIDIfSessionAlive(const std::string& session_id);
+        expected<session_id_t, Error> StartSession(const std::string& user_id, const std::string& device);
+        expected<user_id_t, Error> GetUserIDIfSessionAlive(const std::string& session_id);
         std::optional<Error> CloseSession(const std::string& session_id);
 
     private:
