@@ -45,7 +45,8 @@ namespace
                           .url(url)
                           .headers({
                             {"Accept", "application/json"},
-                            {"Authorization", auth_info}
+                            {"Authorization", auth_info},
+                            {"User-Agent", "miet-video/0.0.1 GNU/Linux 22.04-Ubuntu"}
                           })
                           .timeout(std::chrono::seconds(1));
     }
@@ -69,7 +70,7 @@ namespace
 
     auto OrioksClient::AuntificateStudent(const std::string& login, const std::string& password) -> expected<auth_token_t, Error>
     {
-        auto url = BuildUrl(m_connection_type, m_hostname, "api/v1/auth");
+        auto url = BuildUrl(m_connection_type, m_hostname, "/api/v1/auth");
         auto auth_info = BuildAuthInfo(login, password);
 
         auto response = BuildGetRequest(m_http_client, url, auth_info).perform();
