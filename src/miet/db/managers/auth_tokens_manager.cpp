@@ -21,7 +21,7 @@ namespace
     {
         auto transaction = m_pg_cluster->Begin("Get auth token transaction",
                                                storages::postgres::ClusterHostType::kSlave, {});
-        auto result = transaction.Execute(kGetAuthTokenFromSessionId);
+        auto result = transaction.Execute(kGetAuthTokenFromSessionId, session_id);
         if (result.Size() != 1) {
             return unexpected(Error::CantGetAuthToken);
         }
