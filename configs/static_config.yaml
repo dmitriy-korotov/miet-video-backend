@@ -80,6 +80,11 @@ components_manager:
             method: GET               
             task_processor: main-task-processor
 
+        study-disciplines-handler:
+            path: /v1/user/disciplines
+            method: GET               
+            task_processor: main-task-processor
+
         postgres-miet-video-db:
             dbconnection: $dbconnection
             blocking_task_processor: fs-task-processor

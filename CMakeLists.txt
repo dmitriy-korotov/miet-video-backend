@@ -61,6 +61,8 @@ set(MIET_VIDEO_HANDLERS_SOURCE
     ${MIET_VIDEO_HANDLERS_DIR}/authorization_handler.cpp
     ${MIET_VIDEO_HANDLERS_DIR}/user_info_handler.hpp
     ${MIET_VIDEO_HANDLERS_DIR}/user_info_handler.cpp
+    ${MIET_VIDEO_HANDLERS_DIR}/study_disciplines_handler.hpp
+    ${MIET_VIDEO_HANDLERS_DIR}/study_disciplines_handler.cpp
 )
 
 set(MIET_VIDEO_DB_SOURCE
