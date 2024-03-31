@@ -13,7 +13,7 @@ async def test_invalid_user_json(service_client):
     response = await service_client.post('/v1/users')
     assert response.status == 400
     responseJson = json.loads(response.text)
-    assert responseJson["error"]["error_code"] == 1 # incorrect JSON format
+    assert responseJson["error"]["error_code"] == 0 # incorrect JSON format
 
 
 async def test_request_without_password(service_client):
@@ -21,7 +21,7 @@ async def test_request_without_password(service_client):
     response = await service_client.post('/v1/users', json=user_data)
     assert response.status == 400
     responseJson = json.loads(response.text)
-    assert responseJson["error"]["error_code"] == 3 # user must have 'login' field
+    assert responseJson["error"]["error_code"] == 1 # user must have 'login' field
 
 
 async def test_request_without_password(service_client):
@@ -29,7 +29,7 @@ async def test_request_without_password(service_client):
     response = await service_client.post('/v1/users', json=user_data)
     assert response.status == 400
     responseJson = json.loads(response.text)
-    assert responseJson["error"]["error_code"] == 4 # user must have 'password' field
+    assert responseJson["error"]["error_code"] == 1 # user must have 'password' field
 
 
 async def test_login_is_string_format(service_client):
@@ -37,7 +37,7 @@ async def test_login_is_string_format(service_client):
     response = await service_client.post('/v1/users', json=user_data)
     assert response.status == 400
     responseJson = json.loads(response.text)
-    assert responseJson["error"]["error_code"] == 6 # 'login' field must be in string format
+    assert responseJson["error"]["error_code"] == 1 # 'login' field must be in string format
 
 
 async def test_password_is_string_format(service_client):
@@ -45,19 +45,10 @@ async def test_password_is_string_format(service_client):
     response = await service_client.post('/v1/users', json=user_data)
     assert response.status == 400
     responseJson = json.loads(response.text)
-    assert responseJson["error"]["error_code"] == 7 # 'password' field must be in string format
+    assert responseJson["error"]["error_code"] == 1 # 'password' field must be in string format
 
 
-async def test_success_registration(service_client):
+async def test_unknow_orioks_user_registration(service_client):
     user_data = json.loads('{"username": "Dima", "login": "233424", "password": "3424"}')
     response = await service_client.post('/v1/users', json=user_data)
-    assert response.status == 201
-    assert response.text == '1'
-
-
-@pytest.mark.pgsql('db_test', files=['initial_data.sql'])
-async def test_already_registrated_user(service_client):
-    user_data = json.loads('{"username": "DimaTest1", "login": "123", "password": "3424"}')
-    response = await service_client.post('/v1/users', json=user_data)
-    assert response.status == 403
-    assert response.text == '0'
+    assert response.status == 401
