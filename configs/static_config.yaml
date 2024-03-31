@@ -62,6 +62,9 @@ components_manager:
         users-manager:
             load-enabled: true
 
+        auth-tokens-manager:
+            load-enabled: true
+
         registration-handler:                   
             path: /v1/users              
             method: POST                 
