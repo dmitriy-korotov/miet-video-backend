@@ -39,6 +39,8 @@ components_manager:
             fs-task-processor: fs-task-processor
 
         orioks-client:
+            load-enabled: true
+            connection-type: https
             hostname: orioks.miet.ru
 
         tests-control:

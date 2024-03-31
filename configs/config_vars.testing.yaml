@@ -6,4 +6,6 @@ is-testing: true
 
 server-port: 8080
 
+miet-video-user-argent: miet-video/0.0.1 GNU/Linux 22.04-Ubuntu
+
 dbconnection: 'postgresql://testsuite@localhost:15433/miet_video_test_db'
