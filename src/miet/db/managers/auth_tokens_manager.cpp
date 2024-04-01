@@ -12,8 +12,8 @@ namespace
         WHERE user_id = COALESCE(
             (SELECT user_id
              FROM miet_video.sessions
-             WHERE session_id = %1)
-            , "")
+             WHERE session_id = $1)
+            , 'null')
     )", storages::Query::Name("get_auth_token"));
 }
 

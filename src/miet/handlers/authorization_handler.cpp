@@ -26,7 +26,8 @@ namespace miet::handlers
 
         auto auth_result = m_users_manager.AuthificateUser(authorizationData.login, authorizationData.password);
         if (!auth_result.has_value()) {
-            errors::BuildError(auth_result.error(), "Can't auntificate user");
+            request.SetResponseStatus(server::http::HttpStatus::kUnauthorized);
+            return errors::BuildError(auth_result.error(), "Can't auntificate user");
         }
         auto user_id = auth_result.value();
 

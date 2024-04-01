@@ -13,20 +13,20 @@ namespace
 {
     const auto kCreateSessionQuery = storages::Query(R"(
         INSERT INTO miet_video.sessions (session_id, user_id, device)
-        VALUES (%1, %2, %3)
+        VALUES ($1, $2, $3)
         ON CONFLICT DO NOTHING
     )", storages::Query::Name("create_session"));
 
     const auto kGetUserIdQuery = storages::Query(R"(
         SELECT user_id
         FROM miet_video.sessions
-        WHERE session_id = %1 AND end_timestamp IS NULL
+        WHERE session_id = $1 AND end_timestamp IS NULL
     )", storages::Query::Name("create_session"));
 
     const auto kCloseSessionQuery = storages::Query(R"(
         UPDATE miet_video.sessions
-        SET end_timestamp = %1
-        WHERE session_id = %2
+        SET end_timestamp = $1
+        WHERE session_id = $2
     )", storages::Query::Name("close_session"));
 }
     

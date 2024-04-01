@@ -15,30 +15,30 @@ namespace
     const auto kSelectUserByUsernameQuery = storages::Query(R"(
         SELECT username
         FROM miet_video.users
-        WHERE username = %1
+        WHERE username = $1
     )", storages::Query::Name("insert_user"));
 
     const auto kSelectUserByLoginQuery = storages::Query(R"(
         SELECT login
         FROM miet_video.users
-        WHERE login = %1
+        WHERE login = $1
     )", storages::Query::Name("insert_user"));
 
     const auto kInsertUserQuery = storages::Query(R"(
         INSERT INTO miet_video.users (user_id, auth_token, username, login, password, registration_timestamp)
-        VALUES (%1, %2, %3, %4, %5, %6)
+        VALUES ($1, $2, $3, $4, $5, $6)
         ON CONFLICT DO NOTHING
     )", storages::Query::Name("insert_user"));
 
     const auto kGetUserIdQuery = storages::Query(R"(
         SELECT user_id, password
         FROM miet_video.users
-        WHERE login = %1
+        WHERE login = $1
     )", storages::Query::Name("get_user_id"));
 
     const auto kDeleteUserQuery = storages::Query(R"(
         DELETE FROM miet_video.users
-        WHERE user_id = %1
+        WHERE user_id = $1
     )", storages::Query::Name("get_user_id"));
 
     auto GetHashedPassword(const std::string& password) -> std::string
