@@ -48,7 +48,7 @@ namespace
                             {"Authorization", auth_info},
                             {"User-Agent", "miet-video/0.0.1 GNU/Linux 22.04-Ubuntu"}
                           })
-                          .timeout(std::chrono::seconds(1));
+                          .timeout(std::chrono::seconds(3));
     }
 }
 
