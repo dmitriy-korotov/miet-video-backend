@@ -23,6 +23,9 @@ namespace
     auto UserInfoHandler::HandleRequestThrow(const server::http::HttpRequest& request,
                                              server::request::RequestContext&) const -> std::string
     {
+        auto& responseHeaders = request.GetHttpResponse();
+        responseHeaders.SetHeader(std::string_view("Content-Type"), "application/json");
+
         formats::json::Value requestJsonBody;
         try {
             requestJsonBody = formats::json::FromString(request.RequestBody());

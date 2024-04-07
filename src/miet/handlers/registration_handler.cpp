@@ -32,6 +32,9 @@ namespace
     auto RegistrationHandler::HandleRequestThrow(const server::http::HttpRequest& request,
                                                  server::request::RequestContext&) const -> std::string
     {
+        auto& responseHeaders = request.GetHttpResponse();
+        responseHeaders.SetHeader(std::string_view("Content-Type"), "application/json");
+
         models::UserRegistrationData registrationData;
         formats::json::Value requestJsonBody;
         try {
@@ -66,13 +69,13 @@ namespace
 
         auto session_result = m_sessions_manager.StartSession(userData.user_id, "Yandex browser"); // TODO Get registration device
         if (!session_result.has_value()) {
-            request.SetResponseStatus(server::http::HttpStatus::kForbidden);
+            request.SetResponseStatus(server::http::HttpStatus::kInternalServerError);
             return errors::BuildError(session_result.error(), "Can't start user session");
         }
         auto session_token = session_result.value();
         auto response = helpers::BuildResponse(session_token);
         if (!response.has_value()) {
-            request.SetResponseStatus(server::http::HttpStatus::kServiceUnavailable);
+            request.SetResponseStatus(server::http::HttpStatus::kInternalServerError);
             return errors::BuildError(response.error(), "Can't build response body");
         }
         request.SetResponseStatus(server::http::HttpStatus::kCreated);

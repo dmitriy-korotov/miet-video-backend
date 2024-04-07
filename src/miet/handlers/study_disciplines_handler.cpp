@@ -23,6 +23,9 @@ namespace
     auto StudyDisciplinesHandler::HandleRequestThrow(const server::http::HttpRequest& request,
                                                      server::request::RequestContext&) const -> std::string
     {
+        auto& responseHeaders = request.GetHttpResponse();
+        responseHeaders.SetHeader(std::string_view("Content-Type"), "application/json");
+
         auto expected_auth_token = helpers::GetAuthTokenFromRequest(request);
         if (!expected_auth_token.has_value()) {
             request.SetResponseStatus(server::http::HttpStatus::kBadRequest);

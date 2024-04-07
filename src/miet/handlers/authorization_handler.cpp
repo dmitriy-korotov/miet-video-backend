@@ -4,6 +4,8 @@
 #include <miet/utils/json.hpp>
 #include <miet/handlers/helpers/helpers.hpp>
 
+#include <userver/server/http/http_response.hpp>
+
 
 
 namespace miet::handlers
@@ -11,6 +13,9 @@ namespace miet::handlers
     auto AuthorizationHandler::HandleRequestThrow(const server::http::HttpRequest& request,
                                                   server::request::RequestContext&) const -> std::string
     {
+        auto& responseHeaders = request.GetHttpResponse();
+        responseHeaders.SetHeader(std::string_view("Content-Type"), "application/json");
+
         models::UserAuthorizationData authorizationData;
         formats::json::Value requestJsonBody;
         try {
