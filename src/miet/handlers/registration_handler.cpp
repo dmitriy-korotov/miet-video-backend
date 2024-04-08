@@ -24,7 +24,6 @@ namespace
 
         userData.auth_token = auth_token;
         userData.user_id = userver::utils::generators::GenerateUuidV7();
-        userData.registration_timestamp = userver::utils::datetime::LocalTimezoneTimestring(userver::utils::datetime::Now());
         return userData;
     }
 }

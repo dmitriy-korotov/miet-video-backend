@@ -25,8 +25,8 @@ namespace
     )", storages::Query::Name("insert_user"));
 
     const auto kInsertUserQuery = storages::Query(R"(
-        INSERT INTO miet_video.users (user_id, auth_token, username, login, password, registration_timestamp)
-        VALUES ($1, $2, $3, $4, $5, $6)
+        INSERT INTO miet_video.users (user_id, auth_token, username, login, password)
+        VALUES ($1, $2, $3, $4, $5)
         ON CONFLICT DO NOTHING
     )", storages::Query::Name("insert_user"));
 
@@ -77,8 +77,8 @@ namespace
         }
         result = transaction.Execute(kInsertUserQuery,
                                      userData.user_id, userData.auth_token,
-                                     hashed_password, userData.login,
-                                     userData.password, userData.registration_timestamp);
+                                     userData.username, userData.login,
+                                     hashed_password);
         if (result.RowsAffected() != 1) {
             return Error::CantCreateUser;
         }

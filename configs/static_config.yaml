@@ -76,8 +76,8 @@ components_manager:
             task_processor: main-task-processor
 
         user-info-handler:                   
-            path: /v1/users
-            method: GET               
+            path: /v1/student/info
+            method: POST               
             task_processor: main-task-processor
 
         study-disciplines-handler:

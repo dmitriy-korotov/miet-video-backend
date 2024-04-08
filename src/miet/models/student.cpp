@@ -10,7 +10,7 @@ namespace miet::models
     {
         if (!utils::JsonProcessor::Write(json, "course", course))
             return false;
-        if (!utils::JsonProcessor::Write(json, "departament", departament))
+        if (!utils::JsonProcessor::Write(json, "department", department))
             return false;
         if (!utils::JsonProcessor::Write(json, "full_name", full_name))
             return false;
@@ -33,7 +33,7 @@ namespace miet::models
     {
         if (!utils::JsonProcessor::Read(json, "course", course))
             return false;
-        if (!utils::JsonProcessor::Read(json, "departament", departament))
+        if (!utils::JsonProcessor::Read(json, "department", department))
             return false;
         if (!utils::JsonProcessor::Read(json, "full_name", full_name))
             return false;
