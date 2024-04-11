@@ -75,6 +75,11 @@ components_manager:
             method: POST               
             task_processor: main-task-processor
 
+        logout-handler:                   
+            path: /v1/users/logout
+            method: POST
+            task_processor: main-task-processor
+
         user-info-handler:                   
             path: /v1/student/info
             method: POST               
@@ -82,7 +87,7 @@ components_manager:
 
         study-disciplines-handler:
             path: /v1/user/disciplines
-            method: GET               
+            method: POST               
             task_processor: main-task-processor
 
         postgres-miet-video-db:

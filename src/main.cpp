@@ -15,6 +15,7 @@
 #include <miet/handlers/authorization_handler.hpp>
 #include <miet/handlers/user_info_handler.hpp>
 #include <miet/handlers/study_disciplines_handler.hpp>
+#include <miet/handlers/logout_handler.hpp>
 
 
 
@@ -33,6 +34,7 @@ int main(int argc, char* argv[]) {
                             .Append<miet::handlers::AuthorizationHandler>()
                             .Append<miet::handlers::UserInfoHandler>()
                             .Append<miet::handlers::StudyDisciplinesHandler>()
+                            .Append<miet::handlers::LogoutHandler>()
                             .Append<userver::server::handlers::TestsControl>();
 
   return userver::utils::DaemonMain(argc, argv, component_list);
