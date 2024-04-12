@@ -6,45 +6,27 @@
 
 namespace miet::models
 {
-    auto StudyDiscipline::SerializeToJson(userver::formats::json::ValueBuilder& json) const noexcept -> bool
+    auto StudyDiscipline::SerializeToJson(userver::formats::json::ValueBuilder& json) const -> void
     {
-        if (!utils::JsonProcessor::Write(json, "control_form", control_form))
-            return false;
-        if (!utils::JsonProcessor::Write(json, "current_grade", current_grade))
-            return false;
-        if (!utils::JsonProcessor::Write(json, "department", department))
-            return false;
-        if (!utils::JsonProcessor::Write(json, "exam_date", exam_date))
-            return false;
-        if (!utils::JsonProcessor::Write(json, "id", id))
-            return false;
-        if (!utils::JsonProcessor::Write(json, "max_grade", max_grade))
-            return false;
-        if (!utils::JsonProcessor::Write(json, "name", name))
-            return false;
-        if (!utils::JsonProcessor::Write(json, "teachers", teachers))
-            return false;
-        return true;
+        utils::JsonProcessor::Write(json, "control_form", control_form);
+        utils::JsonProcessor::Write(json, "current_grade", current_grade);
+        utils::JsonProcessor::Write(json, "department", department);
+        utils::JsonProcessor::Write(json, "exam_date", exam_date);
+        utils::JsonProcessor::Write(json, "id", id);
+        utils::JsonProcessor::Write(json, "max_grade", max_grade);
+        utils::JsonProcessor::Write(json, "name", name);
+        utils::JsonProcessor::Write(json, "teachers", teachers);
     }
 
-    auto StudyDiscipline::DeserializeFromJson(const userver::formats::json::Value& json) noexcept -> bool
+    auto StudyDiscipline::DeserializeFromJson(const userver::formats::json::Value& json) -> void
     {
-        if (!utils::JsonProcessor::Read(json, "control_form", control_form))
-            return false;
-        if (!utils::JsonProcessor::Read(json, "current_grade", current_grade))
-            return false;
-        if (!utils::JsonProcessor::Read(json, "department", department))
-            return false;
-        if (!utils::JsonProcessor::Read(json, "exam_date", exam_date))
-            return false;
-        if (!utils::JsonProcessor::Read(json, "id", id))
-            return false;
-        if (!utils::JsonProcessor::Read(json, "max_grade", max_grade))
-            return false;
-        if (!utils::JsonProcessor::Read(json, "name", name))
-            return false;
-        if (!utils::JsonProcessor::Read(json, "teachers", teachers))
-            return false;
-        return true;
+        utils::JsonProcessor::Read(json, "control_form", control_form);
+        utils::JsonProcessor::Read(json, "current_grade", current_grade);
+        utils::JsonProcessor::Read(json, "department", department);
+        utils::JsonProcessor::Read(json, "exam_date", exam_date);
+        utils::JsonProcessor::Read(json, "id", id);
+        utils::JsonProcessor::Read(json, "max_grade", max_grade);
+        utils::JsonProcessor::Read(json, "name", name);
+        utils::JsonProcessor::Read(json, "teachers", teachers);
     }
 }

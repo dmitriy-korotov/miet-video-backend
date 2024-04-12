@@ -16,12 +16,12 @@ namespace miet::utils
 
     template <typename T>
     concept deserializable = requires (T object, formats::json::Value json) {
-        { object.DeserializeFromJson(json) } -> std::convertible_to<bool>;
+        { object.DeserializeFromJson(json) };
     };
 
     template <typename T>
     concept serializable = requires (T object, formats::json::ValueBuilder json) {
-        { object.SerializeToJson(json) } -> std::convertible_to<bool>;
+        { object.SerializeToJson(json) };
     };
 
     template <template<typename...> typename Container, typename T>
@@ -32,190 +32,183 @@ namespace miet::utils
     public:
 
         template <typename T>
-        static bool Read(const formats::json::Value& json, std::string_view key, T& result) noexcept;
+        static void Read(const formats::json::Value& json, std::string_view key, T& result);
         template <typename T>
-        static bool Read(const formats::json::Value& json, std::string_view key, std::optional<T>& result) noexcept;
+        static void Read(const formats::json::Value& json, std::string_view key, std::optional<T>& result);
         template <typename T>
-        static bool Read(const formats::json::Value& json, T& result) noexcept;
+        static void Read(const formats::json::Value& json, T& result);
 
         template <typename T>
-        static bool Write(formats::json::ValueBuilder& json, std::string_view key, const T& value) noexcept;
+        static void Write(formats::json::ValueBuilder& json, std::string_view key, const T& value);
         template <typename T>
-        static bool Write(formats::json::ValueBuilder& json, std::string_view key, const std::optional<T>& value) noexcept;
+        static void Write(formats::json::ValueBuilder& json, std::string_view key, const std::optional<T>& value);
         template <typename T>
-        static bool Write(formats::json::ValueBuilder& json, const T& value) noexcept;
+        static void Write(formats::json::ValueBuilder& json, const T& value);
 
     private:
 
         template <deserializable T>
-        static bool GetValue(const formats::json::Value& json, T& result) noexcept;
+        static void GetValue(const formats::json::Value& json, T& result);
 
         template <template<typename...> typename Container, typename T>
         requires container<Container, T>
-        static bool GetValue(const formats::json::Value& json, Container<T>& result) noexcept;
+        static void GetValue(const formats::json::Value& json, Container<T>& result);
 
         template <typename T>
-        static bool GetValue(const formats::json::Value& json, std::optional<T>& result) noexcept;
+        static void GetValue(const formats::json::Value& json, std::optional<T>& result);
 
         template <std::signed_integral T>
-        static bool GetValue(const formats::json::Value& json, T& result) noexcept;
+        static void GetValue(const formats::json::Value& json, T& result);
         template <std::unsigned_integral T>
-        static bool GetValue(const formats::json::Value& json, T& result) noexcept;
+        static void GetValue(const formats::json::Value& json, T& result);
         template <std::floating_point T>
-        static bool GetValue(const formats::json::Value& json, T& result) noexcept;
+        static void GetValue(const formats::json::Value& json, T& result);
 
-        static bool GetValue(const formats::json::Value& json, std::string& result) noexcept;
-        static bool GetValue(const formats::json::Value& json, bool& result) noexcept;
+        static void GetValue(const formats::json::Value& json, std::string& result);
+        static void GetValue(const formats::json::Value& json, bool& result);
 
         template <typename T>
-        static bool PutValue(formats::json::ValueBuilder& json, const T& value) noexcept;
+        static void PutValue(formats::json::ValueBuilder& json, const T& value);
 
         template <serializable T>
-        static bool PutValue(formats::json::ValueBuilder& json, const T& value) noexcept;
+        static void PutValue(formats::json::ValueBuilder& json, const T& value);
 
         template <template<typename...> typename Container, typename T>
         requires container<Container, T>
-        static bool PutValue(formats::json::ValueBuilder& json, const Container<T>& value) noexcept;
+        static void PutValue(formats::json::ValueBuilder& json, const Container<T>& value);
 
     };
 
     template <deserializable T>
-    auto JsonProcessor::GetValue(const formats::json::Value& json, T& result) noexcept -> bool
+    auto JsonProcessor::GetValue(const formats::json::Value& json, T& result) -> void
     {
-        static_assert(deserializable<T>, "Type must be deserializable and have method 'DeserializeFromJson'");
         if (!json.IsObject()) {
-            return false;
+            throw std::runtime_error("value type is not an object");
         }
-        return result.DeserializeFromJson(json);
+        result.DeserializeFromJson(json);
     }
 
     template <template<typename...> typename Container, typename T>
     requires container<Container, T>
-    auto JsonProcessor::GetValue(const formats::json::Value& json, Container<T>& result) noexcept -> bool
+    auto JsonProcessor::GetValue(const formats::json::Value& json, Container<T>& result) -> void
     {
         if (!json.IsArray()) {
-            return false;
+            throw std::runtime_error("value type is not an array");
         }
         for (auto&& elem : json) {
             T value;
-            if (!GetValue(elem, value)) {
-                return false;
-            }
+            GetValue(elem, value);
             result.push_back(std::move(value));
         }
-        return true;
     }
 
     template <std::signed_integral T>
-    auto JsonProcessor::GetValue(const formats::json::Value& json, T& result) noexcept -> bool
+    auto JsonProcessor::GetValue(const formats::json::Value& json, T& result) -> void
     {
         if (!json.IsInt64()) {
-            return false;
+            throw std::runtime_error("value type is not a signed integer");
         }
         result = json.As<T>();
-        return true;
     }
 
     template <std::unsigned_integral T>
-    bool JsonProcessor::GetValue(const formats::json::Value& json, T& result) noexcept
+    auto JsonProcessor::GetValue(const formats::json::Value& json, T& result) -> void
     {
         if (!json.IsUInt64()) {
-            return false;
+            throw std::runtime_error("value type is not an unsigned integer");
         }
         result = json.As<T>();
-        return true;
     }
 
     template <std::floating_point T>
-    auto JsonProcessor::GetValue(const formats::json::Value& json, T& result) noexcept -> bool
+    auto JsonProcessor::GetValue(const formats::json::Value& json, T& result) -> void
     {
         if (!json.IsDouble()) {
-            return false;
+            throw std::runtime_error("value type is not a double");
         }
         result = json.As<T>();
-        return true;
     }
     
 
     template <typename T>
-    auto JsonProcessor::PutValue(formats::json::ValueBuilder& json, const T& value) noexcept -> bool
+    auto JsonProcessor::PutValue(formats::json::ValueBuilder& json, const T& value) -> void
     {
         json = value;
-        return true;
     }
 
     template <serializable T>
-    auto JsonProcessor::PutValue(formats::json::ValueBuilder& json, const T& value) noexcept -> bool
+    auto JsonProcessor::PutValue(formats::json::ValueBuilder& json, const T& value) -> void
     {
-        static_assert(serializable<T>, "Type must be serializable and have method 'SerializeFromJson'");
-        return value.SerializeToJson(json);
+        value.SerializeToJson(json);
     }
 
     template <template<typename...> typename Container, typename T>
     requires container<Container, T>
-    auto JsonProcessor::PutValue(formats::json::ValueBuilder& json, const Container<T>& value) noexcept -> bool
+    auto JsonProcessor::PutValue(formats::json::ValueBuilder& json, const Container<T>& value) -> void
     {
         for (auto&& elem : value) {
             formats::json::ValueBuilder jsonElem;
-            if (!Write(jsonElem, elem)) {
-                return false;
-            }
+            Write(jsonElem, elem);
             json.PushBack(std::move(jsonElem));
         }
-        return true;
     }
 
     template <typename T>
-    auto JsonProcessor::Read(const formats::json::Value& json, std::string_view key, T& result) noexcept -> bool
+    auto JsonProcessor::Read(const formats::json::Value& json, std::string_view key, T& result) -> void
     {
         if (!json.HasMember(key)) {
-            return false;
+            throw std::runtime_error(fmt::format("json value has not '{}' member", key));
         }
-        return GetValue(json[key], result);
+        try {
+            GetValue(json[key], result);
+        } catch (const std::runtime_error& ex) {
+            throw std::runtime_error(fmt::format("{}: {}", key, ex.what()));
+        }
     }
 
     template <typename T>
-    auto JsonProcessor::Read(const formats::json::Value& json, std::string_view key, std::optional<T>& result) noexcept -> bool
+    auto JsonProcessor::Read(const formats::json::Value& json, std::string_view key, std::optional<T>& result) -> void
     {
         if (!json.HasMember(key)) {
-            return true;
+            return;
         }
         result.emplace(T{});
-        return GetValue(json[key], result.value());
+        try {
+            GetValue(json[key], result.value());
+        } catch (const std::runtime_error& ex) {
+            throw std::runtime_error(fmt::format("{}: {}", key, ex.what()));
+        }
     }
 
     template <typename T>
-    auto JsonProcessor::Read(const formats::json::Value& json, T& result) noexcept -> bool
+    auto JsonProcessor::Read(const formats::json::Value& json, T& result) -> void
     {
-        return GetValue(json, result);
+        GetValue(json, result);
     }
 
     template <typename T>
-    auto JsonProcessor::Write(formats::json::ValueBuilder& json, std::string_view key, const T& value) noexcept -> bool
+    auto JsonProcessor::Write(formats::json::ValueBuilder& json, std::string_view key, const T& value) -> void
     {
         if (json.HasMember(key)) {
-            return false;
+            throw std::runtime_error(fmt::format("'{}' key already exists", key));
         }
         formats::json::ValueBuilder json_value;
-        if (!PutValue(json_value, value)) {
-            return false;
-        }
+        PutValue(json_value, value);
         json.EmplaceNocheck(key, std::move(json_value));
-        return true;
     }
 
     template <typename T>
-    auto JsonProcessor::Write(formats::json::ValueBuilder& json, std::string_view key, const std::optional<T>& value) noexcept -> bool
+    auto JsonProcessor::Write(formats::json::ValueBuilder& json, std::string_view key, const std::optional<T>& value) -> void
     {
         if (!value.has_value()) {
-            return true;
+            return;
         }
-        return Write(json, key, value.value());
+        Write(json, key, value.value());
     }
 
     template <typename T>
-    auto JsonProcessor::Write(formats::json::ValueBuilder& json, const T& value) noexcept -> bool
+    auto JsonProcessor::Write(formats::json::ValueBuilder& json, const T& value) -> void
     {
-        return PutValue(json, value);
+        PutValue(json, value);
     }
 }

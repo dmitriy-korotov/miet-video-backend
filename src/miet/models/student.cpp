@@ -6,49 +6,29 @@
 
 namespace miet::models
 {
-    auto StudentInfo::SerializeToJson(userver::formats::json::ValueBuilder& json) const noexcept -> bool
+    auto StudentInfo::SerializeToJson(userver::formats::json::ValueBuilder& json) const -> void
     {
-        if (!utils::JsonProcessor::Write(json, "course", course))
-            return false;
-        if (!utils::JsonProcessor::Write(json, "department", department))
-            return false;
-        if (!utils::JsonProcessor::Write(json, "full_name", full_name))
-            return false;
-        if (!utils::JsonProcessor::Write(json, "group", group))
-            return false;
-        if (!utils::JsonProcessor::Write(json, "record_book_id", record_book_id))
-            return false;
-        if (!utils::JsonProcessor::Write(json, "semester", semester))
-            return false;
-        if (!utils::JsonProcessor::Write(json, "study_direction", study_direction))
-            return false;
-        if (!utils::JsonProcessor::Write(json, "study_profile", study_profile))
-            return false;
-        if (!utils::JsonProcessor::Write(json, "year", year))
-            return false;
-        return true;
+        utils::JsonProcessor::Write(json, "course", course);
+        utils::JsonProcessor::Write(json, "department", department);
+        utils::JsonProcessor::Write(json, "full_name", full_name);
+        utils::JsonProcessor::Write(json, "group", group);
+        utils::JsonProcessor::Write(json, "record_book_id", record_book_id);
+        utils::JsonProcessor::Write(json, "semester", semester);
+        utils::JsonProcessor::Write(json, "study_direction", study_direction);
+        utils::JsonProcessor::Write(json, "study_profile", study_profile);
+        utils::JsonProcessor::Write(json, "year", year);
     }
 
-    auto StudentInfo::DeserializeFromJson(const userver::formats::json::Value& json) noexcept -> bool
+    auto StudentInfo::DeserializeFromJson(const userver::formats::json::Value& json) -> void
     {
-        if (!utils::JsonProcessor::Read(json, "course", course))
-            return false;
-        if (!utils::JsonProcessor::Read(json, "department", department))
-            return false;
-        if (!utils::JsonProcessor::Read(json, "full_name", full_name))
-            return false;
-        if (!utils::JsonProcessor::Read(json, "group", group))
-            return false;
-        if (!utils::JsonProcessor::Read(json, "record_book_id", record_book_id))
-            return false;
-        if (!utils::JsonProcessor::Read(json, "semester", semester))
-            return false;
-        if (!utils::JsonProcessor::Read(json, "study_direction", study_direction))
-            return false;
-        if (!utils::JsonProcessor::Read(json, "study_profile", study_profile))
-            return false;
-        if (!utils::JsonProcessor::Read(json, "year", year))
-            return false;
-        return true;
+        utils::JsonProcessor::Read(json, "course", course);
+        utils::JsonProcessor::Read(json, "department", department);
+        utils::JsonProcessor::Read(json, "full_name", full_name);
+        utils::JsonProcessor::Read(json, "group", group);
+        utils::JsonProcessor::Read(json, "record_book_id", record_book_id);
+        utils::JsonProcessor::Read(json, "semester", semester);
+        utils::JsonProcessor::Read(json, "study_direction", study_direction);
+        utils::JsonProcessor::Read(json, "study_profile", study_profile);
+        utils::JsonProcessor::Read(json, "year", year);
     }
 }

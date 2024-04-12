@@ -42,7 +42,9 @@ namespace
             request.SetResponseStatus(server::http::HttpStatus::kBadRequest);
             return errors::BuildError(Error::CantParseRequestBody, "Can't parse request body");
         }
-        if (!utils::JsonProcessor::Read(requestJsonBody, registrationData)) {
+        try {
+            utils::JsonProcessor::Read(requestJsonBody, registrationData);
+        } catch (const std::runtime_error& ex) {
             request.SetResponseStatus(server::http::HttpStatus::kBadRequest);
             return errors::BuildError(Error::CantReadUserRegistrationData, "Can't read user registration data");
         }

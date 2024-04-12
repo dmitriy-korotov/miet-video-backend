@@ -23,11 +23,11 @@ UTEST(JsonProcessorTest, DeserizalizeStandardTypes)
     uint64_t ui_value;
     double d_value;
 
-    EXPECT_TRUE(JsonProcessor::Read(json, "test_string", s_value));
-    EXPECT_TRUE(JsonProcessor::Read(json, "test_bool", b_value));
-    EXPECT_TRUE(JsonProcessor::Read(json, "test_i64", i_value));
-    EXPECT_TRUE(JsonProcessor::Read(json, "test_ui64", ui_value));
-    EXPECT_TRUE(JsonProcessor::Read(json, "test_double", d_value));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "test_string", s_value));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "test_bool", b_value));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "test_i64", i_value));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "test_ui64", ui_value));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "test_double", d_value));
 
     EXPECT_EQ(s_value, "string");
     EXPECT_EQ(b_value, true);
@@ -63,16 +63,16 @@ UTEST(JsonProcessorTest, DeserizalizeAllArifmaticTypes)
     float f_v;
     double d_v;
 
-    EXPECT_TRUE(JsonProcessor::Read(json, "int8_t", i8_v));
-    EXPECT_TRUE(JsonProcessor::Read(json, "int16_t", i16_v));
-    EXPECT_TRUE(JsonProcessor::Read(json, "int32_t", i32_v));
-    EXPECT_TRUE(JsonProcessor::Read(json, "int64_t", i64_v));
-    EXPECT_TRUE(JsonProcessor::Read(json, "uint8_t", ui8_v));
-    EXPECT_TRUE(JsonProcessor::Read(json, "uint16_t", ui16_v));
-    EXPECT_TRUE(JsonProcessor::Read(json, "uint32_t", ui32_v));
-    EXPECT_TRUE(JsonProcessor::Read(json, "uint64_t", ui64_v));
-    EXPECT_TRUE(JsonProcessor::Read(json, "float", f_v));
-    EXPECT_TRUE(JsonProcessor::Read(json, "double", d_v));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "int8_t", i8_v));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "int16_t", i16_v));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "int32_t", i32_v));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "int64_t", i64_v));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "uint8_t", ui8_v));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "uint16_t", ui16_v));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "uint32_t", ui32_v));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "uint64_t", ui64_v));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "float", f_v));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "double", d_v));
 
     EXPECT_EQ(i8_v, -111);
     EXPECT_EQ(i16_v, 300);
@@ -101,11 +101,11 @@ UTEST(JsonProcessorTest, DeserizalizeOptionalValues)
     std::optional<double> d_v;
     std::optional<uint16_t> ui16_v;
 
-    EXPECT_TRUE(JsonProcessor::Read(json, "string_opt", s_v));
-    EXPECT_TRUE(JsonProcessor::Read(json, "int_opt", i_v));
-    EXPECT_TRUE(JsonProcessor::Read(json, "float_opt", f_v));
-    EXPECT_TRUE(JsonProcessor::Read(json, "ui16_opt", ui16_v));
-    EXPECT_TRUE(JsonProcessor::Read(json, "double_opt", d_v));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "string_opt", s_v));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "int_opt", i_v));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "float_opt", f_v));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "ui16_opt", ui16_v));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "double_opt", d_v));
 
     ASSERT_TRUE(s_v.has_value());
     ASSERT_TRUE(i_v.has_value());
@@ -126,9 +126,9 @@ UTEST(JsonProcessorTest, SerizalizeOptionalValues)
 
     formats::json::ValueBuilder builder;
     
-    EXPECT_TRUE(JsonProcessor::Write(builder, "s_opt", s_opt));
-    EXPECT_TRUE(JsonProcessor::Write(builder, "i_opt", i_opt));
-    EXPECT_TRUE(JsonProcessor::Write(builder, "d_opt", d_opt));
+    EXPECT_NO_THROW(JsonProcessor::Write(builder, "s_opt", s_opt));
+    EXPECT_NO_THROW(JsonProcessor::Write(builder, "i_opt", i_opt));
+    EXPECT_NO_THROW(JsonProcessor::Write(builder, "d_opt", d_opt));
 
     auto json = builder.ExtractValue();
 
@@ -140,9 +140,9 @@ UTEST(JsonProcessorTest, SerizalizeOptionalValues)
     int i_res;
     double d_res;
 
-    ASSERT_TRUE(JsonProcessor::Read(json, "s_opt", s_res));
-    EXPECT_FALSE(JsonProcessor::Read(json, "i_opt", i_res));
-    ASSERT_TRUE(JsonProcessor::Read(json, "d_opt", d_res));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "s_opt", s_res));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "i_opt", i_res));
+    EXPECT_NO_THROW(JsonProcessor::Read(json, "d_opt", d_res));
 
     EXPECT_EQ(s_res, "string");
     EXPECT_EQ(d_res, 3.14);

@@ -13,9 +13,7 @@ namespace
     auto BuildResponse(const models::StudentInfo& studentInfo) -> userver::utils::expected<std::string, helpers::HandleError>
     {
         formats::json::ValueBuilder result;
-        if (!utils::JsonProcessor::Write(result, studentInfo)) {
-            return userver::utils::unexpected(helpers::HandleError::CantBuildResponse);
-        }
+        utils::JsonProcessor::Write(result, studentInfo);
         return formats::json::ToString(result.ExtractValue());
     }
 }
@@ -34,7 +32,9 @@ namespace
             return errors::BuildError(helpers::HandleError::CantParseRequestBody, "Can't parse request body");
         }
         db::managers::SessionsManager::session_id_t session_id;
-        if (!utils::JsonProcessor::Read(requestJsonBody, "session_token", session_id)) {
+        try {
+            utils::JsonProcessor::Read(requestJsonBody, "session_token", session_id);
+        } catch (const std::runtime_error& ex) {
             request.SetResponseStatus(server::http::HttpStatus::kBadRequest);
             return errors::BuildError(helpers::HandleError::CantReadSessionToken, "Can't read session token");
         }

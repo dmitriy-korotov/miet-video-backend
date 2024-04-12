@@ -24,7 +24,9 @@ namespace miet::handlers
             request.SetResponseStatus(server::http::HttpStatus::kBadRequest);
             return errors::BuildError(Error::CantParseRequestBody, "Can't parse request body");
         }
-        if (!utils::JsonProcessor::Read(requestJsonBody, authorizationData)) {
+        try {
+            utils::JsonProcessor::Read(requestJsonBody, authorizationData);
+        } catch (const std::runtime_error& ex) {
             request.SetResponseStatus(server::http::HttpStatus::kBadRequest);
             return errors::BuildError(Error::CantReadUserAuthorizationData, "Can't read user authorization data");
         }

@@ -17,8 +17,8 @@ namespace miet::models
         uint64_t id;
         float max_grade;
 
-        bool SerializeToJson(userver::formats::json::ValueBuilder& json) const noexcept;
-        bool DeserializeFromJson(const userver::formats::json::Value& json) noexcept;
+        void SerializeToJson(userver::formats::json::ValueBuilder& json) const;
+        void DeserializeFromJson(const userver::formats::json::Value& json);
 
     };
 }

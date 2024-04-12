@@ -8,81 +8,43 @@ using namespace userver;
 
 namespace miet::models
 {
-    auto UserAuthorizationData::SerializeToJson(userver::formats::json::ValueBuilder& json) const noexcept -> bool
+    auto UserAuthorizationData::SerializeToJson(userver::formats::json::ValueBuilder& json) const -> void
     {
-        if (!utils::JsonProcessor::Write(json, "login", login)) {
-            return false;
-        }
-        if (!utils::JsonProcessor::Write(json, "password", password)) {
-            return false;
-        }
-        return true;
+        utils::JsonProcessor::Write(json, "login", login);
+        utils::JsonProcessor::Write(json, "password", password);
     }
 
-    auto UserAuthorizationData::DeserializeFromJson(const userver::formats::json::Value& json) noexcept -> bool
+    auto UserAuthorizationData::DeserializeFromJson(const userver::formats::json::Value& json) -> void
     {
-        if (!utils::JsonProcessor::Read(json, "login", login)) {
-            return false;
-        }
-        if (!utils::JsonProcessor::Read(json, "password", password)) {
-            return false;
-        }
-        return true;
+        utils::JsonProcessor::Read(json, "login", login);
+        utils::JsonProcessor::Read(json, "password", password);
     }
 
-    auto UserRegistrationData::SerializeToJson(userver::formats::json::ValueBuilder& json) const noexcept -> bool
+    auto UserRegistrationData::SerializeToJson(userver::formats::json::ValueBuilder& json) const -> void
     {
-        if (!UserAuthorizationData::SerializeToJson(json)) {
-            return false;
-        }
-        if (!utils::JsonProcessor::Write(json, "username", username)) {
-            return false;
-        }
-        return true;
+        UserAuthorizationData::SerializeToJson(json);
+        utils::JsonProcessor::Write(json, "username", username);
     }
 
-    auto UserRegistrationData::DeserializeFromJson(const userver::formats::json::Value& json) noexcept -> bool
+    auto UserRegistrationData::DeserializeFromJson(const userver::formats::json::Value& json) -> void
     {
-        if (!UserAuthorizationData::DeserializeFromJson(json)) {
-            return false;
-        }
-        if (!utils::JsonProcessor::Read(json, "username", username)) {
-            return false;
-        }
-        return true;
+        UserAuthorizationData::DeserializeFromJson(json);
+        utils::JsonProcessor::Read(json, "username", username);
     }
 
-    auto UserData::SerializeToJson(userver::formats::json::ValueBuilder& json) const noexcept -> bool
+    auto UserData::SerializeToJson(userver::formats::json::ValueBuilder& json) const -> void
     {
-        if (!UserRegistrationData::SerializeToJson(json)) {
-            return false;
-        }
-        if (!utils::JsonProcessor::Write(json, "user_id", user_id)) {
-            return false;
-        }
-        if (!utils::JsonProcessor::Write(json, "auth_token", auth_token)) {
-            return false;
-        }
-        if (!utils::JsonProcessor::Write(json, "registration_timestamp", registration_timestamp)) {
-            return false;
-        }
-        return true;
+        UserRegistrationData::SerializeToJson(json);
+        utils::JsonProcessor::Write(json, "user_id", user_id);
+        utils::JsonProcessor::Write(json, "auth_token", auth_token);
+        utils::JsonProcessor::Write(json, "registration_timestamp", registration_timestamp);
     }
 
-    auto UserData::DeserializeFromJson(const userver::formats::json::Value& json) noexcept -> bool
+    auto UserData::DeserializeFromJson(const userver::formats::json::Value& json) -> void
     {
-        if (!UserRegistrationData::DeserializeFromJson(json)) {
-            return false;
-        }
-        if (!utils::JsonProcessor::Read(json, "user_id", user_id)) {
-            return false;
-        }
-        if (!utils::JsonProcessor::Read(json, "auth_token", auth_token)) {
-            return false;
-        }
-        if (!utils::JsonProcessor::Read(json, "registration_timestamp", registration_timestamp)) {
-            return false;
-        }
-        return true;
+        UserRegistrationData::DeserializeFromJson(json);
+        utils::JsonProcessor::Read(json, "user_id", user_id);
+        utils::JsonProcessor::Read(json, "auth_token", auth_token);
+        utils::JsonProcessor::Read(json, "registration_timestamp", registration_timestamp);
     }
 }

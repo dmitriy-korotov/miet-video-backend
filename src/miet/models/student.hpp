@@ -18,8 +18,8 @@ namespace miet::models
         std::string study_profile;
         std::string year;
 
-        bool SerializeToJson(userver::formats::json::ValueBuilder& json) const noexcept;
-        bool DeserializeFromJson(const userver::formats::json::Value& json) noexcept;
+        void SerializeToJson(userver::formats::json::ValueBuilder& json) const;
+        void DeserializeFromJson(const userver::formats::json::Value& json);
 
     };
 }

@@ -101,9 +101,7 @@ namespace
             return unexpected(Error::CantGetStudentInfo);
         }
         models::StudentInfo student_info;
-        if (!miet::utils::JsonProcessor::Read(response_body, student_info)) {
-            return unexpected(Error::CantParseStudentInfo);
-        }
+        miet::utils::JsonProcessor::Read(response_body, student_info);
         return student_info;
     }
 
@@ -119,9 +117,7 @@ namespace
             return unexpected(Error::CantGetStudyDisciplines);
         }
         std::vector<models::StudyDiscipline> study_disciplines;
-        if (!miet::utils::JsonProcessor::Read(response_body, study_disciplines)) {
-            return unexpected(Error::CantParseStudyDisciplines);
-        }
+        miet::utils::JsonProcessor::Read(response_body, study_disciplines);
         return study_disciplines;
     }
 }

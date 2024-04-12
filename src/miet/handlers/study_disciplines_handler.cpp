@@ -13,9 +13,7 @@ namespace
     auto BuildResponse(const std::vector<models::StudyDiscipline>& studyDisciplines) -> userver::utils::expected<std::string, helpers::HandleError>
     {
         formats::json::ValueBuilder result;
-        if (!utils::JsonProcessor::Write(result, studyDisciplines)) {
-            return userver::utils::unexpected(helpers::HandleError::CantBuildResponse);
-        }
+        utils::JsonProcessor::Write(result, studyDisciplines);
         return formats::json::ToString(result.ExtractValue());
     }
 }

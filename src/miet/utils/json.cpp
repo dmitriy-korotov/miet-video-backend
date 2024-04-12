@@ -4,21 +4,19 @@
 
 namespace miet::utils
 {
-    auto JsonProcessor::GetValue(const formats::json::Value& json, std::string& result) noexcept -> bool
+    auto JsonProcessor::GetValue(const formats::json::Value& json, std::string& result) -> void
     {
         if (!json.IsString()) {
-            return false;
+            throw std::runtime_error("value type is not a string");
         }
         result = json.As<std::string>();
-        return true;
     }
 
-    auto JsonProcessor::GetValue(const formats::json::Value& json, bool& result) noexcept -> bool
+    auto JsonProcessor::GetValue(const formats::json::Value& json, bool& result) -> void
     {
         if (!json.IsBool()) {
-            return false;
+            throw std::runtime_error("value type is not a bool");
         }
         result = json.As<bool>();
-        return true;
     }
 }

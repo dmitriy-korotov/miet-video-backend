@@ -17,18 +17,14 @@ namespace miet::handlers::helpers
             return userver::utils::unexpected(helpers::HandleError::CantParseRequestBody);
         }
         db::managers::SessionsManager::session_id_t session_id;
-        if (!utils::JsonProcessor::Read(requestJsonBody, "session_token", session_id)) {
-            return userver::utils::unexpected(helpers::HandleError::CantReadSessionToken);
-        }   
+        utils::JsonProcessor::Read(requestJsonBody, "session_token", session_id);
         return session_id;
     }
 
     auto BuildResponse(const db::managers::SessionsManager::session_id_t& session_token) -> userver::utils::expected<std::string, HandleError>
     {
         formats::json::ValueBuilder jsonResponse;
-        if (!utils::JsonProcessor::Write(jsonResponse, "session_token", session_token)) {
-            return userver::utils::unexpected(HandleError::CantBuildResponse);
-        }
+        utils::JsonProcessor::Write(jsonResponse, "session_token", session_token);
         return formats::json::ToString(jsonResponse.ExtractValue());
     }
 }
