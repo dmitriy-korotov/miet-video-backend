@@ -15,11 +15,11 @@ namespace miet::errors
 
         ErrorBuilder() = default;
 
-        ErrorBuilder& setErrorMessage(std::string error_message) noexcept;
+        ErrorBuilder& SetErrorMessage(std::string error_message) noexcept;
         template <typename T>
         requires std::is_integral_v<T> || std::is_enum_v<T>
-        ErrorBuilder& setErrorCode(T error_code) noexcept;
-        std::string build() const noexcept;
+        ErrorBuilder& SetErrorCode(T error_code) noexcept;
+        std::string Build() const noexcept;
 
     private:
 
@@ -30,7 +30,7 @@ namespace miet::errors
 
     template <typename T>
     requires std::is_integral_v<T> || std::is_enum_v<T>
-    auto ErrorBuilder::setErrorCode(T error_code) noexcept -> ErrorBuilder&
+    auto ErrorBuilder::SetErrorCode(T error_code) noexcept -> ErrorBuilder&
     {
         m_error_code = static_cast<error_code_t>(error_code);
         return *this;
@@ -38,10 +38,10 @@ namespace miet::errors
 
     template <typename T>
     requires std::is_integral_v<T> || std::is_enum_v<T>
-    std::string BuildError(T error_code, std::string error_message) noexcept
+    auto BuildError(T error_code, std::string error_message) noexcept -> std::string
     {
-        return ErrorBuilder{}.setErrorCode<T>(error_code)
-                             .setErrorMessage(std::move(error_message))
-                             .build();
+        return ErrorBuilder{}.SetErrorCode<T>(error_code)
+                             .SetErrorMessage(std::move(error_message))
+                             .Build();
     }
 }

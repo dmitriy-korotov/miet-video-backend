@@ -10,29 +10,29 @@ TEST(ErrorsBuilderTest, EmptyError)
 {
     ErrorBuilder builder;
     std::string expect = R"({"error":{"error_code":0,"error_message":""}})";
-    EXPECT_EQ(builder.build(), expect);
+    EXPECT_EQ(builder.Build(), expect);
 }
 
 TEST(ErrorsBuilderTest, HappyErrorBuild)
 {
     ErrorBuilder builder;
 
-    builder.setErrorCode(400).setErrorMessage("Error Message");
+    builder.SetErrorCode(400).SetErrorMessage("Error Message");
 
     std::string expect = R"({"error":{"error_code":400,"error_message":"Error Message"}})";
-    EXPECT_EQ(builder.build(), expect);
+    EXPECT_EQ(builder.Build(), expect);
 }
 
 TEST(ErrorsBuilderTest, DoubleSetErrorBuild)
 {
     ErrorBuilder builder;
 
-    builder.setErrorCode(400).setErrorMessage("Error Message");
+    builder.SetErrorCode(400).SetErrorMessage("Error Message");
     std::string expect1 = R"({"error":{"error_code":400,"error_message":"Error Message"}})";
-    EXPECT_EQ(builder.build(), expect1);
-    builder.setErrorCode(200).setErrorMessage("No error");
+    EXPECT_EQ(builder.Build(), expect1);
+    builder.SetErrorCode(200).SetErrorMessage("No error");
     std::string expect2 = R"({"error":{"error_code":200,"error_message":"No error"}})";
-    EXPECT_EQ(builder.build(), expect2);
+    EXPECT_EQ(builder.Build(), expect2);
 }
 
 TEST(ErrorsBuilderTest, ErrorBuilderFunction)

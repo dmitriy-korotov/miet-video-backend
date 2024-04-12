@@ -8,13 +8,13 @@ using namespace userver::formats::json;
 
 namespace miet::errors
 {
-    auto ErrorBuilder::setErrorMessage(std::string error_message) noexcept -> ErrorBuilder&
+    auto ErrorBuilder::SetErrorMessage(std::string error_message) noexcept -> ErrorBuilder&
     {
         m_error_message = std::move(error_message);
         return *this;
     }
 
-    auto ErrorBuilder::build() const noexcept -> std::string
+    auto ErrorBuilder::Build() const noexcept -> std::string
     {
         ValueBuilder result_builder;
         ValueBuilder error_bulder;
