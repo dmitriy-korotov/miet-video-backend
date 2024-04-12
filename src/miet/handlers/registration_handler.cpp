@@ -49,7 +49,7 @@ namespace
             return errors::BuildError(Error::CantReadUserRegistrationData, "Can't read user registration data");
         }
 
-        if (m_users_manager.UserExists(registrationData.login)) {
+        if (m_users_manager.IsExistsUser(registrationData.login)) {
             request.SetResponseStatus(server::http::HttpStatus::kConflict);
             return errors::BuildError(Error::SuchUserAlreadyExists, "User with such login already exists");
         }
@@ -62,11 +62,7 @@ namespace
         auto auth_token = std::move(auntificate_result).value();
 
         auto userData = FillUserData(registrationData, auth_token);
-        auto reg_result = m_users_manager.RegistrateUser(userData);
-        if (reg_result.has_value()) {
-            request.SetResponseStatus(server::http::HttpStatus::kConflict);
-            return errors::BuildError(reg_result.value(), "Can't registrate user, user with such username alreay exits");   
-        }
+        m_users_manager.RegistrateUser(userData);
 
         auto session_result = m_sessions_manager.StartSession(userData.user_id, "Yandex browser"); // TODO Get registration device
         if (!session_result.has_value()) {

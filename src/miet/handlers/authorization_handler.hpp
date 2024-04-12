@@ -1,6 +1,6 @@
 #pragma once
 
-#include <miet/db/managers/users_manager.hpp>
+#include <miet/db/managers/postgres/users_manager.hpp>
 #include <miet/db/managers/sessions_manager.hpp>
 
 #include <userver/components/component.hpp>
@@ -28,7 +28,7 @@ namespace miet::handlers
         AuthorizationHandler(const components::ComponentConfig& config,
                              const components::ComponentContext& component_context)
                 : HttpHandlerBase(config, component_context)
-                , m_users_manager(component_context.FindComponent<db::managers::UsersManager>())
+                , m_users_manager(component_context.FindComponent<db::managers::pg::UsersManager>())
                 , m_sessions_manager(component_context.FindComponent<db::managers::SessionsManager>())
         { }
 
@@ -37,7 +37,7 @@ namespace miet::handlers
 
     private:
 
-        db::managers::UsersManager& m_users_manager;
+        db::managers::pg::UsersManager& m_users_manager;
         db::managers::SessionsManager& m_sessions_manager;
 
     };

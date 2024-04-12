@@ -31,12 +31,7 @@ namespace miet::handlers
             return errors::BuildError(Error::CantReadUserAuthorizationData, "Can't read user authorization data");
         }
 
-        auto auth_result = m_users_manager.AuthificateUser(authorizationData.login, authorizationData.password);
-        if (!auth_result.has_value()) {
-            request.SetResponseStatus(server::http::HttpStatus::kUnauthorized);
-            return errors::BuildError(auth_result.error(), "Can't auntificate user");
-        }
-        auto user_id = auth_result.value();
+        auto user_id = m_users_manager.AuthificateUser(authorizationData.login, authorizationData.password);
 
          auto session_result = m_sessions_manager.StartSession(user_id, "Yandex browser"); // TODO Get registration device
         if (!session_result.has_value()) {
