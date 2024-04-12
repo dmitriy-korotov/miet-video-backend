@@ -141,7 +141,7 @@ UTEST(JsonProcessorTest, SerizalizeOptionalValues)
     double d_res;
 
     EXPECT_NO_THROW(JsonProcessor::Read(json, "s_opt", s_res));
-    EXPECT_NO_THROW(JsonProcessor::Read(json, "i_opt", i_res));
+    EXPECT_THROW(JsonProcessor::Read(json, "i_opt", i_res), std::runtime_error);
     EXPECT_NO_THROW(JsonProcessor::Read(json, "d_opt", d_res));
 
     EXPECT_EQ(s_res, "string");
