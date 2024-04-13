@@ -9,7 +9,7 @@
 
 #include <miet/db/managers/postgres/sessions_manager.hpp>
 #include <miet/db/managers/postgres/users_manager.hpp>
-#include <miet/db/managers/auth_tokens_manager.hpp>
+#include <miet/db/managers/postgres/auth_tokens_manager.hpp>
 #include <miet/clients/orioks_client.hpp>
 #include <miet/handlers/registration_handler.hpp>
 #include <miet/handlers/authorization_handler.hpp>
@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
                             .Append<userver::components::Postgres>("postgres-miet-video-db")
                             .Append<miet::db::managers::pg::SessionsManager>()
                             .Append<miet::db::managers::pg::UsersManager>()
-                            .Append<miet::db::managers::AuthTokensManager>()
+                            .Append<miet::db::managers::pg::OrioksAuthTokensManager>()
                             .Append<userver::clients::dns::Component>()
                             .Append<userver::components::HttpClient>()
                             .Append<miet::clients::OrioksClient>()

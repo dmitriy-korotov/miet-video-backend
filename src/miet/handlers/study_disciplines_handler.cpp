@@ -32,12 +32,8 @@ namespace
 
         // TODO Check aliving session
 
-        auto result = m_auth_tokens_manager.GetOrioksAuthTokenFromSessionID(expected_auth_token.value());
-        if (!result.has_value()) {
-            request.SetResponseStatus(server::http::HttpStatus::kBadRequest);
-            return errors::BuildError(result.error(), "Can't get auth token from session token");
-        }
-        auto auth_token = result.value();
+        auto result = m_auth_tokens_manager.GetAuthTokenFromSessionToken(expected_auth_token.value());
+        auto auth_token = result;
 
         auto disciplines_result = m_orioks_client.GetStudentDisciplines(auth_token);
         if (!disciplines_result.has_value()) {

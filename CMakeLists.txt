@@ -74,13 +74,15 @@ set(MIET_VIDEO_DB_SOURCE
     ${MIET_VIDEO_DB_DIR}/managers/abstract/users_manager_base.cpp
     ${MIET_VIDEO_DB_DIR}/managers/abstract/sessions_manager_base.hpp
     ${MIET_VIDEO_DB_DIR}/managers/abstract/sessions_manager_base.cpp
+    ${MIET_VIDEO_DB_DIR}/managers/abstract/auth_tokens_manager_base.hpp
+    ${MIET_VIDEO_DB_DIR}/managers/abstract/auth_tokens_manager_base.cpp
 
-    ${MIET_VIDEO_DB_DIR}/managers/auth_tokens_manager.hpp
-    ${MIET_VIDEO_DB_DIR}/managers/auth_tokens_manager.cpp
     ${MIET_VIDEO_DB_DIR}/managers/postgres/users_manager.hpp
     ${MIET_VIDEO_DB_DIR}/managers/postgres/users_manager.cpp
     ${MIET_VIDEO_DB_DIR}/managers/postgres/sessions_manager.hpp
     ${MIET_VIDEO_DB_DIR}/managers/postgres/sessions_manager.cpp
+    ${MIET_VIDEO_DB_DIR}/managers/postgres/auth_tokens_manager.hpp
+    ${MIET_VIDEO_DB_DIR}/managers/postgres/auth_tokens_manager.cpp
 )
 
 
