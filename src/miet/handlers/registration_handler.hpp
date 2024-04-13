@@ -2,7 +2,7 @@
 
 #include <miet/clients/orioks_client.hpp>
 #include <miet/db/managers/postgres/users_manager.hpp>
-#include <miet/db/managers/sessions_manager.hpp>
+#include <miet/db/managers/postgres/sessions_manager.hpp>
 
 #include <userver/components/component.hpp>
 #include <userver/server/handlers/http_handler_base.hpp>
@@ -32,7 +32,7 @@ namespace miet::handlers
                 : HttpHandlerBase(config, component_context)
                 , m_orioks_client(component_context.FindComponent<clients::OrioksClient>())
                 , m_users_manager(component_context.FindComponent<db::managers::pg::UsersManager>())
-                , m_sessions_manager(component_context.FindComponent<db::managers::SessionsManager>())
+                , m_sessions_manager(component_context.FindComponent<db::managers::pg::SessionsManager>())
         { }
 
         std::string HandleRequestThrow(const server::http::HttpRequest& request,
@@ -42,7 +42,7 @@ namespace miet::handlers
 
         clients::OrioksClient& m_orioks_client;
         db::managers::pg::UsersManager& m_users_manager;
-        db::managers::SessionsManager& m_sessions_manager;
+        db::managers::pg::SessionsManager& m_sessions_manager;
 
     };
 }

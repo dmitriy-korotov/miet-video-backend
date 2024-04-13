@@ -19,7 +19,7 @@ namespace miet::handlers
         return request.GetHeader("Authorization");
     }
 
-    static auto DoHandleRequestThrow(db::managers::SessionsManager& sessions_manager,
+    static auto DoHandleRequestThrow(db::managers::pg::SessionsManager& sessions_manager,
                                      const server::http::HttpRequest& request,
                                      server::request::RequestContext&) -> std::string
     {

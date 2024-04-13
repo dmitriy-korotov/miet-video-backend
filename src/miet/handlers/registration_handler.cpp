@@ -64,12 +64,12 @@ namespace
         auto userData = FillUserData(registrationData, auth_token);
         m_users_manager.RegistrateUser(userData);
 
-        auto session_result = m_sessions_manager.StartSession(userData.user_id, "Yandex browser"); // TODO Get registration device
-        if (!session_result.has_value()) {
-            request.SetResponseStatus(server::http::HttpStatus::kInternalServerError);
-            return errors::BuildError(session_result.error(), "Can't start user session");
-        }
-        auto session_token = session_result.value();
+        auto session_result = m_sessions_manager.StartSession({
+            .user_id = userData.user_id,
+            .device = "Yandex",
+            .id_address = userver::utils::ip::AddressV4FromString("127.0.0.1")
+        }); // TODO Get registration device
+        auto session_token = session_result.session_token;
         auto response = helpers::BuildResponse(session_token);
         if (!response.has_value()) {
             request.SetResponseStatus(server::http::HttpStatus::kInternalServerError);

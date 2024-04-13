@@ -7,7 +7,7 @@
 #include <userver/testsuite/testsuite_support.hpp>
 #include <userver/utils/daemon_run.hpp>
 
-#include <miet/db/managers/sessions_manager.hpp>
+#include <miet/db/managers/postgres/sessions_manager.hpp>
 #include <miet/db/managers/postgres/users_manager.hpp>
 #include <miet/db/managers/auth_tokens_manager.hpp>
 #include <miet/clients/orioks_client.hpp>
@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
                             .Append<userver::server::handlers::Ping>()
                             .Append<userver::components::TestsuiteSupport>()
                             .Append<userver::components::Postgres>("postgres-miet-video-db")
-                            .Append<miet::db::managers::SessionsManager>()
+                            .Append<miet::db::managers::pg::SessionsManager>()
                             .Append<miet::db::managers::pg::UsersManager>()
                             .Append<miet::db::managers::AuthTokensManager>()
                             .Append<userver::clients::dns::Component>()

@@ -16,12 +16,12 @@ namespace miet::handlers::helpers
         } catch (const std::exception& ex) {
             return userver::utils::unexpected(helpers::HandleError::CantParseRequestBody);
         }
-        db::managers::SessionsManager::session_id_t session_id;
-        utils::JsonProcessor::Read(requestJsonBody, "session_token", session_id);
-        return session_id;
+        models::session_token_t session_token;
+        utils::JsonProcessor::Read(requestJsonBody, "session_token", session_token);
+        return session_token;
     }
 
-    auto BuildResponse(const db::managers::SessionsManager::session_id_t& session_token) -> userver::utils::expected<std::string, HandleError>
+    auto BuildResponse(const models::session_token_t& session_token) -> userver::utils::expected<std::string, HandleError>
     {
         formats::json::ValueBuilder jsonResponse;
         utils::JsonProcessor::Write(jsonResponse, "session_token", session_token);

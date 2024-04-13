@@ -13,8 +13,10 @@ CREATE TABLE IF NOT EXISTS miet_video.users (
 
 CREATE TABLE IF NOT EXISTS miet_video.sessions (
     session_id VARCHAR(128) PRIMARY KEY,
+    refresh_token VARCHAR(128) PRIMARY KEY,
     user_id VARCHAR(128) REFERENCES miet_video.users (user_id),
     device VARCHAR(64),
+    ip_address VARCHAR(16),
     start_timestamp TIMESTAMPTZ DEFAULT NOW(),
     end_timestamp TIMESTAMPTZ DEFAULT NULL
 )

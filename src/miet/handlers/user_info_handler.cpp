@@ -31,7 +31,7 @@ namespace
             request.SetResponseStatus(server::http::HttpStatus::kBadRequest);
             return errors::BuildError(helpers::HandleError::CantParseRequestBody, "Can't parse request body");
         }
-        db::managers::SessionsManager::session_id_t session_id;
+        models::session_id_t session_id;
         try {
             utils::JsonProcessor::Read(requestJsonBody, "session_token", session_id);
         } catch (const std::runtime_error& ex) {

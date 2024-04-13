@@ -37,6 +37,8 @@ set(MIET_VIDEO_ERRORS_SOURCE
 )
 
 set(MIET_VIDEO_MODELS_SOURCE
+    ${MIET_VIDEO_MODELS_DIR}/types.hpp
+    
     ${MIET_VIDEO_MODELS_DIR}/session.hpp
     ${MIET_VIDEO_MODELS_DIR}/session.cpp
     ${MIET_VIDEO_MODELS_DIR}/user.hpp
@@ -70,13 +72,15 @@ set(MIET_VIDEO_HANDLERS_SOURCE
 set(MIET_VIDEO_DB_SOURCE
     ${MIET_VIDEO_DB_DIR}/managers/abstract/users_manager_base.hpp
     ${MIET_VIDEO_DB_DIR}/managers/abstract/users_manager_base.cpp
+    ${MIET_VIDEO_DB_DIR}/managers/abstract/sessions_manager_base.hpp
+    ${MIET_VIDEO_DB_DIR}/managers/abstract/sessions_manager_base.cpp
 
     ${MIET_VIDEO_DB_DIR}/managers/auth_tokens_manager.hpp
     ${MIET_VIDEO_DB_DIR}/managers/auth_tokens_manager.cpp
     ${MIET_VIDEO_DB_DIR}/managers/postgres/users_manager.hpp
     ${MIET_VIDEO_DB_DIR}/managers/postgres/users_manager.cpp
-    ${MIET_VIDEO_DB_DIR}/managers/sessions_manager.hpp
-    ${MIET_VIDEO_DB_DIR}/managers/sessions_manager.cpp
+    ${MIET_VIDEO_DB_DIR}/managers/postgres/sessions_manager.hpp
+    ${MIET_VIDEO_DB_DIR}/managers/postgres/sessions_manager.cpp
 )
 
 

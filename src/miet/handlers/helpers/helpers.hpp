@@ -1,6 +1,6 @@
 #pragma once
 
-#include <miet/db/managers/sessions_manager.hpp>
+#include <miet/models/types.hpp>
 
 #include <userver/server/http/http_request.hpp>
 #include <userver/utils/expected.hpp>
@@ -17,5 +17,5 @@ namespace miet::handlers::helpers
     };
 
     userver::utils::expected<std::string, HandleError> GetAuthTokenFromRequest(const userver::server::http::HttpRequest& request);
-    userver::utils::expected<std::string, HandleError> BuildResponse(const db::managers::SessionsManager::session_id_t& session_token);
+    userver::utils::expected<std::string, HandleError> BuildResponse(const models::session_token_t& session_token);
 }
