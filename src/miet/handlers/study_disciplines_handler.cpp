@@ -35,12 +35,7 @@ namespace
         auto result = m_auth_tokens_manager.GetAuthTokenFromSessionToken(expected_auth_token.value());
         auto auth_token = result;
 
-        auto disciplines_result = m_orioks_client.GetStudentDisciplines(auth_token);
-        if (!disciplines_result.has_value()) {
-            request.SetResponseStatus(server::http::HttpStatus::kInternalServerError);
-            return errors::BuildError(disciplines_result.error(), "Can't get student info from orioks");
-        }
-        auto disciplines = disciplines_result.value();
+        auto disciplines = m_orioks_client.GetStudentDisciplines(auth_token);
         auto response = BuildResponse(disciplines);
         if (!response.has_value()) {
             return errors::BuildError(response.error(), "Can't build response body");

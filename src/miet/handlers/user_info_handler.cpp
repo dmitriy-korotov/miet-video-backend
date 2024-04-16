@@ -44,12 +44,7 @@ namespace
         auto result = m_auth_tokens_manager.GetAuthTokenFromSessionToken(session_id);
         auto auth_token = result;
 
-        auto info_result = m_orioks_client.GetStudentInfo(auth_token);
-        if (!info_result.has_value()) {
-            request.SetResponseStatus(server::http::HttpStatus::kInternalServerError);
-            return errors::BuildError(info_result.error(), "Can't get student info from orioks");
-        }
-        auto info = info_result.value();
+        auto info = m_orioks_client.GetStudentInfo(auth_token);
         auto response = BuildResponse(info);
         if (!response.has_value()) {
             return errors::BuildError(response.error(), "Can't build response body");

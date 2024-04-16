@@ -1,7 +1,6 @@
 #pragma once
 
-#include <miet/models/student.hpp>
-#include <miet/models/study_discipline.hpp>
+#include <miet/clients/abstract/orioks_client_base.hpp>
 
 #include <userver/components/component_list.hpp>
 #include <userver/components/component.hpp>
@@ -11,31 +10,15 @@
 
 
 
+using namespace userver;
+
 namespace miet::clients
 {
-    using namespace userver;
-    using namespace userver::utils;
-
-    class OrioksClient final : public components::LoggableComponentBase
+    class OrioksClient final : public OrioksClientBase,  public components::LoggableComponentBase
     {
     public:
 
         static constexpr std::string_view kName = "orioks-client";
-        static constexpr std::string_view s_orioks_api = "https://orioks.miet.ru";
-
-        enum class Error : uint8_t
-        {
-            OrioksUserNotFound,
-            CantGetUserToken,
-            UnexpectedResponseBody,
-            CantGetStudentInfo,
-            CantParseStudentInfo,
-            CantGetStudyDisciplines,
-            CantParseStudyDisciplines,
-            UnknowError,
-            KSize
-        };
-        using auth_token_t = std::string;
 
         OrioksClient(const components::ComponentConfig& config,
                      const components::ComponentContext& component_context)
@@ -43,19 +26,28 @@ namespace miet::clients
             , m_http_client(component_context.FindComponent<components::HttpClient>().GetHttpClient())
             , m_hostname(config["hostname"].As<std::string>())
             , m_connection_type(config["connection-type"].As<std::string>())
+            , m_user_agent(config["user-agent"].As<std::string>())
+            , m_response_timeout(userver::utils::StringToDuration(config["http-timeout"].As<std::string>()))
         { }
 
         static yaml_config::Schema GetStaticConfigSchema();
 
-        expected<auth_token_t, Error> AuntificateStudent(const std::string& login, const std::string& password);
-        expected<models::StudentInfo, Error> GetStudentInfo(const auth_token_t& auth_token);
-        expected<std::vector<models::StudyDiscipline>, Error> GetStudentDisciplines(const auth_token_t& auth_token);
+        models::orioks::auth_token_t AuntificateStudent(const std::string& login, const std::string& password) const override;
+        models::StudentInfo GetStudentInfo(const models::orioks::auth_token_t& auth_token) const override;
+        std::vector<models::StudyDiscipline> GetStudentDisciplines(const models::orioks::auth_token_t& auth_token) const override;
+
+    private:
+
+        userver::clients::http::Request BuildRequestToOrioks(const std::string& url, const std::string& authorization) const;
+        formats::json::Value GetDataFromOrioks(const std::string& endpoint, const std::string& authorization) const;
 
     private:
 
         userver::clients::http::Client& m_http_client;
         std::string m_hostname;
         std::string m_connection_type;
+        std::string m_user_agent;
+        std::chrono::milliseconds m_response_timeout;
 
     };
 }

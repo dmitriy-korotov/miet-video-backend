@@ -15,7 +15,7 @@ namespace miet::handlers
 namespace
 {
     auto FillUserData(const models::UserRegistrationData& registrationData,
-                      const clients::OrioksClient::auth_token_t& auth_token) -> models::UserData
+                      const models::orioks::auth_token_t& auth_token) -> models::UserData
     {
         models::UserData userData;
         userData.login = registrationData.login;
@@ -54,12 +54,7 @@ namespace
             return errors::BuildError(Error::SuchUserAlreadyExists, "User with such login already exists");
         }
 
-        auto auntificate_result = m_orioks_client.AuntificateStudent(registrationData.login, registrationData.password);
-        if (!auntificate_result.has_value()) {
-            request.SetResponseStatus(server::http::HttpStatus::kUnauthorized);
-            return errors::BuildError(auntificate_result.error(), "Can't get auth token from orioks");
-        }
-        auto auth_token = std::move(auntificate_result).value();
+        auto auth_token = m_orioks_client.AuntificateStudent(registrationData.login, registrationData.password);
 
         auto userData = FillUserData(registrationData, auth_token);
         m_users_manager.RegistrateUser(userData);

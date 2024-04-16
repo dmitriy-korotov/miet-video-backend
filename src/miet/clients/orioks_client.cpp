@@ -1,56 +1,29 @@
 #include "orioks_client.hpp"
 
-#include <miet/errors/builder.hpp>
 #include <miet/models/user.hpp>
 #include <miet/utils/json.hpp>
 
 #include <userver/crypto/base64.hpp>
 #include <userver/formats/json/parser/parser.hpp>
 #include <userver/yaml_config/merge_schemas.hpp>
-
-#include <sstream>
+#include <userver/server/handlers/exceptions.hpp>
 
 
 
 namespace miet::clients
 {
-    using namespace userver::utils;
-
-namespace
-{
-    auto BuildAuthInfo(const std::string& login, const std::string& password) -> std::string
+    static auto HandleOrioksError(userver::clients::http::Status status) -> void
     {
-        std::ostringstream result;
-        result << "Basic " << utils::crypto::base64::Base64Encode(login + ":" + password);
-        return result.str();
+        if (status == userver::clients::http::Status::Unauthorized) {
+            throw server::handlers::Unauthorized(
+                    server::handlers::InternalMessage(
+                        "User unauthorized: incorrect authorization data"));
+        } else {
+            throw server::handlers::InternalServerError(
+                    server::handlers::InternalMessage(
+                        "Unexpected orioks response error"));
+        }
     }
-
-    auto BuildAuthInfo(const OrioksClient::auth_token_t& token) -> std::string
-    {
-        std::ostringstream result;
-        result << "Bearer " << token;
-        return result.str();
-    }
-
-    auto BuildUrl(const std::string& connection_type, const std::string& hostname, const std::string& path) -> std::string
-    {
-        return connection_type + "://" + hostname + path;
-    }
-
-    auto BuildGetRequest(userver::clients::http::Client& http_client,
-                         const std::string& url,
-                         const std::string& auth_info) -> userver::clients::http::Request
-    {
-        return http_client.CreateRequest()
-                          .url(url)
-                          .headers({
-                            {"Accept", "application/json"},
-                            {"Authorization", auth_info},
-                            {"User-Agent", "miet-video/0.0.1 GNU/Linux 22.04-Ubuntu"}
-                          })
-                          .timeout(std::chrono::seconds(3));
-    }
-}
 
     auto OrioksClient::GetStaticConfigSchema() -> yaml_config::Schema
     {
@@ -59,63 +32,65 @@ namespace
             description: orioks client component
             additionalProperties: false
             properties:
+                user-agent:
+                    type: string
+                    description: user agent name
                 hostname:
                     type: string
                     description: orioks hostname
                 connection-type:
                     type: string
                     description: http or https protocol
+                http-timeout:
+                    type: string
+                    description: response timeout in seconds
         )");
     }
 
-    auto OrioksClient::AuntificateStudent(const std::string& login, const std::string& password) -> expected<auth_token_t, Error>
+    auto OrioksClient::BuildRequestToOrioks(const std::string& url, const std::string& authorization) const -> userver::clients::http::Request
     {
-        auto url = BuildUrl(m_connection_type, m_hostname, "/api/v1/auth");
-        auto auth_info = BuildAuthInfo(login, password);
-
-        auto response = BuildGetRequest(m_http_client, url, auth_info).perform();
-        auto response_body = formats::json::FromString(response->body_view());
-
-        if (!response->IsOk()) {
-            if (response->status_code() == userver::clients::http::Status::Unauthorized) {
-                return unexpected(Error::OrioksUserNotFound);
-            } else {
-                return unexpected(Error::CantGetUserToken);
-            }
-        }
-        if (!response_body.HasMember("token") || !response_body["token"].IsString()) {
-            return unexpected(Error::UnexpectedResponseBody);
-        }
-        return response_body["token"].As<std::string>();
+        return m_http_client.CreateRequest()
+                            .url(url)
+                            .headers({
+                                {"Accept", "application/json"},
+                                {"Authorization", authorization},
+                                {"User-Agent", m_user_agent}
+                            })
+                            .timeout(m_response_timeout);
     }
 
-    auto OrioksClient::GetStudentInfo(const auth_token_t& auth_token) -> expected<models::StudentInfo, Error>
+    auto OrioksClient::GetDataFromOrioks(const std::string& endpoint, const std::string& authorization) const -> formats::json::Value
     {
-        auto url = BuildUrl(m_connection_type, m_hostname, "/api/v1/student");
-        auto auth_info = BuildAuthInfo(auth_token);
-
-        auto response = BuildGetRequest(m_http_client, url, auth_info).perform();
-        auto response_body = formats::json::FromString(response->body_view());
-
-        if (!response->IsOk()) {
-            return unexpected(Error::CantGetStudentInfo);
+        auto url = fmt::format("{}://{}{}", m_connection_type, m_hostname, endpoint);
+        auto response = BuildRequestToOrioks(url, authorization).perform();
+        if (not response->IsOk()) {
+            HandleOrioksError(response->status_code());
         }
+        return formats::json::FromString(response->body_view());
+    }
+
+    auto OrioksClient::AuntificateStudent(const std::string& login, const std::string& password) const -> models::orioks::auth_token_t
+    {
+        auto endcoded_data = utils::crypto::base64::Base64Encode(fmt::format("{}:{}", login, password));
+        auto authorization = fmt::format("Basic {}", endcoded_data);
+
+        auto response_body = GetDataFromOrioks("/api/v1/auth", authorization);
+        models::orioks::auth_token_t token;
+        miet::utils::JsonProcessor::Read(response_body, "token", token);
+        return token;
+    }
+
+    auto OrioksClient::GetStudentInfo(const models::orioks::auth_token_t& auth_token) const -> models::StudentInfo
+    {
+        auto response_body = GetDataFromOrioks("/api/v1/student", fmt::format("Bearer {}", auth_token));
         models::StudentInfo student_info;
         miet::utils::JsonProcessor::Read(response_body, student_info);
         return student_info;
     }
 
-    auto OrioksClient::GetStudentDisciplines(const auth_token_t& auth_token) -> expected<std::vector<models::StudyDiscipline>, Error>
+    auto OrioksClient::GetStudentDisciplines(const models::orioks::auth_token_t& auth_token) const -> std::vector<models::StudyDiscipline>
     {
-        auto url = BuildUrl(m_connection_type, m_hostname, "/api/v1/student/disciplines");
-        auto auth_info = BuildAuthInfo(auth_token);
-
-        auto response = BuildGetRequest(m_http_client, url, auth_info).perform();
-        auto response_body = formats::json::FromString(response->body_view());
-
-        if (!response->IsOk()) {
-            return unexpected(Error::CantGetStudyDisciplines);
-        }
+        auto response_body = GetDataFromOrioks("/api/v1/student/disciplines", fmt::format("Bearer {}", auth_token));
         std::vector<models::StudyDiscipline> study_disciplines;
         miet::utils::JsonProcessor::Read(response_body, study_disciplines);
         return study_disciplines;

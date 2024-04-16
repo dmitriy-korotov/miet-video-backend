@@ -42,6 +42,8 @@ components_manager:
             load-enabled: true
             connection-type: https
             hostname: orioks.miet.ru
+            user-agent: miet-video/0.0.1 GNU/Linux 22.04-Ubuntu
+            http-timeout: 10s
 
         tests-control:
             load-enabled: $is-testing

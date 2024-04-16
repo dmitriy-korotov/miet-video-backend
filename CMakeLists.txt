@@ -50,6 +50,9 @@ set(MIET_VIDEO_MODELS_SOURCE
 )
 
 set(MIET_VIDEO_CLIENTS_SOURCE
+    ${MIET_VIDEO_CLIENTS_DIR}/abstract/orioks_client_base.hpp
+    ${MIET_VIDEO_CLIENTS_DIR}/abstract/orioks_client_base.cpp    
+
     ${MIET_VIDEO_CLIENTS_DIR}/orioks_client.hpp
     ${MIET_VIDEO_CLIENTS_DIR}/orioks_client.cpp
 )
