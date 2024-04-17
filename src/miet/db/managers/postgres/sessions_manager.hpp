@@ -30,6 +30,7 @@ namespace miet::db::managers::pg
         { }
 
         models::SessionTokensData StartSession(models::UserSessionData session_data) override;
+        bool IsSessionAlive(const models::session_token_t& session_token) override;
         bool RefreshSession(models::refresh_token_t refresh_token) override;
         std::optional<models::user_id_t> GetUserIDIfSessionAlive(const models::session_token_t& session_token) const override;
         void CloseSession(const models::session_token_t& session_token) override;

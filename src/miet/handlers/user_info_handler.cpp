@@ -1,6 +1,5 @@
 #include "user_info_handler.hpp"
 
-#include <miet/errors/builder.hpp>
 #include <miet/utils/json.hpp>
 #include <miet/handlers/helpers/helpers.hpp>
 
@@ -8,47 +7,35 @@
 
 namespace miet::handlers
 {
-namespace
-{
-    auto BuildResponse(const models::StudentInfo& studentInfo) -> userver::utils::expected<std::string, helpers::HandleError>
+    auto DoGetUserInfoHandle(const UserInfoHandleArgs& args, const UserInfoHandleDeps& deps) -> models::StudentInfo
     {
-        formats::json::ValueBuilder result;
-        utils::JsonProcessor::Write(result, studentInfo);
-        return formats::json::ToString(result.ExtractValue());
+        if (!deps.sessions_manager->IsSessionAlive(args.session_token)) {
+            throw server::handlers::ExceptionWithCode<server::handlers::HandlerErrorCode::kForbidden>(
+                server::handlers::InternalMessage(
+                        fmt::format("Session lifetime has expired (token = '{}')", args.session_token)));
+        }
+        auto orioks_auth_token = deps.auth_tokens_manager->GetAuthTokenFromSessionToken(args.session_token);
+        return deps.orioks_client->GetStudentInfo(orioks_auth_token);
     }
-}
 
     auto UserInfoHandler::HandleRequestThrow(const server::http::HttpRequest& request,
                                              server::request::RequestContext&) const -> std::string
     {
-        auto& responseHeaders = request.GetHttpResponse();
-        responseHeaders.SetHeader(std::string_view("Content-Type"), "application/json");
-
-        formats::json::Value requestJsonBody;
-        try {
-            requestJsonBody = formats::json::FromString(request.RequestBody());
-        } catch (const std::exception& ex) {
-            request.SetResponseStatus(server::http::HttpStatus::kBadRequest);
-            return errors::BuildError(helpers::HandleError::CantParseRequestBody, "Can't parse request body");
-        }
-        models::session_id_t session_id;
-        try {
-            utils::JsonProcessor::Read(requestJsonBody, "session_token", session_id);
-        } catch (const std::runtime_error& ex) {
-            request.SetResponseStatus(server::http::HttpStatus::kBadRequest);
-            return errors::BuildError(helpers::HandleError::CantReadSessionToken, "Can't read session token");
-        }
-
-        // TODO Check aliving session
-
-        auto result = m_auth_tokens_manager.GetAuthTokenFromSessionToken(session_id);
-        auto auth_token = result;
-
-        auto info = m_orioks_client.GetStudentInfo(auth_token);
-        auto response = BuildResponse(info);
-        if (!response.has_value()) {
-            return errors::BuildError(response.error(), "Can't build response body");
-        }
-        return response.value();
+        helpers::PrepareJsonResponseHeaders(request);
+        return helpers::CallSafeHttpRequestHandler(request, [this, &request]() -> std::string
+        {
+            UserInfoHandleArgs args
+            {
+                .session_token = helpers::GetSessionToken(request)
+            };
+            UserInfoHandleDeps deps
+            {
+                .orioks_client = m_orioks_client,
+                .sessions_manager = m_sessions_manager,
+                .auth_tokens_manager = m_auth_tokens_manager
+            };
+            auto student_info = DoGetUserInfoHandle(args, deps);
+            return utils::ToString(student_info);
+        });
     }
 }

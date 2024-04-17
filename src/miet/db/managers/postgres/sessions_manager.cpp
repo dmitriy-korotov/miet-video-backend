@@ -8,10 +8,16 @@
 namespace miet::db::managers::pg
 {
     static const auto kCreateSessionQuery = storages::Query(R"(
-        INSERT INTO miet_video.sessions (session_id, user_id, device)
-        VALUES ($1, $2, $3)
+        INSERT INTO miet_video.sessions (session_id, user_id, device, ip_address)
+        VALUES ($1, $2, $3, $4)
         ON CONFLICT DO NOTHING
     )", storages::Query::Name("create_session"));
+
+    static const auto kIsAliveSession = storages::Query(R"(
+        SELECT end_timestamp > NOW()
+        FROM miet_video.sessions
+        WHERE session_id = $1
+    )", storages::Query::Name("is_alive_session"));
 
     static const auto kRefreshSessionQuery = storages::Query(R"(
         UPDATE miet_video.sessions
@@ -51,6 +57,22 @@ namespace miet::db::managers::pg
         tokens.session_token = std::move(generated_session_id);
         tokens.refresh_token = std::move(generated_refresh_token);
         return tokens;
+    }
+
+    auto SessionsManager::IsSessionAlive(const models::session_token_t& session_token) -> bool
+    {
+        storages::postgres::TransactionOptions options;
+        options.mode = storages::postgres::TransactionOptions::kReadOnly;
+        auto transaction = m_pg_cluster->Begin("IsSessionAlive",
+                                               storages::postgres::ClusterHostType::kSlave,
+                                               options);
+        auto result = transaction.Execute(kIsAliveSession, session_token);
+        if (result.IsEmpty()) {
+            throw server::handlers::ResourceNotFound(
+                server::handlers::InternalMessage(
+                        fmt::format("Session with such token is not found (token = '{}')", session_token)));
+        }
+        return result.AsSingleRow<bool>();
     }
 
     auto SessionsManager::RefreshSession(models::refresh_token_t refresh_token) -> bool
