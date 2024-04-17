@@ -214,11 +214,11 @@ namespace miet::utils
 
 
 
-    template <serializable T>
+    template <typename T>
     auto ToString(const T& obj) -> std::string
     {
         formats::json::ValueBuilder json;
-        obj.SerializeToJson(json);
+        JsonProcessor::Write(json, obj);
         return formats::json::ToString(json.ExtractValue());
     }
 }

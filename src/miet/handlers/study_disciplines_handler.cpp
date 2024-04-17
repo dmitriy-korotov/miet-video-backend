@@ -1,45 +1,41 @@
 #include "study_disciplines_handler.hpp"
 
 #include <miet/handlers/helpers/helpers.hpp>
-#include <miet/errors/builder.hpp>
 #include <miet/utils/json.hpp>
 
 
 
 namespace miet::handlers
 {
-namespace
-{
-    auto BuildResponse(const std::vector<models::StudyDiscipline>& studyDisciplines) -> userver::utils::expected<std::string, helpers::HandleError>
+    auto DoGetStudyDisciplinesHandle(const StudyDisciplinesHandleArgs& args, const StudyDisciplinesHandleDeps& deps) -> std::vector<models::StudyDiscipline>
     {
-        formats::json::ValueBuilder result;
-        utils::JsonProcessor::Write(result, studyDisciplines);
-        return formats::json::ToString(result.ExtractValue());
+        if (!deps.sessions_manager->IsSessionAlive(args.session_token)) {
+            throw server::handlers::ExceptionWithCode<server::handlers::HandlerErrorCode::kForbidden>(
+                server::handlers::InternalMessage(
+                        fmt::format("Session lifetime has expired (token = '{}')", args.session_token)));
+        }
+        auto orioks_auth_token = deps.auth_tokens_manager->GetAuthTokenFromSessionToken(args.session_token);
+        return deps.orioks_client->GetStudentDisciplines(orioks_auth_token);
     }
-}
 
     auto StudyDisciplinesHandler::HandleRequestThrow(const server::http::HttpRequest& request,
                                                      server::request::RequestContext&) const -> std::string
     {
-        auto& responseHeaders = request.GetHttpResponse();
-        responseHeaders.SetHeader(std::string_view("Content-Type"), "application/json");
-
-        auto expected_auth_token = helpers::GetAuthTokenFromRequest(request);
-        if (!expected_auth_token.has_value()) {
-            request.SetResponseStatus(server::http::HttpStatus::kBadRequest);
-            return errors::BuildError(expected_auth_token.error(), "Can't get auth token from request");
-        }
-
-        // TODO Check aliving session
-
-        auto result = m_auth_tokens_manager.GetAuthTokenFromSessionToken(expected_auth_token.value());
-        auto auth_token = result;
-
-        auto disciplines = m_orioks_client.GetStudentDisciplines(auth_token);
-        auto response = BuildResponse(disciplines);
-        if (!response.has_value()) {
-            return errors::BuildError(response.error(), "Can't build response body");
-        }
-        return response.value();
+        helpers::PrepareJsonResponseHeaders(request);
+        return helpers::CallSafeHttpRequestHandler(request, [this, &request]() -> std::string
+        {
+            StudyDisciplinesHandleArgs args
+            {
+                .session_token = helpers::GetSessionToken(request)
+            };
+            StudyDisciplinesHandleDeps deps
+            {
+                .orioks_client = m_orioks_client,
+                .sessions_manager = m_sessions_manager,
+                .auth_tokens_manager = m_auth_tokens_manager
+            };
+            auto disciplines = DoGetStudyDisciplinesHandle(args, deps);
+            return utils::ToString(disciplines);
+        });
     }
 }

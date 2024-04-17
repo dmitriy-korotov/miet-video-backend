@@ -25,9 +25,9 @@ namespace miet::handlers
         UserInfoHandler(const components::ComponentConfig& config,
                         const components::ComponentContext& component_context)
                 : HttpHandlerBase(config, component_context)
-                , m_orioks_client(utils::CteateViewSharedPtr(&component_context.FindComponent<clients::OrioksClient>()))
-                , m_sessions_manager(utils::CteateViewSharedPtr(&component_context.FindComponent<db::managers::pg::SessionsManager>()))
-                , m_auth_tokens_manager(utils::CteateViewSharedPtr(&component_context.FindComponent<db::managers::pg::OrioksAuthTokensManager>()))
+                , m_orioks_client(utils::CreateViewSharedPtr(&component_context.FindComponent<clients::OrioksClient>()))
+                , m_sessions_manager(utils::CreateViewSharedPtr(&component_context.FindComponent<db::managers::pg::SessionsManager>()))
+                , m_auth_tokens_manager(utils::CreateViewSharedPtr(&component_context.FindComponent<db::managers::pg::OrioksAuthTokensManager>()))
         { }
 
         std::string HandleRequestThrow(const server::http::HttpRequest& request,

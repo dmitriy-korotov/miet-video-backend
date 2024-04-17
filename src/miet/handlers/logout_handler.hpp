@@ -22,7 +22,7 @@ namespace miet::handlers
         LogoutHandler(const components::ComponentConfig& config,
                       const components::ComponentContext& component_context)
                 : HttpHandlerBase(config, component_context)
-                , m_sessions_manager(utils::CteateViewSharedPtr(&component_context.FindComponent<db::managers::pg::SessionsManager>()))
+                , m_sessions_manager(utils::CreateViewSharedPtr(&component_context.FindComponent<db::managers::pg::SessionsManager>()))
         { }
 
         std::string HandleRequestThrow(const server::http::HttpRequest& request,
