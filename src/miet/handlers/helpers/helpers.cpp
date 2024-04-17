@@ -11,6 +11,7 @@
 static const std::string_view kContentType = "Content-Type";
 static const std::string_view kForwardedFrom = "X-Forwarded-For";
 static const std::string_view kUserAgent = "User-Agent";
+static const std::string_view kAuthorization = "Authorization";
 
 
 
@@ -42,6 +43,12 @@ namespace miet::handlers::helpers
                 server::handlers::InternalMessage(
                     fmt::format("Request must contains '{}' header", header)));
         }
+    }
+
+    auto GetSessionToken(const server::http::HttpRequest& request) -> std::string
+    {
+        CheckRequiredHeader(request, kAuthorization);
+        return request.GetHeader(kAuthorization);
     }
 
     auto GetIpAddress(const userver::server::http::HttpRequest& request) -> userver::utils::ip::AddressV4
@@ -89,7 +96,7 @@ namespace miet::handlers::helpers
         }
     }
 
-    auto CallSafeHttpRequestHandler(const userver::server::http::HttpRequest& request, handler_t handler) noexcept -> std::string
+    auto CallSafeHttpRequestHandler(const userver::server::http::HttpRequest& request, handler_t handler) -> std::string
     {
         try {
             return std::invoke(handler);

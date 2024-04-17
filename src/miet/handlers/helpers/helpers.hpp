@@ -39,11 +39,12 @@ namespace miet::handlers::helpers
         }
     }
 
+    std::string GetSessionToken(const server::http::HttpRequest& request);
     userver::utils::ip::AddressV4 GetIpAddress(const userver::server::http::HttpRequest& request);
     std::string GetClientUserAgent(const userver::server::http::HttpRequest& request);
     void SetResponseStatus(const userver::server::http::HttpRequest& request, userver::server::handlers::HandlerErrorCode code);
 
-    std::string CallSafeHttpRequestHandler(const userver::server::http::HttpRequest& request, handler_t handler) noexcept;
+    std::string CallSafeHttpRequestHandler(const userver::server::http::HttpRequest& request, handler_t handler);
 
     userver::utils::expected<std::string, HandleError> GetAuthTokenFromRequest(const userver::server::http::HttpRequest& request);
     userver::utils::expected<std::string, HandleError> BuildResponse(const models::session_token_t& session_token);
