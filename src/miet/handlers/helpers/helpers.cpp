@@ -1,6 +1,7 @@
 #include "helpers.hpp"
 
 #include <miet/utils/json.hpp>
+#include <miet/errors/builder.hpp>
 
 #include <userver/server/handlers/exceptions.hpp>
 #include <userver/utils/text.hpp>
@@ -85,6 +86,24 @@ namespace miet::handlers::helpers
             break;
         default:
             request.SetResponseStatus(server::http::HttpStatus::kInternalServerError);
+        }
+    }
+
+    auto CallSafeHttpRequestHandler(const userver::server::http::HttpRequest& request, handler_t handler) noexcept -> std::string
+    {
+        try {
+            return std::invoke(handler);
+        } catch (const server::handlers::CustomHandlerException& ex) {
+            helpers::SetResponseStatus(request, ex.GetCode());
+            return errors::BuildError(ex.GetCode(), ex.what());
+        } catch (const std::runtime_error& ex) {
+            throw server::handlers::InternalServerError(
+                server::handlers::InternalMessage(
+                    errors::BuildError(server::http::HttpStatus::kInternalServerError, ex.what())));
+        } catch (...) {
+            throw server::handlers::InternalServerError(
+                server::handlers::InternalMessage(
+                    errors::BuildError(server::http::HttpStatus::kInternalServerError, "Unnexpected server error")));
         }
     }
 

@@ -10,41 +10,42 @@
 
 namespace miet::handlers
 {
+    auto DoAuthorizateHandle(const AuthorizateHandleArgs& args, const AuthorizateHandleDeps& deps) -> models::SessionTokensData
+    {
+        auto user_id = deps.users_manager->AuthificateUser(args.login, args.password);
+        auto session_tokens = deps.sessions_manager->StartSession({
+            .user_id = std::move(user_id),
+            .device = args.device,
+            .id_address = args.address
+        });
+        return session_tokens;
+    }
+
     auto AuthorizationHandler::HandleRequestThrow(const server::http::HttpRequest& request,
                                                   server::request::RequestContext&) const -> std::string
     {
-        auto& responseHeaders = request.GetHttpResponse();
-        responseHeaders.SetHeader(std::string_view("Content-Type"), "application/json");
+        helpers::PrepareJsonResponseHeaders(request);
+        return helpers::CallSafeHttpRequestHandler(request, [this, &request]() -> std::string
+        {
+            auto jsonBody = helpers::GetRequestBodyAsJson(request);
+            models::UserAuthorizationData data;
+            helpers::ReadClientJsonData(jsonBody, data);
 
-        models::UserAuthorizationData authorizationData;
-        formats::json::Value requestJsonBody;
-        try {
-            requestJsonBody = formats::json::FromString(request.RequestBody());
-        } catch (const std::exception& ex) {
-            request.SetResponseStatus(server::http::HttpStatus::kBadRequest);
-            return errors::BuildError(Error::CantParseRequestBody, "Can't parse request body");
-        }
-        try {
-            utils::JsonProcessor::Read(requestJsonBody, authorizationData);
-        } catch (const std::runtime_error& ex) {
-            request.SetResponseStatus(server::http::HttpStatus::kBadRequest);
-            return errors::BuildError(Error::CantReadUserAuthorizationData, "Can't read user authorization data");
-        }
-
-        auto user_id = m_users_manager.AuthificateUser(authorizationData.login, authorizationData.password);
-
-        auto session_result = m_sessions_manager.StartSession({
-            .user_id = user_id,
-            .device = "Yandex",
-            .id_address = userver::utils::ip::AddressV4FromString("127.0.0.1")
-        }); // TODO Get registration device
-        auto session_token = session_result.session_token;
-        auto response = helpers::BuildResponse(session_token);
-        if (!response.has_value()) {
-            request.SetResponseStatus(server::http::HttpStatus::kServiceUnavailable);
-            return errors::BuildError(response.error(), "Can't build response body");
-        }
-        request.SetResponseStatus(server::http::HttpStatus::kCreated);
-        return response.value();
+            AuthorizateHandleArgs args
+            {
+                .login = std::move(data.login),
+                .password = std::move(data.password),
+                .device = helpers::GetClientUserAgent(request),
+                .address = helpers::GetIpAddress(request)
+            };
+            AuthorizateHandleDeps deps
+            {
+                .users_manager = m_users_manager,
+                .sessions_manager = m_sessions_manager
+            };
+            auto session_tokens = DoAuthorizateHandle(args, deps);
+            request.SetResponseStatus(server::http::HttpStatus::kOk);
+            return utils::ToString(session_tokens);
+        });
     }
 }

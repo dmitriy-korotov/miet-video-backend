@@ -15,6 +15,8 @@ using namespace userver;
 
 namespace miet::handlers::helpers
 {
+    using handler_t = std::function<std::string()>;
+
     enum class HandleError : uint16_t
     {
         CantParseRequestBody = 400,
@@ -24,7 +26,7 @@ namespace miet::handlers::helpers
 
     void PrepareJsonResponseHeaders(const userver::server::http::HttpRequest& request);
     formats::json::Value GetRequestBodyAsJson(const userver::server::http::HttpRequest& request);
-    
+
     template <utils::serializable T>
     void ReadClientJsonData(const formats::json::Value& json, T& data)
     {
@@ -40,6 +42,8 @@ namespace miet::handlers::helpers
     userver::utils::ip::AddressV4 GetIpAddress(const userver::server::http::HttpRequest& request);
     std::string GetClientUserAgent(const userver::server::http::HttpRequest& request);
     void SetResponseStatus(const userver::server::http::HttpRequest& request, userver::server::handlers::HandlerErrorCode code);
+
+    std::string CallSafeHttpRequestHandler(const userver::server::http::HttpRequest& request, handler_t handler) noexcept;
 
     userver::utils::expected<std::string, HandleError> GetAuthTokenFromRequest(const userver::server::http::HttpRequest& request);
     userver::utils::expected<std::string, HandleError> BuildResponse(const models::session_token_t& session_token);

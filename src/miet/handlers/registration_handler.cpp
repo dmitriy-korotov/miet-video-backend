@@ -49,7 +49,8 @@ namespace miet::handlers
                                                  server::request::RequestContext&) const -> std::string
     {
         helpers::PrepareJsonResponseHeaders(request);
-        try {
+        return helpers::CallSafeHttpRequestHandler(request, [this, &request]() -> std::string
+        {
             auto jsonBody = helpers::GetRequestBodyAsJson(request);
             models::UserRegistrationData data;
             helpers::ReadClientJsonData(jsonBody, data);
@@ -71,18 +72,6 @@ namespace miet::handlers
 
             request.SetResponseStatus(server::http::HttpStatus::kCreated);
             return utils::ToString(session_tokens);
-
-        } catch (const server::handlers::CustomHandlerException& ex) {
-            helpers::SetResponseStatus(request, ex.GetCode());
-            return errors::BuildError(ex.GetCode(), ex.what());
-        } catch (const std::runtime_error& ex) {
-            throw server::handlers::InternalServerError(
-                server::handlers::InternalMessage(
-                    errors::BuildError(500, ex.what())));
-        } catch (...) {
-            throw server::handlers::InternalServerError(
-                server::handlers::InternalMessage(
-                    errors::BuildError(500, "Unnexpected server error")));
-        }
+        });
     }
 }
