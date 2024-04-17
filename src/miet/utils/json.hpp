@@ -10,10 +10,10 @@
 
 
 
+using namespace userver;
+
 namespace miet::utils
 {
-    using namespace userver;
-
     template <typename T>
     concept deserializable = requires (T object, formats::json::Value json) {
         { object.DeserializeFromJson(json) };
@@ -210,5 +210,15 @@ namespace miet::utils
     auto JsonProcessor::Write(formats::json::ValueBuilder& json, const T& value) -> void
     {
         PutValue(json, value);
+    }
+
+
+
+    template <serializable T>
+    auto ToString(const T& obj) -> std::string
+    {
+        formats::json::ValueBuilder json;
+        obj.SerializeToJson(json);
+        return formats::json::ToString(json.ExtractValue());
     }
 }

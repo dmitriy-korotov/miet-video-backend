@@ -6,71 +6,83 @@
 #include <miet/handlers/helpers/helpers.hpp>
 
 #include <userver/utils/uuid7.hpp>
-#include <userver/utils/datetime.hpp>
 
 
 
 namespace miet::handlers
 {
-namespace
-{
-    auto FillUserData(const models::UserRegistrationData& registrationData,
-                      const models::orioks::auth_token_t& auth_token) -> models::UserData
+    static auto GetUserData(const RegistrateHandleArgs& args,
+                            const models::orioks::auth_token_t& auth_token) -> models::UserData
     {
-        models::UserData userData;
-        userData.login = registrationData.login;
-        userData.password = registrationData.password;
-        userData.username = registrationData.username;
-
-        userData.auth_token = auth_token;
-        userData.user_id = userver::utils::generators::GenerateUuidV7();
-        return userData;
+        models::UserData user;
+        {
+            user.username = args.username;
+            user.login = args.login;
+            user.password = args.password;
+            user.user_id = userver::utils::generators::GenerateUuidV7();
+            user.auth_token = auth_token;
+        }
+        return user;
     }
-}
+
+    auto DoRegistrateHandle(const RegistrateHandleArgs& args, const RegistrateHandleDeps& deps) -> models::SessionTokensData
+    {
+        if (deps.users_manager->IsExistsUser(args.login)) {
+            throw server::handlers::ConflictError(
+                server::handlers::InternalMessage(
+                    "User with such login already exists"));
+        }
+        auto auth_token = deps.orioks_client->AuntificateStudent(args.login, args.password);
+
+        auto user = GetUserData(args, auth_token);
+        deps.users_manager->RegistrateUser(user);
+
+        auto session_tokens = deps.sessions_manager->StartSession({
+            .user_id = user.user_id,
+            .device = args.device,
+            .id_address = args.address
+        });
+        return session_tokens;
+    }
 
     auto RegistrationHandler::HandleRequestThrow(const server::http::HttpRequest& request,
                                                  server::request::RequestContext&) const -> std::string
     {
-        auto& responseHeaders = request.GetHttpResponse();
-        responseHeaders.SetHeader(std::string_view("Content-Type"), "application/json");
+        helpers::PrepareJsonResponseHeaders(request);
+        try {
+            auto jsonBody = helpers::GetRequestBodyAsJson(request);
+            models::UserRegistrationData data;
+            helpers::ReadClientJsonData(jsonBody, data);
+            RegistrateHandleArgs args
+            {
+                .username = std::move(data.username),
+                .login = std::move(data.login),
+                .password = std::move(data.password),
+                .device = helpers::GetClientUserAgent(request),
+                .address = helpers::GetIpAddress(request)
+            };
+            RegistrateHandleDeps deps
+            {
+                .orioks_client = m_orioks_client,
+                .users_manager = m_users_manager,
+                .sessions_manager = m_sessions_manager
+            };
+            auto session_tokens = DoRegistrateHandle(args, deps);
 
-        models::UserRegistrationData registrationData;
-        formats::json::Value requestJsonBody;
-        try {
-            requestJsonBody = formats::json::FromString(request.RequestBody());
-        } catch (const std::exception& ex) {
-            request.SetResponseStatus(server::http::HttpStatus::kBadRequest);
-            return errors::BuildError(Error::CantParseRequestBody, "Can't parse request body");
-        }
-        try {
-            utils::JsonProcessor::Read(requestJsonBody, registrationData);
+            request.SetResponseStatus(server::http::HttpStatus::kCreated);
+            return utils::ToString(session_tokens);
+
+        } catch (const server::handlers::CustomHandlerException& ex) {
+            helpers::SetResponseStatus(request, ex.GetCode());
+            return errors::BuildError(ex.GetCode(), ex.what());
         } catch (const std::runtime_error& ex) {
-            request.SetResponseStatus(server::http::HttpStatus::kBadRequest);
-            return errors::BuildError(Error::CantReadUserRegistrationData, "Can't read user registration data");
+            throw server::handlers::InternalServerError(
+                server::handlers::InternalMessage(
+                    errors::BuildError(500, ex.what())));
+        } catch (...) {
+            throw server::handlers::InternalServerError(
+                server::handlers::InternalMessage(
+                    errors::BuildError(500, "Unnexpected server error")));
         }
-
-        if (m_users_manager.IsExistsUser(registrationData.login)) {
-            request.SetResponseStatus(server::http::HttpStatus::kConflict);
-            return errors::BuildError(Error::SuchUserAlreadyExists, "User with such login already exists");
-        }
-
-        auto auth_token = m_orioks_client.AuntificateStudent(registrationData.login, registrationData.password);
-
-        auto userData = FillUserData(registrationData, auth_token);
-        m_users_manager.RegistrateUser(userData);
-
-        auto session_result = m_sessions_manager.StartSession({
-            .user_id = userData.user_id,
-            .device = "Yandex",
-            .id_address = userver::utils::ip::AddressV4FromString("127.0.0.1")
-        }); // TODO Get registration device
-        auto session_token = session_result.session_token;
-        auto response = helpers::BuildResponse(session_token);
-        if (!response.has_value()) {
-            request.SetResponseStatus(server::http::HttpStatus::kInternalServerError);
-            return errors::BuildError(response.error(), "Can't build response body");
-        }
-        request.SetResponseStatus(server::http::HttpStatus::kCreated);
-        return response.value();
     }
 }

@@ -27,6 +27,9 @@ set(MIET_VIDEO_MODELS_DIR src/miet/models)
 set(MIET_VIDEO_UTILS_DIR src/miet/utils)
 
 set(MIET_VIDEO_UTILS_SOURCE
+    ${MIET_VIDEO_UTILS_DIR}/utils.hpp
+    ${MIET_VIDEO_UTILS_DIR}/utils.cpp
+
     ${MIET_VIDEO_UTILS_DIR}/json.hpp
     ${MIET_VIDEO_UTILS_DIR}/json.cpp
 )

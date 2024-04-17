@@ -17,7 +17,11 @@ namespace miet::clients
         if (status == userver::clients::http::Status::Unauthorized) {
             throw server::handlers::Unauthorized(
                     server::handlers::InternalMessage(
-                        "User unauthorized: incorrect authorization data"));
+                        "User unauthorized in orioks: unknown authorization token"));
+        } else if (status == userver::clients::http::Status::Forbidden) {
+            throw server::handlers::Unauthorized(
+                    server::handlers::InternalMessage(
+                        "User unauthorized in orioks: incorrect authorization login or password"));
         } else {
             throw server::handlers::InternalServerError(
                     server::handlers::InternalMessage(
@@ -71,7 +75,7 @@ namespace miet::clients
 
     auto OrioksClient::AuntificateStudent(const std::string& login, const std::string& password) const -> models::orioks::auth_token_t
     {
-        auto endcoded_data = utils::crypto::base64::Base64Encode(fmt::format("{}:{}", login, password));
+        auto endcoded_data = userver::crypto::base64::Base64Encode(fmt::format("{}:{}", login, password));
         auto authorization = fmt::format("Basic {}", endcoded_data);
 
         auto response_body = GetDataFromOrioks("/api/v1/auth", authorization);
