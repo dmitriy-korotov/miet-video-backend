@@ -57,5 +57,5 @@ namespace miet::handlers
         userver::utils::SharedRef<db::managers::OrioksAuthTokensManagerBase> auth_tokens_manager;
     };
 
-    models::StudentInfo DoGetUserInfoHandle(const UserInfoHandleArgs& args, const UserInfoHandleDeps& deps);
+    models::StudentUser DoGetUserInfoHandle(const UserInfoHandleArgs& args, const UserInfoHandleDeps& deps);
 }

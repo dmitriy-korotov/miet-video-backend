@@ -60,6 +60,7 @@ components_manager:
 
         sessions-manager:
             load-enabled: true
+            session-live-time: 1d
         
         users-manager:
             load-enabled: true

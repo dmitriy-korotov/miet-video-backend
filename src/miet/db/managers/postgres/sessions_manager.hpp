@@ -6,6 +6,7 @@
 #include <userver/components/loggable_component_base.hpp>
 #include <userver/storages/postgres/component.hpp>
 #include <userver/storages/postgres/cluster.hpp>
+#include <userver/yaml_config/schema.hpp>
 
 #include <optional>
 
@@ -27,7 +28,10 @@ namespace miet::db::managers::pg
                 , m_pg_cluster(component_context
                                 .FindComponent<components::Postgres>("postgres-miet-video-db")
                                 .GetCluster())
+                , m_session_live_time(userver::utils::StringToDuration(config["session-live-time"].As<std::string>()))
         { }
+
+        static yaml_config::Schema GetStaticConfigSchema();
 
         models::SessionTokensData StartSession(models::UserSessionData session_data) override;
         bool IsSessionAlive(const models::session_token_t& session_token) override;
@@ -38,6 +42,7 @@ namespace miet::db::managers::pg
     private:
 
         storages::postgres::ClusterPtr m_pg_cluster;
+        std::chrono::milliseconds m_session_live_time;
 
     };
 }

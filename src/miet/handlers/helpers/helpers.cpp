@@ -85,6 +85,9 @@ namespace miet::handlers::helpers
         case HandlerErrorCode::kResourceNotFound:
             request.SetResponseStatus(server::http::HttpStatus::kNotFound);
             break;
+        case HandlerErrorCode::kForbidden:
+            request.SetResponseStatus(server::http::HttpStatus::kForbidden);
+            break;
         case HandlerErrorCode::kServerSideError:
             request.SetResponseStatus(server::http::HttpStatus::kInternalServerError);
             break;

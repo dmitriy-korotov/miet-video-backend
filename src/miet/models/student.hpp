@@ -8,7 +8,7 @@
 
 namespace miet::models
 {
-    struct StudentInfo : public UserPublicData
+    struct StudentInfo
     {
         uint8_t course;
         uint8_t semester;
@@ -23,5 +23,11 @@ namespace miet::models
         void SerializeToJson(userver::formats::json::ValueBuilder& json) const;
         void DeserializeFromJson(const userver::formats::json::Value& json);
 
+    };
+
+    struct StudentUser : public StudentInfo, public UserPublicData
+    {
+        void SerializeToJson(userver::formats::json::ValueBuilder& json) const;
+        void DeserializeFromJson(const userver::formats::json::Value& json);
     };
 }

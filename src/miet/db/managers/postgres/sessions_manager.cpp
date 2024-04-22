@@ -2,19 +2,23 @@
 
 #include <userver/utils/uuid7.hpp>
 #include <userver/server/handlers/exceptions.hpp>
+#include <userver/yaml_config/merge_schemas.hpp>
 
 
 
 namespace miet::db::managers::pg
 {
     static const auto kCreateSessionQuery = storages::Query(R"(
-        INSERT INTO miet_video.sessions (session_id, user_id, device, ip_address)
-        VALUES ($1, $2, $3, $4)
+        INSERT INTO miet_video.sessions (session_id, refresh_token, user_id, device, ip_address, end_timestamp)
+        VALUES ($1, $2, $3, $4, $5, $6)
         ON CONFLICT DO NOTHING
     )", storages::Query::Name("create_session"));
 
     static const auto kIsAliveSession = storages::Query(R"(
-        SELECT end_timestamp > NOW()
+        SELECT CASE
+                    WHEN (end_timestamp > NOW()) THEN true
+                    ELSE false
+               END
         FROM miet_video.sessions
         WHERE session_id = $1
     )", storages::Query::Name("is_alive_session"));
@@ -28,25 +32,39 @@ namespace miet::db::managers::pg
     static const auto kGetUserIdQuery = storages::Query(R"(
         SELECT user_id
         FROM miet_video.sessions
-        WHERE session_id = $1 AND end_timestamp IS NULL
+        WHERE session_id = $1 AND end_timestamp > NOW()
     )", storages::Query::Name("get_user_id"));
 
     static const auto kCloseSessionQuery = storages::Query(R"(
         UPDATE miet_video.sessions
-        SET end_timestamp = $1
-        WHERE session_id = $2
+        SET end_timestamp = NOW()
+        WHERE session_id = $1
     )", storages::Query::Name("close_session"));
 
-    
+    auto SessionsManager::GetStaticConfigSchema() -> yaml_config::Schema
+    {
+        return yaml_config::MergeSchemas<components::LoggableComponentBase>(R"(
+            type: object
+            description: sessions manager component
+            additionalProperties: false
+            properties:
+                session-live-time:
+                    type: string
+                    description: session time living
+        )");
+    }
+
     auto SessionsManager::StartSession(models::UserSessionData session_data) -> models::SessionTokensData
     {
         auto generated_session_id = utils::generators::GenerateUuidV7();
         auto generated_refresh_token = utils::generators::GenerateUuidV7();
+        auto end_timestamp = storages::postgres::TimePointTz(utils::datetime::Now() + m_session_live_time);
         auto transaction = m_pg_cluster->Begin("StartSession",
                                                storages::postgres::ClusterHostType::kMaster, {});
-        auto result = transaction.Execute(kCreateSessionQuery, generated_session_id,
+        auto result = transaction.Execute(kCreateSessionQuery, generated_session_id, generated_refresh_token,
                                           session_data.user_id, session_data.device,
-                                          utils::ip::AddressV4ToString(session_data.id_address));
+                                          utils::ip::AddressV4ToString(session_data.id_address),
+                                          end_timestamp);
         if (result.RowsAffected() != 1) {
             throw server::handlers::ConflictError(
                 server::handlers::InternalMessage(
@@ -72,10 +90,10 @@ namespace miet::db::managers::pg
                 server::handlers::InternalMessage(
                         fmt::format("Session with such token is not found (token = '{}')", session_token)));
         }
-        return result.AsSingleRow<bool>();
+        return result.Back().As<bool>();
     }
 
-    auto SessionsManager::RefreshSession(models::refresh_token_t refresh_token) -> bool
+    auto SessionsManager::RefreshSession([[maybe_unused]] models::refresh_token_t refresh_token) -> bool
     {
         return false; // TODO
     }
@@ -96,14 +114,14 @@ namespace miet::db::managers::pg
 
     auto SessionsManager::CloseSession(const models::session_token_t& session_token) -> void
     {
-        auto end_timestamp = utils::datetime::LocalTimezoneTimestring(utils::datetime::Now());
         auto transaction = m_pg_cluster->Begin("CloseSession",
                                                storages::postgres::ClusterHostType::kMaster, {});
-        auto result = transaction.Execute(kCloseSessionQuery, end_timestamp, session_token);
+        auto result = transaction.Execute(kCloseSessionQuery, session_token);
         if (result.RowsAffected() != 1) {
             throw server::handlers::ResourceNotFound(
                 server::handlers::InternalMessage(
                         fmt::format("Session with such token is not found (token = '{}')", session_token)));
         }
+        transaction.Commit();
     }
 }

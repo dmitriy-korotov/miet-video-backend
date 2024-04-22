@@ -8,7 +8,6 @@ namespace miet::models
 {
     auto StudentInfo::SerializeToJson(userver::formats::json::ValueBuilder& json) const -> void
     {
-        UserPublicData::SerializeToJson(json);
         utils::JsonProcessor::Write(json, "course", course);
         utils::JsonProcessor::Write(json, "department", department);
         utils::JsonProcessor::Write(json, "full_name", full_name);
@@ -22,7 +21,6 @@ namespace miet::models
 
     auto StudentInfo::DeserializeFromJson(const userver::formats::json::Value& json) -> void
     {
-        UserPublicData::DeserializeFromJson(json);
         utils::JsonProcessor::Read(json, "course", course);
         utils::JsonProcessor::Read(json, "department", department);
         utils::JsonProcessor::Read(json, "full_name", full_name);
@@ -32,5 +30,17 @@ namespace miet::models
         utils::JsonProcessor::Read(json, "study_direction", study_direction);
         utils::JsonProcessor::Read(json, "study_profile", study_profile);
         utils::JsonProcessor::Read(json, "year", year);
+    }
+
+    auto StudentUser::SerializeToJson(userver::formats::json::ValueBuilder& json) const -> void
+    {
+        UserPublicData::SerializeToJson(json);
+        StudentInfo::SerializeToJson(json);
+    }
+
+    auto StudentUser::DeserializeFromJson(const userver::formats::json::Value& json) -> void
+    {
+        UserPublicData::DeserializeFromJson(json);
+        StudentInfo::DeserializeFromJson(json);
     }
 }
