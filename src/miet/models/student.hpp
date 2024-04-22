@@ -1,12 +1,14 @@
 #pragma once
 
+#include <miet/models/user.hpp>
+
 #include <userver/formats/json.hpp>
 
 
 
 namespace miet::models
 {
-    struct StudentInfo
+    struct StudentInfo : public UserPublicData
     {
         uint8_t course;
         uint8_t semester;

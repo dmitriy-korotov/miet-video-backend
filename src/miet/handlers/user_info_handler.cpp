@@ -9,13 +9,17 @@ namespace miet::handlers
 {
     auto DoGetUserInfoHandle(const UserInfoHandleArgs& args, const UserInfoHandleDeps& deps) -> models::StudentInfo
     {
-        if (!deps.sessions_manager->IsSessionAlive(args.session_token)) {
+        auto user_id_opt = deps.sessions_manager->GetUserIDIfSessionAlive(args.session_token);
+        if (!user_id_opt) {
             throw server::handlers::ExceptionWithCode<server::handlers::HandlerErrorCode::kForbidden>(
                 server::handlers::InternalMessage(
                         fmt::format("Session lifetime has expired (token = '{}')", args.session_token)));
         }
+        auto username = deps.users_manager->GetUsername(user_id_opt.value());
         auto orioks_auth_token = deps.auth_tokens_manager->GetAuthTokenFromSessionToken(args.session_token);
-        return deps.orioks_client->GetStudentInfo(orioks_auth_token);
+        auto student_info = deps.orioks_client->GetStudentInfo(orioks_auth_token);
+        student_info.username = std::move(username);
+        return student_info;
     }
 
     auto UserInfoHandler::HandleRequestThrow(const server::http::HttpRequest& request,
@@ -32,6 +36,7 @@ namespace miet::handlers
             {
                 .orioks_client = m_orioks_client,
                 .sessions_manager = m_sessions_manager,
+                .users_manager = m_users_manager,
                 .auth_tokens_manager = m_auth_tokens_manager
             };
             auto student_info = DoGetUserInfoHandle(args, deps);

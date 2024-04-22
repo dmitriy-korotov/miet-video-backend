@@ -40,6 +40,12 @@ namespace miet::db::managers::pg
         WHERE user_id = $1
     )", storages::Query::Name("delete_user"));
 
+    static const auto kSelectUsername = storages::Query(R"(
+        SELECT username
+        FROM miet_video.users
+        WHERE user_id = $1
+    )", storages::Query::Name("select_username"));
+
     static auto GetHashedPassword(const std::string& password) -> std::string
     {
         return crypto::hash::Sha256(fmt::format("{}.{}", password, kSalt));
@@ -119,8 +125,25 @@ namespace miet::db::managers::pg
         return user_id;
     }
 
-    auto UsersManager::AuthorizateUser([[maybe_unused]] const std::string& user_id) const -> models::UserRights
+    auto UsersManager::AuthorizateUser([[maybe_unused]] const std::string& user_id) const -> models::EUserType
+    {   
+        return models::EUserType::Student; // TODO
+    }
+
+    auto UsersManager::GetUsername(const models::user_id_t& user_id) const -> std::string
     {
-        return models::UserRights(); // TODO
+        storages::postgres::TransactionOptions options;
+        options.mode = storages::postgres::TransactionOptions::kReadOnly;
+        auto transaction = m_pg_cluster->Begin("GetUsername",
+                                               storages::postgres::ClusterHostType::kMaster,
+                                               options);
+        auto result = transaction.Execute(kSelectUsername, user_id);
+        if (result.IsEmpty()) {
+            throw server::handlers::ResourceNotFound(
+                server::handlers::InternalMessage(
+                    fmt::format("User with such id is not exists (id = '{}')", user_id)));
+        }
+        transaction.Commit();
+        return result.AsSingleRow<std::string>();
     }
 }

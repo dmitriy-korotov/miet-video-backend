@@ -32,9 +32,10 @@ namespace miet::db::managers::pg
 
         bool IsExistsUser(const std::string& login) const override;
         void RegistrateUser(models::UserData userData) override;
-        void DeleteUser(const std::string& user_id) override;
+        void DeleteUser(const models::user_id_t& user_id) override;
         user_id_t AuthificateUser(const std::string& login, const std::string& password) const override;
-        models::UserRights AuthorizateUser(const std::string& user_id) const override;
+        models::EUserType AuthorizateUser(const models::user_id_t& user_id) const override;
+        std::string GetUsername(const models::user_id_t& user_id) const override;
 
     private:
 

@@ -8,6 +8,16 @@ using namespace userver;
 
 namespace miet::models
 {
+    auto UserPublicData::SerializeToJson(userver::formats::json::ValueBuilder& json) const -> void
+    {
+        utils::JsonProcessor::Write(json, "username", username);
+    }
+
+    auto UserPublicData::DeserializeFromJson(const userver::formats::json::Value& json) -> void
+    {
+        utils::JsonProcessor::Read(json, "username", username);
+    }
+
     auto UserAuthorizationData::SerializeToJson(userver::formats::json::ValueBuilder& json) const -> void
     {
         utils::JsonProcessor::Write(json, "login", login);
@@ -22,14 +32,14 @@ namespace miet::models
 
     auto UserRegistrationData::SerializeToJson(userver::formats::json::ValueBuilder& json) const -> void
     {
+        UserPublicData::SerializeToJson(json);
         UserAuthorizationData::SerializeToJson(json);
-        utils::JsonProcessor::Write(json, "username", username);
     }
 
     auto UserRegistrationData::DeserializeFromJson(const userver::formats::json::Value& json) -> void
     {
+        UserPublicData::DeserializeFromJson(json);
         UserAuthorizationData::DeserializeFromJson(json);
-        utils::JsonProcessor::Read(json, "username", username);
     }
 
     auto UserData::SerializeToJson(userver::formats::json::ValueBuilder& json) const -> void

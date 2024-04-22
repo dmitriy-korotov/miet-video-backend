@@ -3,6 +3,7 @@
 #include <miet/utils/utils.hpp>
 #include <miet/clients/orioks_client.hpp>
 #include <miet/db/managers/postgres/sessions_manager.hpp>
+#include <miet/db/managers/postgres/users_manager.hpp>
 #include <miet/db/managers/postgres/auth_tokens_manager.hpp>
 
 #include <miet/models/student.hpp>
@@ -27,6 +28,7 @@ namespace miet::handlers
                 : HttpHandlerBase(config, component_context)
                 , m_orioks_client(utils::CreateViewSharedPtr(&component_context.FindComponent<clients::OrioksClient>()))
                 , m_sessions_manager(utils::CreateViewSharedPtr(&component_context.FindComponent<db::managers::pg::SessionsManager>()))
+                , m_users_manager(utils::CreateViewSharedPtr(&component_context.FindComponent<db::managers::pg::UsersManager>()))
                 , m_auth_tokens_manager(utils::CreateViewSharedPtr(&component_context.FindComponent<db::managers::pg::OrioksAuthTokensManager>()))
         { }
 
@@ -37,6 +39,7 @@ namespace miet::handlers
 
         userver::utils::SharedRef<clients::OrioksClientBase> m_orioks_client;
         userver::utils::SharedRef<db::managers::SessionsManagerBase> m_sessions_manager;
+        userver::utils::SharedRef<db::managers::UsersManagerBase> m_users_manager;
         userver::utils::SharedRef<db::managers::OrioksAuthTokensManagerBase> m_auth_tokens_manager;
 
     };
@@ -50,6 +53,7 @@ namespace miet::handlers
     {
         userver::utils::SharedRef<clients::OrioksClientBase> orioks_client;
         userver::utils::SharedRef<db::managers::SessionsManagerBase> sessions_manager;
+        userver::utils::SharedRef<db::managers::UsersManagerBase> users_manager;
         userver::utils::SharedRef<db::managers::OrioksAuthTokensManagerBase> auth_tokens_manager;
     };
 

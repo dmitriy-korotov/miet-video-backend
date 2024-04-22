@@ -9,6 +9,14 @@
 
 namespace miet::models
 {
+    struct UserPublicData
+    {
+        std::string username;
+
+        void SerializeToJson(userver::formats::json::ValueBuilder& json) const;
+        void DeserializeFromJson(const userver::formats::json::Value& json);
+    };
+
     struct UserAuthorizationData
     {
         std::string login;
@@ -16,16 +24,12 @@ namespace miet::models
 
         void SerializeToJson(userver::formats::json::ValueBuilder& json) const;
         void DeserializeFromJson(const userver::formats::json::Value& json);
-
     };
 
-    struct UserRegistrationData : public UserAuthorizationData
+    struct UserRegistrationData : public UserAuthorizationData, public UserPublicData
     {
-        std::string username;
-
         void SerializeToJson(userver::formats::json::ValueBuilder& json) const;
         void DeserializeFromJson(const userver::formats::json::Value& json);
-
     };
 
     struct UserData final : public UserRegistrationData
@@ -36,12 +40,13 @@ namespace miet::models
 
         void SerializeToJson(userver::formats::json::ValueBuilder& json) const;
         void DeserializeFromJson(const userver::formats::json::Value& json);
-        
     };
 
-    struct UserRights
+    enum EUserType : uint8_t
     {
-        // TODO
+        Student,
+        Teacher,
+        Admin
     };
     
 }
