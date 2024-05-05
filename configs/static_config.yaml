@@ -79,7 +79,7 @@ components_manager:
             task_processor: main-task-processor
 
         logout-handler:                   
-            path: /v1/users/logout
+            path: /v1/logout
             method: POST
             task_processor: main-task-processor
 
