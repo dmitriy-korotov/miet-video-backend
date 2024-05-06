@@ -146,6 +146,7 @@ namespace miet::utils
     requires container<Container, T>
     auto JsonProcessor::PutValue(formats::json::ValueBuilder& json, const Container<T>& value) -> void
     {
+        json = formats::json::MakeArray();
         for (auto&& elem : value) {
             formats::json::ValueBuilder jsonElem;
             Write(jsonElem, elem);
