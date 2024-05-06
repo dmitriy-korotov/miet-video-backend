@@ -65,12 +65,33 @@ components_manager:
         users-manager:
             load-enabled: true
 
+        videos-manager:
+            load-enabled: true
+
+        lectures-manager:
+            load-enabled: true
+
         auth-tokens-manager:
             load-enabled: true
 
         registration-handler:                   
             path: /v1/users   
             method: POST                 
+            task_processor: main-task-processor
+
+        upload-lecture-handler:                   
+            path: /v1/lectures   
+            method: POST
+            task_processor: main-task-processor
+
+        get-lectures-handler:                   
+            path: /v1/lectures 
+            method: GET
+            task_processor: main-task-processor
+
+        get-lecture-handler:                   
+            path: /v1/lectures/{id}
+            method: GET
             task_processor: main-task-processor
 
         authorization-handler:                   

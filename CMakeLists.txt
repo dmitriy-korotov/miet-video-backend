@@ -50,6 +50,10 @@ set(MIET_VIDEO_MODELS_SOURCE
     ${MIET_VIDEO_MODELS_DIR}/student.cpp
     ${MIET_VIDEO_MODELS_DIR}/study_discipline.hpp
     ${MIET_VIDEO_MODELS_DIR}/study_discipline.cpp
+    ${MIET_VIDEO_MODELS_DIR}/video.hpp
+    ${MIET_VIDEO_MODELS_DIR}/video.cpp
+    ${MIET_VIDEO_MODELS_DIR}/lecture.hpp
+    ${MIET_VIDEO_MODELS_DIR}/lecture.cpp
 )
 
 set(MIET_VIDEO_CLIENTS_SOURCE
@@ -73,6 +77,12 @@ set(MIET_VIDEO_HANDLERS_SOURCE
     ${MIET_VIDEO_HANDLERS_DIR}/user_info_handler.cpp
     ${MIET_VIDEO_HANDLERS_DIR}/study_disciplines_handler.hpp
     ${MIET_VIDEO_HANDLERS_DIR}/study_disciplines_handler.cpp
+    ${MIET_VIDEO_HANDLERS_DIR}/upload_lecture_handler.hpp
+    ${MIET_VIDEO_HANDLERS_DIR}/upload_lecture_handler.cpp
+    ${MIET_VIDEO_HANDLERS_DIR}/get_lectures_handler.hpp
+    ${MIET_VIDEO_HANDLERS_DIR}/get_lectures_handler.cpp
+    ${MIET_VIDEO_HANDLERS_DIR}/get_lecture_handler.hpp
+    ${MIET_VIDEO_HANDLERS_DIR}/get_lecture_handler.cpp
 )
 
 set(MIET_VIDEO_DB_SOURCE
@@ -82,6 +92,7 @@ set(MIET_VIDEO_DB_SOURCE
     ${MIET_VIDEO_DB_DIR}/managers/abstract/sessions_manager_base.cpp
     ${MIET_VIDEO_DB_DIR}/managers/abstract/auth_tokens_manager_base.hpp
     ${MIET_VIDEO_DB_DIR}/managers/abstract/auth_tokens_manager_base.cpp
+    ${MIET_VIDEO_DB_DIR}/managers/abstract/lectures_manager_base.hpp
 
     ${MIET_VIDEO_DB_DIR}/managers/postgres/users_manager.hpp
     ${MIET_VIDEO_DB_DIR}/managers/postgres/users_manager.cpp
@@ -89,6 +100,10 @@ set(MIET_VIDEO_DB_SOURCE
     ${MIET_VIDEO_DB_DIR}/managers/postgres/sessions_manager.cpp
     ${MIET_VIDEO_DB_DIR}/managers/postgres/auth_tokens_manager.hpp
     ${MIET_VIDEO_DB_DIR}/managers/postgres/auth_tokens_manager.cpp
+    ${MIET_VIDEO_DB_DIR}/managers/postgres/videos_manager.hpp
+    ${MIET_VIDEO_DB_DIR}/managers/postgres/videos_manager.cpp
+    ${MIET_VIDEO_DB_DIR}/managers/postgres/lectures_manager.hpp
+    ${MIET_VIDEO_DB_DIR}/managers/postgres/lectures_manager.cpp
 )
 
 

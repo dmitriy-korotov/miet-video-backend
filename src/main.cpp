@@ -10,12 +10,17 @@
 #include <miet/db/managers/postgres/sessions_manager.hpp>
 #include <miet/db/managers/postgres/users_manager.hpp>
 #include <miet/db/managers/postgres/auth_tokens_manager.hpp>
+#include <miet/db/managers/postgres/videos_manager.hpp>
+#include <miet/db/managers/postgres/lectures_manager.hpp>
 #include <miet/clients/orioks_client.hpp>
 #include <miet/handlers/registration_handler.hpp>
 #include <miet/handlers/authorization_handler.hpp>
 #include <miet/handlers/user_info_handler.hpp>
 #include <miet/handlers/study_disciplines_handler.hpp>
 #include <miet/handlers/logout_handler.hpp>
+#include <miet/handlers/upload_lecture_handler.hpp>
+#include <miet/handlers/get_lectures_handler.hpp>
+#include <miet/handlers/get_lecture_handler.hpp>
 
 
 
@@ -26,6 +31,8 @@ int main(int argc, char* argv[]) {
                             .Append<userver::components::Postgres>("postgres-miet-video-db")
                             .Append<miet::db::managers::pg::SessionsManager>()
                             .Append<miet::db::managers::pg::UsersManager>()
+                            .Append<miet::db::managers::pg::VideosManager>()
+                            .Append<miet::db::managers::pg::LecturesManager>()
                             .Append<miet::db::managers::pg::OrioksAuthTokensManager>()
                             .Append<userver::clients::dns::Component>()
                             .Append<userver::components::HttpClient>()
@@ -34,6 +41,9 @@ int main(int argc, char* argv[]) {
                             .Append<miet::handlers::AuthorizationHandler>()
                             .Append<miet::handlers::UserInfoHandler>()
                             .Append<miet::handlers::StudyDisciplinesHandler>()
+                            .Append<miet::handlers::UploadLectureHandler>()
+                            .Append<miet::handlers::GetLecturesHandler>()
+                            .Append<miet::handlers::GetLectureHandler>()
                             .Append<miet::handlers::LogoutHandler>()
                             .Append<userver::server::handlers::TestsControl>();
 
