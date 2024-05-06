@@ -8,6 +8,7 @@ namespace miet::models
 {
     struct VideoCommonData
     {
+        std::string video_id;
         std::string title;
         std::optional<std::string> description;
         std::string video_src;
