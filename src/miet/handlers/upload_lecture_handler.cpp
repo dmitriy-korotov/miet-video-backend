@@ -7,6 +7,7 @@
 
 #include <userver/server/handlers/exceptions.hpp>
 #include <userver/utils/uuid7.hpp>
+#include <userver/crypto/base64.hpp>
 
 
 
@@ -49,8 +50,10 @@ namespace miet::handlers
         video.video_id = userver::utils::generators::GenerateUuidV7();
         video.title = std::move(args.title);
         video.description = std::move(args.description);
-        video.video_src = "None";
-        video.preview_src = "None";
+        video.video_src = crypto::base64::Base64Decode(args.video_data);
+        if (args.preview_data) {
+            video.preview_src = crypto::base64::Base64Decode(*args.preview_data);
+        }
         video.author_id = std::move(user_id_opt).value();
 
         models::LectureUploadData lecture
