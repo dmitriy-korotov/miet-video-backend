@@ -12,6 +12,7 @@
 #include <miet/db/managers/postgres/auth_tokens_manager.hpp>
 #include <miet/db/managers/postgres/videos_manager.hpp>
 #include <miet/db/managers/postgres/lectures_manager.hpp>
+#include <miet/db/managers/postgres/comments_manager.hpp>
 #include <miet/clients/orioks_client.hpp>
 #include <miet/handlers/registration_handler.hpp>
 #include <miet/handlers/authorization_handler.hpp>
@@ -33,6 +34,7 @@ int main(int argc, char* argv[]) {
                             .Append<miet::db::managers::pg::UsersManager>()
                             .Append<miet::db::managers::pg::VideosManager>()
                             .Append<miet::db::managers::pg::LecturesManager>()
+                            .Append<miet::db::managers::pg::CommentsManager>()
                             .Append<miet::db::managers::pg::OrioksAuthTokensManager>()
                             .Append<userver::clients::dns::Component>()
                             .Append<userver::components::HttpClient>()

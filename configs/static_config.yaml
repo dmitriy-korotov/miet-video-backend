@@ -71,6 +71,9 @@ components_manager:
         lectures-manager:
             load-enabled: true
 
+        comments-manager:
+            load-enabled: true
+
         auth-tokens-manager:
             load-enabled: true
 
