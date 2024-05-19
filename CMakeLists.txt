@@ -95,6 +95,8 @@ set(MIET_VIDEO_HANDLERS_SOURCE
     ${MIET_VIDEO_HANDLERS_DIR}/get_lecture_handler.cpp
     ${MIET_VIDEO_HANDLERS_DIR}/add_comment_handler.hpp
     ${MIET_VIDEO_HANDLERS_DIR}/add_comment_handler.cpp
+    ${MIET_VIDEO_HANDLERS_DIR}/get_comments_handler.hpp
+    ${MIET_VIDEO_HANDLERS_DIR}/get_comments_handler.cpp
     ${MIET_VIDEO_HANDLERS_DIR}/comments_notify_handler.hpp
     ${MIET_VIDEO_HANDLERS_DIR}/comments_notify_handler.cpp
 )

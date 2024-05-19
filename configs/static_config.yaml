@@ -125,6 +125,11 @@ components_manager:
             method: POST               
             task_processor: main-task-processor
 
+        get-comments-handler:
+            path: /v1/comments
+            method: GET               
+            task_processor: main-task-processor
+
         comments-notify-handler:
             path: /v1/comments/notifications
             method: GET
