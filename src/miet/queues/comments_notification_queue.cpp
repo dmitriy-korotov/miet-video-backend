@@ -1,5 +1,7 @@
 #include "comments_notification_queue.hpp"
 
+#include <userver/logging/log.hpp>
+
 
 
 using namespace userver;
@@ -22,7 +24,11 @@ namespace miet::queues
             return !m_comments.empty();
         });
         if (waited) {    
-            std::invoke(handler, m_comments);
+            try {
+                std::invoke(handler, m_comments);
+            } catch (const std::exception& ex) {
+                LOG_ERROR() << ex.what();
+            }
             m_comments.clear();
         }
     }

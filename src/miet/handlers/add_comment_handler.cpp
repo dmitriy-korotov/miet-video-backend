@@ -25,12 +25,14 @@ namespace miet::handlers
         models::Comment comment;
         comment.comment_id = userver::utils::generators::GenerateUuidV7();
         comment.video_id = args.video_id,
-        comment.author_id = std::move(*user_id_opt);
+        comment.author_id = *user_id_opt;
         comment.text = args.text;
         comment.date = userver::utils::datetime::TimestampToString(time(0));
         comment.likes = 0;
 
         deps.comments_manager->AddComment(comment);
+
+        comment.author_id = deps.users_manager->GetUsername(std::move(*user_id_opt));
         deps.comments_queue->AddComment(comment);
 
         return comment.comment_id;
