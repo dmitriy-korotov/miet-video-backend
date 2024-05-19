@@ -27,8 +27,11 @@ namespace miet::handlers
         comment.video_id = args.video_id,
         comment.author_id = std::move(*user_id_opt);
         comment.text = args.text;
+        comment.date = userver::utils::datetime::TimestampToString(time(0));
+        comment.likes = 0;
 
         deps.comments_manager->AddComment(comment);
+        deps.comments_queue->AddComment(comment);
 
         return comment.comment_id;
     }
@@ -51,7 +54,8 @@ namespace miet::handlers
             {
                 .users_manager = m_users_manager,
                 .sessions_manager = m_sessions_manager,
-                .comments_manager = m_comments_manager
+                .comments_manager = m_comments_manager,
+                .comments_queue = m_comments_queue
             };
             
             auto comment_id = DoAddCommentHandle(args, deps);

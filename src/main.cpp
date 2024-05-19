@@ -13,6 +13,7 @@
 #include <miet/db/managers/postgres/videos_manager.hpp>
 #include <miet/db/managers/postgres/lectures_manager.hpp>
 #include <miet/db/managers/postgres/comments_manager.hpp>
+#include <miet/queues/comments_notification_queue.hpp>
 #include <miet/clients/orioks_client.hpp>
 #include <miet/handlers/registration_handler.hpp>
 #include <miet/handlers/authorization_handler.hpp>
@@ -23,7 +24,7 @@
 #include <miet/handlers/get_lectures_handler.hpp>
 #include <miet/handlers/get_lecture_handler.hpp>
 #include <miet/handlers/add_comment_handler.hpp>
-#include <miet/handlers/comments_handler.hpp>
+#include <miet/handlers/comments_notify_handler.hpp>
 
 
 
@@ -38,6 +39,7 @@ int main(int argc, char* argv[]) {
                             .Append<miet::db::managers::pg::LecturesManager>()
                             .Append<miet::db::managers::pg::CommentsManager>()
                             .Append<miet::db::managers::pg::OrioksAuthTokensManager>()
+                            .Append<miet::queues::CommentsNotificationQueue>()
                             .Append<userver::clients::dns::Component>()
                             .Append<userver::components::HttpClient>()
                             .Append<miet::clients::OrioksClient>()
@@ -50,7 +52,7 @@ int main(int argc, char* argv[]) {
                             .Append<miet::handlers::GetLectureHandler>()
                             .Append<miet::handlers::LogoutHandler>()
                             .Append<miet::handlers::AddCommentHandler>()
-                            .Append<miet::handlers::CommentsHandler>()
+                            .Append<miet::handlers::CommentsNotifyHandler>()
                             .Append<userver::server::handlers::TestsControl>();
 
   return userver::utils::DaemonMain(argc, argv, component_list);

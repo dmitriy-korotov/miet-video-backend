@@ -76,6 +76,9 @@ components_manager:
 
         auth-tokens-manager:
             load-enabled: true
+        
+        comments-notification-queue:
+            load-enabled: true
 
         registration-handler:                   
             path: /v1/users   
@@ -122,8 +125,8 @@ components_manager:
             method: POST               
             task_processor: main-task-processor
 
-        comments-handler:
-            path: /v1/comments
+        comments-notify-handler:
+            path: /v1/comments/notifications
             method: GET
             task_processor: main-task-processor
             max-remote-payload: 100000

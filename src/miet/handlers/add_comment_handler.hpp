@@ -5,6 +5,7 @@
 #include <miet/db/managers/postgres/users_manager.hpp>
 #include <miet/db/managers/postgres/sessions_manager.hpp>
 #include <miet/db/managers/postgres/comments_manager.hpp>
+#include <miet/queues/comments_notification_queue.hpp>
 
 #include <userver/components/component.hpp>
 #include <userver/server/handlers/http_handler_base.hpp>
@@ -29,6 +30,7 @@ namespace miet::handlers
                 , m_users_manager(utils::CreateViewSharedPtr(&component_context.FindComponent<db::managers::pg::UsersManager>()))
                 , m_sessions_manager(utils::CreateViewSharedPtr(&component_context.FindComponent<db::managers::pg::SessionsManager>()))
                 , m_comments_manager(utils::CreateViewSharedPtr(&component_context.FindComponent<db::managers::pg::CommentsManager>()))
+                , m_comments_queue(utils::CreateViewSharedPtr(&component_context.FindComponent<queues::CommentsNotificationQueue>()))
         { }
 
         std::string HandleRequestThrow(const server::http::HttpRequest& request,
@@ -39,6 +41,7 @@ namespace miet::handlers
         userver::utils::SharedRef<db::managers::UsersManagerBase> m_users_manager;
         userver::utils::SharedRef<db::managers::SessionsManagerBase> m_sessions_manager;
         userver::utils::SharedRef<db::managers::CommentsManagerBase> m_comments_manager;
+        userver::utils::SharedRef<queues::CommentsNotificationQueueBase> m_comments_queue;
 
     };
 
@@ -54,6 +57,7 @@ namespace miet::handlers
         userver::utils::SharedRef<db::managers::UsersManagerBase> users_manager;
         userver::utils::SharedRef<db::managers::SessionsManagerBase> sessions_manager;
         userver::utils::SharedRef<db::managers::CommentsManagerBase> comments_manager;
+        userver::utils::SharedRef<queues::CommentsNotificationQueueBase> comments_queue;
     };
 
     models::comment_id_t DoAddCommentHandle(const AddCommentHandleArgs& args, const AddCommentHandleDeps& deps);

@@ -21,10 +21,18 @@ userver_setup_environment()
 
 set(MIET_VIDEO_CLIENTS_DIR src/miet/clients)
 set(MIET_VIDEO_HANDLERS_DIR src/miet/handlers)
+set(MIET_VIDEO_QUEUES_DIR src/miet/queues)
 set(MIET_VIDEO_DB_DIR src/miet/db)
 set(MIET_VIDEO_ERRORS_DIR src/miet/errors)
 set(MIET_VIDEO_MODELS_DIR src/miet/models)
 set(MIET_VIDEO_UTILS_DIR src/miet/utils)
+
+set(MIET_VIDEO_QUEUES_SOURCE
+    ${MIET_VIDEO_QUEUES_DIR}/base/comments_notification_queue_base.hpp
+
+    ${MIET_VIDEO_QUEUES_DIR}/comments_notification_queue.hpp
+    ${MIET_VIDEO_QUEUES_DIR}/comments_notification_queue.cpp
+)
 
 set(MIET_VIDEO_UTILS_SOURCE
     ${MIET_VIDEO_UTILS_DIR}/utils.hpp
@@ -87,8 +95,8 @@ set(MIET_VIDEO_HANDLERS_SOURCE
     ${MIET_VIDEO_HANDLERS_DIR}/get_lecture_handler.cpp
     ${MIET_VIDEO_HANDLERS_DIR}/add_comment_handler.hpp
     ${MIET_VIDEO_HANDLERS_DIR}/add_comment_handler.cpp
-    ${MIET_VIDEO_HANDLERS_DIR}/comments_handler.hpp
-    ${MIET_VIDEO_HANDLERS_DIR}/comments_handler.cpp
+    ${MIET_VIDEO_HANDLERS_DIR}/comments_notify_handler.hpp
+    ${MIET_VIDEO_HANDLERS_DIR}/comments_notify_handler.cpp
 )
 
 set(MIET_VIDEO_DB_SOURCE
@@ -115,6 +123,7 @@ set(MIET_VIDEO_DB_SOURCE
 
 
 add_library(${PROJECT_NAME}_objs OBJECT
+    ${MIET_VIDEO_QUEUES_SOURCE}
     ${MIET_VIDEO_UTILS_SOURCE}
     ${MIET_VIDEO_CLIENTS_SOURCE}
     ${MIET_VIDEO_HANDLERS_SOURCE}

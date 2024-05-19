@@ -28,6 +28,11 @@ namespace miet::handlers
             utils::JsonProcessor::Read(jsonBody, "video", args.video_data);
             utils::JsonProcessor::Read(jsonBody, "preview", args.preview_data);
 
+            args.video_data = crypto::base64::Base64Decode(args.video_data);
+            if (args.preview_data) {
+                args.preview_data = crypto::base64::Base64Decode(*args.preview_data);
+            }
+
             return args;
         } catch (const std::exception& ex) {
             throw server::handlers::ClientError(
@@ -50,10 +55,8 @@ namespace miet::handlers
         video.video_id = userver::utils::generators::GenerateUuidV7();
         video.title = std::move(args.title);
         video.description = std::move(args.description);
-        video.video_src = crypto::base64::Base64Decode(args.video_data);
-        if (args.preview_data) {
-            video.preview_src = crypto::base64::Base64Decode(*args.preview_data);
-        }
+        video.video_src = args.video_data;
+        video.preview_src = *args.preview_data;
         video.author_id = std::move(user_id_opt).value();
 
         models::LectureUploadData lecture
