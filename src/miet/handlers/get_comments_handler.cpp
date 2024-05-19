@@ -16,7 +16,7 @@ namespace miet::handlers
         try {
             GetCommentsHandleArgs args;
             args.session_token = helpers::GetSessionToken(request);
-            utils::JsonProcessor::Read(helpers::GetRequestBodyAsJson(request), "video_id", args.video_id);
+            args.video_id = request.GetArg("video_id");
             return args;
         } catch (const std::exception& ex) {
             throw server::handlers::ClientError(
