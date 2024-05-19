@@ -22,6 +22,8 @@
 #include <miet/handlers/upload_lecture_handler.hpp>
 #include <miet/handlers/get_lectures_handler.hpp>
 #include <miet/handlers/get_lecture_handler.hpp>
+#include <miet/handlers/add_comment_handler.hpp>
+#include <miet/handlers/comments_handler.hpp>
 
 
 
@@ -47,6 +49,8 @@ int main(int argc, char* argv[]) {
                             .Append<miet::handlers::GetLecturesHandler>()
                             .Append<miet::handlers::GetLectureHandler>()
                             .Append<miet::handlers::LogoutHandler>()
+                            .Append<miet::handlers::AddCommentHandler>()
+                            .Append<miet::handlers::CommentsHandler>()
                             .Append<userver::server::handlers::TestsControl>();
 
   return userver::utils::DaemonMain(argc, argv, component_list);
