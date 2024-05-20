@@ -56,7 +56,7 @@ namespace miet::handlers
         video.title = std::move(args.title);
         video.description = std::move(args.description);
         video.video_src = args.video_data;
-        video.preview_src = *args.preview_data;
+        video.preview_src = args.preview_data;
         video.author_id = std::move(user_id_opt).value();
 
         models::LectureUploadData lecture
