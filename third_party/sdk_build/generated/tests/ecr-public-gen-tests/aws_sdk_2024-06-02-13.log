@@ -1,0 +1,290 @@
+[INFO] 2024-06-02 13:38:05.083 Aws_Init_Cleanup [140017470587968] Initiate AWS SDK for C++ with Version:1.11.340
+[INFO] 2024-06-02 13:38:05.083 aws-c-common [140017470587968] static: libnuma.so loaded
+[INFO] 2024-06-02 13:38:05.083 aws-c-common [140017470587968] static: set_mempolicy() loaded
+[INFO] 2024-06-02 13:38:05.083 aws-c-common [140017470587968] static: numa_available() loaded
+[INFO] 2024-06-02 13:38:05.083 aws-c-common [140017470587968] static: numa_num_configured_nodes() loaded
+[INFO] 2024-06-02 13:38:05.083 aws-c-common [140017470587968] static: numa_num_possible_cpus() loaded
+[INFO] 2024-06-02 13:38:05.083 aws-c-common [140017470587968] static: numa_node_of_cpu() loaded
+[DEBUG] 2024-06-02 13:38:05.083 libcrypto_resolve [140017470587968] searching process and loaded modules
+[DEBUG] 2024-06-02 13:38:05.083 libcrypto_resolve [140017470587968] did not find aws-lc symbols linked
+[DEBUG] 2024-06-02 13:38:05.083 libcrypto_resolve [140017470587968] did not find boringssl symbols linked
+[DEBUG] 2024-06-02 13:38:05.083 libcrypto_resolve [140017470587968] did not find libcrypto 1.0.2 symbols linked
+[DEBUG] 2024-06-02 13:38:05.083 libcrypto_resolve [140017470587968] found static libcrypto 1.1.1 HMAC symbols
+[DEBUG] 2024-06-02 13:38:05.083 libcrypto_resolve [140017470587968] found static libcrypto 1.1.1 EVP_MD symbols
+[INFO] 2024-06-02 13:38:05.083 tls-handler [140017470587968] static: Initializing TLS using s2n.
+[DEBUG] 2024-06-02 13:38:05.086 tls-handler [140017470587968] ctx: Based on OS, we detected the default PKI path as /etc/ssl/certs, and ca file as /etc/ssl/certs/ca-certificates.crt
+[ERROR] 2024-06-02 13:38:05.086 common-io [140017470587968] static: Failed to open file. path:'/sys/devices/virtual/dmi/id/sys_vendor' mode:'rb' errno:2 aws-error:44(AWS_ERROR_FILE_INVALID_PATH)
+[ERROR] 2024-06-02 13:38:05.086 common-io [140017470587968] static: Failed to open file. path:'/sys/devices/virtual/dmi/id/product_name' mode:'rb' errno:2 aws-error:44(AWS_ERROR_FILE_INVALID_PATH)
+[TRACE] 2024-06-02 13:38:05.086 aws-c-common [140017470587968] id=0x555850e467a0: virtualization vendor detected as ""
+[TRACE] 2024-06-02 13:38:05.086 aws-c-common [140017470587968] id=0x555850e467a0: virtualization product name detected as " "
+[TRACE] 2024-06-02 13:38:05.086 S3General [140017470587968] id=0x555850dc7c30: adding platform entry for "c5n.18xlarge".
+[TRACE] 2024-06-02 13:38:05.086 S3General [140017470587968] id=0x555850dc7c30: adding platform entry for "c5n.9xlarge".
+[TRACE] 2024-06-02 13:38:05.086 S3General [140017470587968] id=0x555850dc7c30: adding platform entry for "c5n.metal".
+[TRACE] 2024-06-02 13:38:05.086 S3General [140017470587968] id=0x555850dc7c30: adding platform entry for "p4d.24xlarge".
+[TRACE] 2024-06-02 13:38:05.086 S3General [140017470587968] id=0x555850dc7c30: adding platform entry for "p4de.24xlarge".
+[TRACE] 2024-06-02 13:38:05.086 S3General [140017470587968] id=0x555850dc7c30: adding platform entry for "p5.48xlarge".
+[TRACE] 2024-06-02 13:38:05.086 S3General [140017470587968] id=0x555850dc7c30: adding platform entry for "trn1n.32xlarge".
+[TRACE] 2024-06-02 13:38:05.086 S3General [140017470587968] id=0x555850dc7c30: adding platform entry for "trn1.32xlarge".
+[INFO] 2024-06-02 13:38:05.086 GlobalEnumOverflowContainer [140017470587968] Initialized AWS-CRT-CPP with version 0.26.9
+[TRACE] 2024-06-02 13:38:05.086 FileSystemUtils [140017470587968] Checking HOME for the home directory.
+[DEBUG] 2024-06-02 13:38:05.086 FileSystemUtils [140017470587968] Environment value for variable HOME is /home/dmitriy
+[DEBUG] 2024-06-02 13:38:05.086 FileSystemUtils [140017470587968] Home directory is missing the final / appending one to normalize
+[DEBUG] 2024-06-02 13:38:05.086 FileSystemUtils [140017470587968] Final Home Directory is /home/dmitriy/
+[INFO] 2024-06-02 13:38:05.086 Aws::Config::AWSConfigFileProfileConfigLoader [140017470587968] Initializing config loader against fileName /home/dmitriy/.aws/credentials and using profilePrefix = 0
+[TRACE] 2024-06-02 13:38:05.086 FileSystemUtils [140017470587968] Checking HOME for the home directory.
+[DEBUG] 2024-06-02 13:38:05.086 FileSystemUtils [140017470587968] Environment value for variable HOME is /home/dmitriy
+[DEBUG] 2024-06-02 13:38:05.086 FileSystemUtils [140017470587968] Home directory is missing the final / appending one to normalize
+[DEBUG] 2024-06-02 13:38:05.086 FileSystemUtils [140017470587968] Final Home Directory is /home/dmitriy/
+[INFO] 2024-06-02 13:38:05.086 Aws::Config::AWSConfigFileProfileConfigLoader [140017470587968] Initializing config loader against fileName /home/dmitriy/.aws/config and using profilePrefix = 1
+[TRACE] 2024-06-02 13:38:05.086 FileSystemUtils [140017470587968] Checking HOME for the home directory.
+[DEBUG] 2024-06-02 13:38:05.086 FileSystemUtils [140017470587968] Environment value for variable HOME is /home/dmitriy
+[DEBUG] 2024-06-02 13:38:05.086 FileSystemUtils [140017470587968] Home directory is missing the final / appending one to normalize
+[DEBUG] 2024-06-02 13:38:05.086 FileSystemUtils [140017470587968] Final Home Directory is /home/dmitriy/
+[INFO] 2024-06-02 13:38:05.088 Aws::Config::AWSConfigFileProfileConfigLoader [140017470587968] Unable to open config file /home/dmitriy/.aws/credentials for reading.
+[INFO] 2024-06-02 13:38:05.088 Aws::Config::AWSProfileConfigLoaderBase [140017470587968] Failed to reload configuration.
+[TRACE] 2024-06-02 13:38:05.088 FileSystemUtils [140017470587968] Checking HOME for the home directory.
+[DEBUG] 2024-06-02 13:38:05.088 FileSystemUtils [140017470587968] Environment value for variable HOME is /home/dmitriy
+[DEBUG] 2024-06-02 13:38:05.088 FileSystemUtils [140017470587968] Home directory is missing the final / appending one to normalize
+[DEBUG] 2024-06-02 13:38:05.088 FileSystemUtils [140017470587968] Final Home Directory is /home/dmitriy/
+[INFO] 2024-06-02 13:38:05.089 Aws::Config::AWSConfigFileProfileConfigLoader [140017470587968] Unable to open config file /home/dmitriy/.aws/config for reading.
+[INFO] 2024-06-02 13:38:05.089 Aws::Config::AWSProfileConfigLoaderBase [140017470587968] Failed to reload configuration.
+[INFO] 2024-06-02 13:38:05.089 event-loop [140017470587968] id=0x555850dc4630: Initializing edge-triggered epoll
+[INFO] 2024-06-02 13:38:05.089 event-loop [140017470587968] id=0x555850dc4630: Using eventfd for cross-thread notifications.
+[TRACE] 2024-06-02 13:38:05.089 event-loop [140017470587968] id=0x555850dc4630: eventfd descriptor 6.
+[INFO] 2024-06-02 13:38:05.089 event-loop [140017470587968] id=0x555850dc4630: Starting event-loop thread.
+[INFO] 2024-06-02 13:38:05.089 event-loop [140017470587968] id=0x555850dc5650: Initializing edge-triggered epoll
+[INFO] 2024-06-02 13:38:05.089 event-loop [140017470587968] id=0x555850dc5650: Using eventfd for cross-thread notifications.
+[TRACE] 2024-06-02 13:38:05.089 event-loop [140017470587968] id=0x555850dc5650: eventfd descriptor 8.
+[INFO] 2024-06-02 13:38:05.089 event-loop [140017470587968] id=0x555850dc5650: Starting event-loop thread.
+[INFO] 2024-06-02 13:38:05.089 event-loop [140017462126144] id=0x555850dc4630: main loop started
+[TRACE] 2024-06-02 13:38:05.090 event-loop [140017462126144] id=0x555850dc4630: subscribing to events on fd 6
+[INFO] 2024-06-02 13:38:05.090 event-loop [140017470587968] id=0x555850dc60d0: Initializing edge-triggered epoll
+[INFO] 2024-06-02 13:38:05.090 event-loop [140017470587968] id=0x555850dc60d0: Using eventfd for cross-thread notifications.
+[INFO] 2024-06-02 13:38:05.090 event-loop [140017462126144] id=0x555850dc4630: default timeout 100000, and max events to process per tick 100
+[TRACE] 2024-06-02 13:38:05.090 event-loop [140017470587968] id=0x555850dc60d0: eventfd descriptor 10.
+[TRACE] 2024-06-02 13:38:05.090 event-loop [140017462126144] id=0x555850dc4630: waiting for a maximum of 100000 ms
+[INFO] 2024-06-02 13:38:05.090 event-loop [140017470587968] id=0x555850dc60d0: Starting event-loop thread.
+[INFO] 2024-06-02 13:38:05.090 event-loop [140017453733440] id=0x555850dc5650: main loop started
+[TRACE] 2024-06-02 13:38:05.090 event-loop [140017453733440] id=0x555850dc5650: subscribing to events on fd 8
+[INFO] 2024-06-02 13:38:05.090 event-loop [140017453733440] id=0x555850dc5650: default timeout 100000, and max events to process per tick 100
+[INFO] 2024-06-02 13:38:05.090 event-loop [140017470587968] id=0x555850dc8260: Initializing edge-triggered epoll
+[TRACE] 2024-06-02 13:38:05.090 event-loop [140017453733440] id=0x555850dc5650: waiting for a maximum of 100000 ms
+[INFO] 2024-06-02 13:38:05.090 event-loop [140017470587968] id=0x555850dc8260: Using eventfd for cross-thread notifications.
+[TRACE] 2024-06-02 13:38:05.090 event-loop [140017470587968] id=0x555850dc8260: eventfd descriptor 12.
+[INFO] 2024-06-02 13:38:05.090 event-loop [140017470587968] id=0x555850dc8260: Starting event-loop thread.
+[INFO] 2024-06-02 13:38:05.090 event-loop [140017445340736] id=0x555850dc60d0: main loop started
+[TRACE] 2024-06-02 13:38:05.090 event-loop [140017445340736] id=0x555850dc60d0: subscribing to events on fd 10
+[INFO] 2024-06-02 13:38:05.090 event-loop [140017445340736] id=0x555850dc60d0: default timeout 100000, and max events to process per tick 100
+[TRACE] 2024-06-02 13:38:05.090 event-loop [140017445340736] id=0x555850dc60d0: waiting for a maximum of 100000 ms
+[INFO] 2024-06-02 13:38:05.090 dns [140017470587968] id=0x555850e4bf10: Initializing default host resolver with 8 max host entries.
+[INFO] 2024-06-02 13:38:05.090 event-loop [140017436948032] id=0x555850dc8260: main loop started
+[TRACE] 2024-06-02 13:38:05.090 event-loop [140017436948032] id=0x555850dc8260: subscribing to events on fd 12
+[INFO] 2024-06-02 13:38:05.090 event-loop [140017436948032] id=0x555850dc8260: default timeout 100000, and max events to process per tick 100
+[TRACE] 2024-06-02 13:38:05.090 event-loop [140017436948032] id=0x555850dc8260: waiting for a maximum of 100000 ms
+[INFO] 2024-06-02 13:38:05.090 channel-bootstrap [140017470587968] id=0x555850e4c190: Initializing client bootstrap with event-loop group 0x555850e498a0
+[DEBUG] 2024-06-02 13:38:05.164 HttpClientFactory [140017470587968] Initializing Http Static State
+[DEBUG] 2024-06-02 13:38:05.164 HttpClientFactory [140017470587968] Initializing Curl Http Client
+[INFO] 2024-06-02 13:38:05.164 CurlHttpClient [140017470587968] Initializing Curl library with version: 7.81.0, ssl version: GnuTLS/3.7.3
+[INFO] 2024-06-02 13:38:05.164 EC2MetadataClient [140017470587968] Using IMDS endpoint: http://169.254.169.254
+[DEBUG] 2024-06-02 13:38:05.164 ClientConfiguration [140017470587968] Request Compression enabled
+[DEBUG] 2024-06-02 13:38:05.164 ClientConfiguration [140017470587968] ClientConfiguration will use MinReqCompression: 10240
+[DEBUG] 2024-06-02 13:38:05.164 ClientConfiguration [140017470587968] ClientConfiguration will use SDK Auto Resolved profile: [default] if not specified by users.
+[INFO] 2024-06-02 13:38:05.164 ClientConfiguration [140017470587968] Retry Strategy will use the default max attempts.
+[INFO] 2024-06-02 13:38:05.164 EC2MetadataClient [140017470587968] Creating AWSHttpResourceClient with max connections 2 and scheme http
+[INFO] 2024-06-02 13:38:05.165 CurlHandleContainer [140017470587968] Initializing CurlHandleContainer with size 2
+[TRACE] 2024-06-02 13:38:05.166 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:38:05.166 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-east-1
+[TRACE] 2024-06-02 13:38:05.166 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:38:05.167 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.167 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://api.ecr-public-fips.us-east-1.api.aws
+[TRACE] 2024-06-02 13:38:05.168 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:38:05.168 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-east-1
+[TRACE] 2024-06-02 13:38:05.168 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:38:05.168 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.168 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://api.ecr-public-fips.us-east-1.amazonaws.com
+[TRACE] 2024-06-02 13:38:05.168 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:38:05.168 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-east-1
+[TRACE] 2024-06-02 13:38:05.168 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:38:05.168 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.168 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://api.ecr-public.us-east-1.api.aws
+[TRACE] 2024-06-02 13:38:05.169 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:38:05.169 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-east-1
+[TRACE] 2024-06-02 13:38:05.169 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:38:05.169 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.169 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://api.ecr-public.us-east-1.amazonaws.com
+[TRACE] 2024-06-02 13:38:05.170 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:38:05.170 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = cn-north-1
+[TRACE] 2024-06-02 13:38:05.170 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:38:05.170 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.170 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://api.ecr-public-fips.cn-north-1.api.amazonwebservices.com.cn
+[TRACE] 2024-06-02 13:38:05.170 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:38:05.170 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = cn-north-1
+[TRACE] 2024-06-02 13:38:05.170 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:38:05.170 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.170 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://api.ecr-public-fips.cn-north-1.amazonaws.com.cn
+[TRACE] 2024-06-02 13:38:05.171 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:38:05.171 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = cn-north-1
+[TRACE] 2024-06-02 13:38:05.171 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:38:05.171 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.171 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://api.ecr-public.cn-north-1.api.amazonwebservices.com.cn
+[TRACE] 2024-06-02 13:38:05.171 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:38:05.171 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = cn-north-1
+[TRACE] 2024-06-02 13:38:05.171 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:38:05.171 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.171 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://api.ecr-public.cn-north-1.amazonaws.com.cn
+[TRACE] 2024-06-02 13:38:05.172 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:38:05.172 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-gov-east-1
+[TRACE] 2024-06-02 13:38:05.172 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:38:05.172 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.172 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://api.ecr-public-fips.us-gov-east-1.api.aws
+[TRACE] 2024-06-02 13:38:05.173 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:38:05.173 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-gov-east-1
+[TRACE] 2024-06-02 13:38:05.173 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:38:05.173 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.173 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://api.ecr-public-fips.us-gov-east-1.amazonaws.com
+[TRACE] 2024-06-02 13:38:05.173 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:38:05.173 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-gov-east-1
+[TRACE] 2024-06-02 13:38:05.173 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:38:05.173 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.173 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://api.ecr-public.us-gov-east-1.api.aws
+[TRACE] 2024-06-02 13:38:05.174 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:38:05.174 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-gov-east-1
+[TRACE] 2024-06-02 13:38:05.174 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:38:05.174 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.174 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://api.ecr-public.us-gov-east-1.amazonaws.com
+[TRACE] 2024-06-02 13:38:05.174 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:38:05.174 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-iso-east-1
+[TRACE] 2024-06-02 13:38:05.174 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:38:05.174 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[TRACE] 2024-06-02 13:38:05.175 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:38:05.175 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-iso-east-1
+[TRACE] 2024-06-02 13:38:05.175 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:38:05.175 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.175 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://api.ecr-public-fips.us-iso-east-1.c2s.ic.gov
+[TRACE] 2024-06-02 13:38:05.176 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:38:05.176 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-iso-east-1
+[TRACE] 2024-06-02 13:38:05.176 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:38:05.176 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[TRACE] 2024-06-02 13:38:05.176 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:38:05.176 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-iso-east-1
+[TRACE] 2024-06-02 13:38:05.176 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:38:05.176 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.176 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://api.ecr-public.us-iso-east-1.c2s.ic.gov
+[TRACE] 2024-06-02 13:38:05.177 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:38:05.177 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-isob-east-1
+[TRACE] 2024-06-02 13:38:05.177 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:38:05.177 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[TRACE] 2024-06-02 13:38:05.178 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:38:05.178 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-isob-east-1
+[TRACE] 2024-06-02 13:38:05.178 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:38:05.178 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.178 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://api.ecr-public-fips.us-isob-east-1.sc2s.sgov.gov
+[TRACE] 2024-06-02 13:38:05.178 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:38:05.179 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-isob-east-1
+[TRACE] 2024-06-02 13:38:05.179 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:38:05.179 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[TRACE] 2024-06-02 13:38:05.179 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:38:05.179 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-isob-east-1
+[TRACE] 2024-06-02 13:38:05.179 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:38:05.179 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.179 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://api.ecr-public.us-isob-east-1.sc2s.sgov.gov
+[TRACE] 2024-06-02 13:38:05.180 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:38:05.180 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Endpoint = https://example.com
+[TRACE] 2024-06-02 13:38:05.180 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-east-1
+[TRACE] 2024-06-02 13:38:05.180 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:38:05.180 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.180 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://example.com
+[TRACE] 2024-06-02 13:38:05.180 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:38:05.180 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Endpoint = https://example.com
+[TRACE] 2024-06-02 13:38:05.180 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:38:05.180 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.180 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint rules engine evaluated the endpoint: https://example.com
+[TRACE] 2024-06-02 13:38:05.181 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:38:05.181 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Endpoint = https://example.com
+[TRACE] 2024-06-02 13:38:05.181 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-east-1
+[TRACE] 2024-06-02 13:38:05.181 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:38:05.181 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[TRACE] 2024-06-02 13:38:05.182 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:38:05.182 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Endpoint = https://example.com
+[TRACE] 2024-06-02 13:38:05.182 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint str eval parameter: Region = us-east-1
+[TRACE] 2024-06-02 13:38:05.182 Aws::Endpoint::DefaultEndpointProvider [140017470587968] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:38:05.182 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:38:05.182 AWSEndpointsResolution [140017470587968] Resolved endpoint with status 0
+[INFO] 2024-06-02 13:38:05.182 Aws_Init_Cleanup [140017470587968] Shutdown AWS SDK for C++.
+[INFO] 2024-06-02 13:38:05.183 CurlHandleContainer [140017470587968] Cleaning up CurlHandleContainer.
+[DEBUG] 2024-06-02 13:38:05.183 HttpClientFactory [140017470587968] Cleanup Http Static State
+[DEBUG] 2024-06-02 13:38:05.183 HttpClientFactory [140017470587968] Cleanup Curl Http Client
+[DEBUG] 2024-06-02 13:38:05.183 channel-bootstrap [140017470587968] id=0x555850e4c190: releasing bootstrap reference
+[DEBUG] 2024-06-02 13:38:05.183 channel-bootstrap [140017470587968] id=0x555850e4c190: bootstrap destroying
+[INFO] 2024-06-02 13:38:05.183 event-loop [140017428555328] id=0x555850dc8260: Destroying event_loop
+[INFO] 2024-06-02 13:38:05.183 event-loop [140017428555328] id=0x555850dc8260: Stopping event-loop thread.
+[TRACE] 2024-06-02 13:38:05.183 event-loop [140017428555328] id=0x555850dc8260: Scheduling task 0x555850e4ba98 cross-thread for timestamp 0
+[TRACE] 2024-06-02 13:38:05.183 event-loop [140017428555328] id=0x555850dc8260: Waking up event-loop thread
+[TRACE] 2024-06-02 13:38:05.183 event-loop [140017436948032] id=0x555850dc8260: wake up with 1 events to process.
+[TRACE] 2024-06-02 13:38:05.183 event-loop [140017436948032] id=0x555850dc8260: activity on fd 12, invoking handler.
+[TRACE] 2024-06-02 13:38:05.183 event-loop [140017436948032] id=0x555850dc8260: notified of cross-thread tasks to schedule
+[TRACE] 2024-06-02 13:38:05.183 event-loop [140017436948032] id=0x555850dc8260: processing cross-thread tasks
+[TRACE] 2024-06-02 13:38:05.183 event-loop [140017436948032] id=0x555850dc8260: task 0x555850e4ba98 pulled to event-loop, scheduling now.
+[DEBUG] 2024-06-02 13:38:05.183 task-scheduler [140017436948032] id=0x555850e4ba98: Scheduling epoll_event_loop_stop task for immediate execution
+[TRACE] 2024-06-02 13:38:05.183 event-loop [140017436948032] id=0x555850dc8260: running scheduled tasks.
+[DEBUG] 2024-06-02 13:38:05.183 task-scheduler [140017436948032] id=0x555850e4ba98: Running epoll_event_loop_stop task with <Running> status
+[TRACE] 2024-06-02 13:38:05.183 event-loop [140017436948032] id=0x555850dc8260: no more scheduled tasks using default timeout.
+[DEBUG] 2024-06-02 13:38:05.183 event-loop [140017436948032] id=0x555850dc8260: exiting main loop
+[TRACE] 2024-06-02 13:38:05.183 event-loop [140017436948032] id=0x555850dc8260: un-subscribing from events on fd 12
+[TRACE] 2024-06-02 13:38:05.183 event-loop [140017436948032] id=0x555850dc8260: scheduling task 0x7f5848000c80 in-thread for timestamp 0
+[DEBUG] 2024-06-02 13:38:05.183 task-scheduler [140017436948032] id=0x7f5848000c80: Scheduling epoll_event_loop_unsubscribe_cleanup task for immediate execution
+[DEBUG] 2024-06-02 13:38:05.184 task-scheduler [140017428555328] id=0x7f5848000c80: Running epoll_event_loop_unsubscribe_cleanup task with <Canceled> status
+[INFO] 2024-06-02 13:38:05.184 event-loop [140017428555328] id=0x555850dc60d0: Destroying event_loop
+[INFO] 2024-06-02 13:38:05.184 event-loop [140017428555328] id=0x555850dc60d0: Stopping event-loop thread.
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017428555328] id=0x555850dc60d0: Scheduling task 0x555850e4b0e8 cross-thread for timestamp 0
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017428555328] id=0x555850dc60d0: Waking up event-loop thread
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017445340736] id=0x555850dc60d0: wake up with 1 events to process.
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017445340736] id=0x555850dc60d0: activity on fd 10, invoking handler.
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017445340736] id=0x555850dc60d0: notified of cross-thread tasks to schedule
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017445340736] id=0x555850dc60d0: processing cross-thread tasks
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017445340736] id=0x555850dc60d0: task 0x555850e4b0e8 pulled to event-loop, scheduling now.
+[DEBUG] 2024-06-02 13:38:05.184 task-scheduler [140017445340736] id=0x555850e4b0e8: Scheduling epoll_event_loop_stop task for immediate execution
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017445340736] id=0x555850dc60d0: running scheduled tasks.
+[DEBUG] 2024-06-02 13:38:05.184 task-scheduler [140017445340736] id=0x555850e4b0e8: Running epoll_event_loop_stop task with <Running> status
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017445340736] id=0x555850dc60d0: no more scheduled tasks using default timeout.
+[DEBUG] 2024-06-02 13:38:05.184 event-loop [140017445340736] id=0x555850dc60d0: exiting main loop
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017445340736] id=0x555850dc60d0: un-subscribing from events on fd 10
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017445340736] id=0x555850dc60d0: scheduling task 0x7f5844000c80 in-thread for timestamp 0
+[DEBUG] 2024-06-02 13:38:05.184 task-scheduler [140017445340736] id=0x7f5844000c80: Scheduling epoll_event_loop_unsubscribe_cleanup task for immediate execution
+[DEBUG] 2024-06-02 13:38:05.184 task-scheduler [140017428555328] id=0x7f5844000c80: Running epoll_event_loop_unsubscribe_cleanup task with <Canceled> status
+[INFO] 2024-06-02 13:38:05.184 event-loop [140017428555328] id=0x555850dc5650: Destroying event_loop
+[INFO] 2024-06-02 13:38:05.184 event-loop [140017428555328] id=0x555850dc5650: Stopping event-loop thread.
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017428555328] id=0x555850dc5650: Scheduling task 0x555850e4a738 cross-thread for timestamp 0
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017428555328] id=0x555850dc5650: Waking up event-loop thread
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017453733440] id=0x555850dc5650: wake up with 1 events to process.
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017453733440] id=0x555850dc5650: activity on fd 8, invoking handler.
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017453733440] id=0x555850dc5650: notified of cross-thread tasks to schedule
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017453733440] id=0x555850dc5650: processing cross-thread tasks
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017453733440] id=0x555850dc5650: task 0x555850e4a738 pulled to event-loop, scheduling now.
+[DEBUG] 2024-06-02 13:38:05.184 task-scheduler [140017453733440] id=0x555850e4a738: Scheduling epoll_event_loop_stop task for immediate execution
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017453733440] id=0x555850dc5650: running scheduled tasks.
+[DEBUG] 2024-06-02 13:38:05.184 task-scheduler [140017453733440] id=0x555850e4a738: Running epoll_event_loop_stop task with <Running> status
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017453733440] id=0x555850dc5650: no more scheduled tasks using default timeout.
+[DEBUG] 2024-06-02 13:38:05.184 event-loop [140017453733440] id=0x555850dc5650: exiting main loop
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017453733440] id=0x555850dc5650: un-subscribing from events on fd 8
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017453733440] id=0x555850dc5650: scheduling task 0x7f5850000c80 in-thread for timestamp 0
+[DEBUG] 2024-06-02 13:38:05.184 task-scheduler [140017453733440] id=0x7f5850000c80: Scheduling epoll_event_loop_unsubscribe_cleanup task for immediate execution
+[DEBUG] 2024-06-02 13:38:05.184 task-scheduler [140017428555328] id=0x7f5850000c80: Running epoll_event_loop_unsubscribe_cleanup task with <Canceled> status
+[INFO] 2024-06-02 13:38:05.184 event-loop [140017428555328] id=0x555850dc4630: Destroying event_loop
+[INFO] 2024-06-02 13:38:05.184 event-loop [140017428555328] id=0x555850dc4630: Stopping event-loop thread.
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017428555328] id=0x555850dc4630: Scheduling task 0x555850e49e38 cross-thread for timestamp 0
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017428555328] id=0x555850dc4630: Waking up event-loop thread
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017462126144] id=0x555850dc4630: wake up with 1 events to process.
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017462126144] id=0x555850dc4630: activity on fd 6, invoking handler.
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017462126144] id=0x555850dc4630: notified of cross-thread tasks to schedule
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017462126144] id=0x555850dc4630: processing cross-thread tasks
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017462126144] id=0x555850dc4630: task 0x555850e49e38 pulled to event-loop, scheduling now.
+[DEBUG] 2024-06-02 13:38:05.184 task-scheduler [140017462126144] id=0x555850e49e38: Scheduling epoll_event_loop_stop task for immediate execution
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017462126144] id=0x555850dc4630: running scheduled tasks.
+[DEBUG] 2024-06-02 13:38:05.184 task-scheduler [140017462126144] id=0x555850e49e38: Running epoll_event_loop_stop task with <Running> status
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017462126144] id=0x555850dc4630: no more scheduled tasks using default timeout.
+[DEBUG] 2024-06-02 13:38:05.184 event-loop [140017462126144] id=0x555850dc4630: exiting main loop
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017462126144] id=0x555850dc4630: un-subscribing from events on fd 6
+[TRACE] 2024-06-02 13:38:05.184 event-loop [140017462126144] id=0x555850dc4630: scheduling task 0x7f584c000c80 in-thread for timestamp 0
+[DEBUG] 2024-06-02 13:38:05.184 task-scheduler [140017462126144] id=0x7f584c000c80: Scheduling epoll_event_loop_unsubscribe_cleanup task for immediate execution
+[DEBUG] 2024-06-02 13:38:05.184 task-scheduler [140017428555328] id=0x7f584c000c80: Running epoll_event_loop_unsubscribe_cleanup task with <Canceled> status

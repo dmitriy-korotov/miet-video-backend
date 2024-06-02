@@ -1,0 +1,400 @@
+[INFO] 2024-06-02 13:53:13.609 Aws_Init_Cleanup [140483623425088] Initiate AWS SDK for C++ with Version:1.11.340
+[INFO] 2024-06-02 13:53:13.610 aws-c-common [140483623425088] static: libnuma.so loaded
+[INFO] 2024-06-02 13:53:13.610 aws-c-common [140483623425088] static: set_mempolicy() loaded
+[INFO] 2024-06-02 13:53:13.610 aws-c-common [140483623425088] static: numa_available() loaded
+[INFO] 2024-06-02 13:53:13.610 aws-c-common [140483623425088] static: numa_num_configured_nodes() loaded
+[INFO] 2024-06-02 13:53:13.610 aws-c-common [140483623425088] static: numa_num_possible_cpus() loaded
+[INFO] 2024-06-02 13:53:13.610 aws-c-common [140483623425088] static: numa_node_of_cpu() loaded
+[DEBUG] 2024-06-02 13:53:13.610 libcrypto_resolve [140483623425088] searching process and loaded modules
+[DEBUG] 2024-06-02 13:53:13.610 libcrypto_resolve [140483623425088] did not find aws-lc symbols linked
+[DEBUG] 2024-06-02 13:53:13.610 libcrypto_resolve [140483623425088] did not find boringssl symbols linked
+[DEBUG] 2024-06-02 13:53:13.610 libcrypto_resolve [140483623425088] did not find libcrypto 1.0.2 symbols linked
+[DEBUG] 2024-06-02 13:53:13.610 libcrypto_resolve [140483623425088] found static libcrypto 1.1.1 HMAC symbols
+[DEBUG] 2024-06-02 13:53:13.610 libcrypto_resolve [140483623425088] found static libcrypto 1.1.1 EVP_MD symbols
+[INFO] 2024-06-02 13:53:13.610 tls-handler [140483623425088] static: Initializing TLS using s2n.
+[DEBUG] 2024-06-02 13:53:13.613 tls-handler [140483623425088] ctx: Based on OS, we detected the default PKI path as /etc/ssl/certs, and ca file as /etc/ssl/certs/ca-certificates.crt
+[ERROR] 2024-06-02 13:53:13.613 common-io [140483623425088] static: Failed to open file. path:'/sys/devices/virtual/dmi/id/sys_vendor' mode:'rb' errno:2 aws-error:44(AWS_ERROR_FILE_INVALID_PATH)
+[ERROR] 2024-06-02 13:53:13.613 common-io [140483623425088] static: Failed to open file. path:'/sys/devices/virtual/dmi/id/product_name' mode:'rb' errno:2 aws-error:44(AWS_ERROR_FILE_INVALID_PATH)
+[TRACE] 2024-06-02 13:53:13.613 aws-c-common [140483623425088] id=0x55e9b2adf9b0: virtualization vendor detected as ""
+[TRACE] 2024-06-02 13:53:13.613 aws-c-common [140483623425088] id=0x55e9b2adf9b0: virtualization product name detected as " "
+[TRACE] 2024-06-02 13:53:13.613 S3General [140483623425088] id=0x55e9b2a5de30: adding platform entry for "c5n.18xlarge".
+[TRACE] 2024-06-02 13:53:13.613 S3General [140483623425088] id=0x55e9b2a5de30: adding platform entry for "c5n.9xlarge".
+[TRACE] 2024-06-02 13:53:13.613 S3General [140483623425088] id=0x55e9b2a5de30: adding platform entry for "c5n.metal".
+[TRACE] 2024-06-02 13:53:13.613 S3General [140483623425088] id=0x55e9b2a5de30: adding platform entry for "p4d.24xlarge".
+[TRACE] 2024-06-02 13:53:13.613 S3General [140483623425088] id=0x55e9b2a5de30: adding platform entry for "p4de.24xlarge".
+[TRACE] 2024-06-02 13:53:13.613 S3General [140483623425088] id=0x55e9b2a5de30: adding platform entry for "p5.48xlarge".
+[TRACE] 2024-06-02 13:53:13.613 S3General [140483623425088] id=0x55e9b2a5de30: adding platform entry for "trn1n.32xlarge".
+[TRACE] 2024-06-02 13:53:13.613 S3General [140483623425088] id=0x55e9b2a5de30: adding platform entry for "trn1.32xlarge".
+[INFO] 2024-06-02 13:53:13.613 GlobalEnumOverflowContainer [140483623425088] Initialized AWS-CRT-CPP with version 0.26.9
+[TRACE] 2024-06-02 13:53:13.613 FileSystemUtils [140483623425088] Checking HOME for the home directory.
+[DEBUG] 2024-06-02 13:53:13.613 FileSystemUtils [140483623425088] Environment value for variable HOME is /home/dmitriy
+[DEBUG] 2024-06-02 13:53:13.613 FileSystemUtils [140483623425088] Home directory is missing the final / appending one to normalize
+[DEBUG] 2024-06-02 13:53:13.613 FileSystemUtils [140483623425088] Final Home Directory is /home/dmitriy/
+[INFO] 2024-06-02 13:53:13.613 Aws::Config::AWSConfigFileProfileConfigLoader [140483623425088] Initializing config loader against fileName /home/dmitriy/.aws/credentials and using profilePrefix = 0
+[TRACE] 2024-06-02 13:53:13.613 FileSystemUtils [140483623425088] Checking HOME for the home directory.
+[DEBUG] 2024-06-02 13:53:13.613 FileSystemUtils [140483623425088] Environment value for variable HOME is /home/dmitriy
+[DEBUG] 2024-06-02 13:53:13.613 FileSystemUtils [140483623425088] Home directory is missing the final / appending one to normalize
+[DEBUG] 2024-06-02 13:53:13.613 FileSystemUtils [140483623425088] Final Home Directory is /home/dmitriy/
+[INFO] 2024-06-02 13:53:13.613 Aws::Config::AWSConfigFileProfileConfigLoader [140483623425088] Initializing config loader against fileName /home/dmitriy/.aws/config and using profilePrefix = 1
+[TRACE] 2024-06-02 13:53:13.613 FileSystemUtils [140483623425088] Checking HOME for the home directory.
+[DEBUG] 2024-06-02 13:53:13.613 FileSystemUtils [140483623425088] Environment value for variable HOME is /home/dmitriy
+[DEBUG] 2024-06-02 13:53:13.613 FileSystemUtils [140483623425088] Home directory is missing the final / appending one to normalize
+[DEBUG] 2024-06-02 13:53:13.613 FileSystemUtils [140483623425088] Final Home Directory is /home/dmitriy/
+[INFO] 2024-06-02 13:53:13.615 Aws::Config::AWSConfigFileProfileConfigLoader [140483623425088] Unable to open config file /home/dmitriy/.aws/credentials for reading.
+[INFO] 2024-06-02 13:53:13.615 Aws::Config::AWSProfileConfigLoaderBase [140483623425088] Failed to reload configuration.
+[TRACE] 2024-06-02 13:53:13.615 FileSystemUtils [140483623425088] Checking HOME for the home directory.
+[DEBUG] 2024-06-02 13:53:13.615 FileSystemUtils [140483623425088] Environment value for variable HOME is /home/dmitriy
+[DEBUG] 2024-06-02 13:53:13.615 FileSystemUtils [140483623425088] Home directory is missing the final / appending one to normalize
+[DEBUG] 2024-06-02 13:53:13.615 FileSystemUtils [140483623425088] Final Home Directory is /home/dmitriy/
+[INFO] 2024-06-02 13:53:13.616 Aws::Config::AWSConfigFileProfileConfigLoader [140483623425088] Unable to open config file /home/dmitriy/.aws/config for reading.
+[INFO] 2024-06-02 13:53:13.616 Aws::Config::AWSProfileConfigLoaderBase [140483623425088] Failed to reload configuration.
+[INFO] 2024-06-02 13:53:13.616 event-loop [140483623425088] id=0x55e9b2a5d900: Initializing edge-triggered epoll
+[INFO] 2024-06-02 13:53:13.616 event-loop [140483623425088] id=0x55e9b2a5d900: Using eventfd for cross-thread notifications.
+[TRACE] 2024-06-02 13:53:13.616 event-loop [140483623425088] id=0x55e9b2a5d900: eventfd descriptor 6.
+[INFO] 2024-06-02 13:53:13.616 event-loop [140483623425088] id=0x55e9b2a5d900: Starting event-loop thread.
+[INFO] 2024-06-02 13:53:13.616 event-loop [140483623425088] id=0x55e9b2a5e920: Initializing edge-triggered epoll
+[INFO] 2024-06-02 13:53:13.616 event-loop [140483623425088] id=0x55e9b2a5e920: Using eventfd for cross-thread notifications.
+[TRACE] 2024-06-02 13:53:13.616 event-loop [140483623425088] id=0x55e9b2a5e920: eventfd descriptor 8.
+[INFO] 2024-06-02 13:53:13.616 event-loop [140483623425088] id=0x55e9b2a5e920: Starting event-loop thread.
+[INFO] 2024-06-02 13:53:13.617 event-loop [140483614963264] id=0x55e9b2a5d900: main loop started
+[INFO] 2024-06-02 13:53:13.617 event-loop [140483623425088] id=0x55e9b2a5f3a0: Initializing edge-triggered epoll
+[TRACE] 2024-06-02 13:53:13.617 event-loop [140483614963264] id=0x55e9b2a5d900: subscribing to events on fd 6
+[INFO] 2024-06-02 13:53:13.617 event-loop [140483623425088] id=0x55e9b2a5f3a0: Using eventfd for cross-thread notifications.
+[INFO] 2024-06-02 13:53:13.617 event-loop [140483614963264] id=0x55e9b2a5d900: default timeout 100000, and max events to process per tick 100
+[TRACE] 2024-06-02 13:53:13.617 event-loop [140483614963264] id=0x55e9b2a5d900: waiting for a maximum of 100000 ms
+[TRACE] 2024-06-02 13:53:13.617 event-loop [140483623425088] id=0x55e9b2a5f3a0: eventfd descriptor 10.
+[INFO] 2024-06-02 13:53:13.617 event-loop [140483623425088] id=0x55e9b2a5f3a0: Starting event-loop thread.
+[INFO] 2024-06-02 13:53:13.617 event-loop [140483606570560] id=0x55e9b2a5e920: main loop started
+[TRACE] 2024-06-02 13:53:13.617 event-loop [140483606570560] id=0x55e9b2a5e920: subscribing to events on fd 8
+[INFO] 2024-06-02 13:53:13.617 event-loop [140483623425088] id=0x55e9b2a61530: Initializing edge-triggered epoll
+[INFO] 2024-06-02 13:53:13.617 event-loop [140483606570560] id=0x55e9b2a5e920: default timeout 100000, and max events to process per tick 100
+[TRACE] 2024-06-02 13:53:13.617 event-loop [140483606570560] id=0x55e9b2a5e920: waiting for a maximum of 100000 ms
+[INFO] 2024-06-02 13:53:13.617 event-loop [140483623425088] id=0x55e9b2a61530: Using eventfd for cross-thread notifications.
+[TRACE] 2024-06-02 13:53:13.617 event-loop [140483623425088] id=0x55e9b2a61530: eventfd descriptor 12.
+[INFO] 2024-06-02 13:53:13.617 event-loop [140483623425088] id=0x55e9b2a61530: Starting event-loop thread.
+[INFO] 2024-06-02 13:53:13.617 event-loop [140483598177856] id=0x55e9b2a5f3a0: main loop started
+[TRACE] 2024-06-02 13:53:13.617 event-loop [140483598177856] id=0x55e9b2a5f3a0: subscribing to events on fd 10
+[INFO] 2024-06-02 13:53:13.617 event-loop [140483598177856] id=0x55e9b2a5f3a0: default timeout 100000, and max events to process per tick 100
+[TRACE] 2024-06-02 13:53:13.617 event-loop [140483598177856] id=0x55e9b2a5f3a0: waiting for a maximum of 100000 ms
+[INFO] 2024-06-02 13:53:13.617 dns [140483623425088] id=0x55e9b2ae5120: Initializing default host resolver with 8 max host entries.
+[INFO] 2024-06-02 13:53:13.617 event-loop [140483589785152] id=0x55e9b2a61530: main loop started
+[TRACE] 2024-06-02 13:53:13.617 event-loop [140483589785152] id=0x55e9b2a61530: subscribing to events on fd 12
+[INFO] 2024-06-02 13:53:13.617 event-loop [140483589785152] id=0x55e9b2a61530: default timeout 100000, and max events to process per tick 100
+[TRACE] 2024-06-02 13:53:13.617 event-loop [140483589785152] id=0x55e9b2a61530: waiting for a maximum of 100000 ms
+[INFO] 2024-06-02 13:53:13.617 channel-bootstrap [140483623425088] id=0x55e9b2ae53a0: Initializing client bootstrap with event-loop group 0x55e9b2ae2ab0
+[DEBUG] 2024-06-02 13:53:13.682 HttpClientFactory [140483623425088] Initializing Http Static State
+[DEBUG] 2024-06-02 13:53:13.682 HttpClientFactory [140483623425088] Initializing Curl Http Client
+[INFO] 2024-06-02 13:53:13.682 CurlHttpClient [140483623425088] Initializing Curl library with version: 7.81.0, ssl version: GnuTLS/3.7.3
+[INFO] 2024-06-02 13:53:13.682 EC2MetadataClient [140483623425088] Using IMDS endpoint: http://169.254.169.254
+[DEBUG] 2024-06-02 13:53:13.682 ClientConfiguration [140483623425088] Request Compression enabled
+[DEBUG] 2024-06-02 13:53:13.682 ClientConfiguration [140483623425088] ClientConfiguration will use MinReqCompression: 10240
+[DEBUG] 2024-06-02 13:53:13.682 ClientConfiguration [140483623425088] ClientConfiguration will use SDK Auto Resolved profile: [default] if not specified by users.
+[INFO] 2024-06-02 13:53:13.682 ClientConfiguration [140483623425088] Retry Strategy will use the default max attempts.
+[INFO] 2024-06-02 13:53:13.682 EC2MetadataClient [140483623425088] Creating AWSHttpResourceClient with max connections 2 and scheme http
+[INFO] 2024-06-02 13:53:13.682 CurlHandleContainer [140483623425088] Initializing CurlHandleContainer with size 2
+[TRACE] 2024-06-02 13:53:13.684 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.684 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = af-south-1
+[TRACE] 2024-06-02 13:53:13.684 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.684 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.684 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.af-south-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.685 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.685 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = ap-east-1
+[TRACE] 2024-06-02 13:53:13.685 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.685 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.685 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.ap-east-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.686 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.686 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = ap-northeast-1
+[TRACE] 2024-06-02 13:53:13.686 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.686 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.686 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.ap-northeast-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.687 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.687 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = ap-northeast-2
+[TRACE] 2024-06-02 13:53:13.687 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.687 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.687 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.ap-northeast-2.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.687 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.687 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = ap-northeast-3
+[TRACE] 2024-06-02 13:53:13.687 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.687 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.687 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.ap-northeast-3.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.688 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.688 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = ap-south-1
+[TRACE] 2024-06-02 13:53:13.688 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.688 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.688 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.ap-south-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.688 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.688 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = ap-southeast-1
+[TRACE] 2024-06-02 13:53:13.688 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.689 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.689 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.ap-southeast-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.689 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.689 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = ap-southeast-2
+[TRACE] 2024-06-02 13:53:13.689 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.689 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.689 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.ap-southeast-2.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.690 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.690 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = ap-southeast-3
+[TRACE] 2024-06-02 13:53:13.690 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.690 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.690 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.ap-southeast-3.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.691 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.691 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = ca-central-1
+[TRACE] 2024-06-02 13:53:13.691 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.691 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.691 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.ca-central-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.692 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.692 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = eu-central-1
+[TRACE] 2024-06-02 13:53:13.692 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.692 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.692 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.eu-central-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.693 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.693 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = eu-north-1
+[TRACE] 2024-06-02 13:53:13.693 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.693 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.693 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.eu-north-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.694 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.694 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = eu-south-1
+[TRACE] 2024-06-02 13:53:13.694 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.694 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.694 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.eu-south-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.694 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.694 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = eu-west-1
+[TRACE] 2024-06-02 13:53:13.694 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.694 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.694 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.eu-west-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.695 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.695 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = eu-west-2
+[TRACE] 2024-06-02 13:53:13.695 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.695 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.695 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.eu-west-2.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.695 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.695 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = eu-west-3
+[TRACE] 2024-06-02 13:53:13.695 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.695 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.695 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.eu-west-3.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.696 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.696 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = me-south-1
+[TRACE] 2024-06-02 13:53:13.696 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.696 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.696 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.me-south-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.697 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.697 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = sa-east-1
+[TRACE] 2024-06-02 13:53:13.697 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.697 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.697 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.sa-east-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.697 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.697 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-east-1
+[TRACE] 2024-06-02 13:53:13.697 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.697 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.697 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.us-east-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.698 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.698 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-east-2
+[TRACE] 2024-06-02 13:53:13.698 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.698 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.698 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.us-east-2.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.698 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.698 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-west-1
+[TRACE] 2024-06-02 13:53:13.698 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.698 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.699 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.us-west-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.699 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.699 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-west-2
+[TRACE] 2024-06-02 13:53:13.699 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.699 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.699 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.us-west-2.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.700 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:53:13.700 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-east-1
+[TRACE] 2024-06-02 13:53:13.700 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:53:13.700 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.700 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace-fips.us-east-1.api.aws
+[TRACE] 2024-06-02 13:53:13.701 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:53:13.701 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-east-1
+[TRACE] 2024-06-02 13:53:13.701 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.701 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.701 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace-fips.us-east-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.701 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.701 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-east-1
+[TRACE] 2024-06-02 13:53:13.701 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:53:13.701 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.701 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.us-east-1.api.aws
+[TRACE] 2024-06-02 13:53:13.702 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:53:13.702 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = cn-north-1
+[TRACE] 2024-06-02 13:53:13.702 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:53:13.702 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.702 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace-fips.cn-north-1.api.amazonwebservices.com.cn
+[TRACE] 2024-06-02 13:53:13.702 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:53:13.702 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = cn-north-1
+[TRACE] 2024-06-02 13:53:13.702 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.702 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.702 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace-fips.cn-north-1.amazonaws.com.cn
+[TRACE] 2024-06-02 13:53:13.703 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.703 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = cn-north-1
+[TRACE] 2024-06-02 13:53:13.703 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:53:13.703 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.703 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.cn-north-1.api.amazonwebservices.com.cn
+[TRACE] 2024-06-02 13:53:13.704 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.704 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = cn-north-1
+[TRACE] 2024-06-02 13:53:13.704 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.704 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.704 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.cn-north-1.amazonaws.com.cn
+[TRACE] 2024-06-02 13:53:13.704 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.704 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-gov-east-1
+[TRACE] 2024-06-02 13:53:13.704 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.704 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.704 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.us-gov-east-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.705 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.705 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-gov-west-1
+[TRACE] 2024-06-02 13:53:13.705 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.705 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.705 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.us-gov-west-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.705 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:53:13.705 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-gov-east-1
+[TRACE] 2024-06-02 13:53:13.705 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:53:13.705 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.705 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace-fips.us-gov-east-1.api.aws
+[TRACE] 2024-06-02 13:53:13.706 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:53:13.706 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-gov-east-1
+[TRACE] 2024-06-02 13:53:13.706 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.706 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.706 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace-fips.us-gov-east-1.amazonaws.com
+[TRACE] 2024-06-02 13:53:13.707 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.707 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-gov-east-1
+[TRACE] 2024-06-02 13:53:13.707 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:53:13.707 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.707 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.us-gov-east-1.api.aws
+[TRACE] 2024-06-02 13:53:13.707 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:53:13.707 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-iso-east-1
+[TRACE] 2024-06-02 13:53:13.707 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:53:13.707 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[TRACE] 2024-06-02 13:53:13.708 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:53:13.708 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-iso-east-1
+[TRACE] 2024-06-02 13:53:13.708 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.708 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.708 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace-fips.us-iso-east-1.c2s.ic.gov
+[TRACE] 2024-06-02 13:53:13.709 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.709 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-iso-east-1
+[TRACE] 2024-06-02 13:53:13.709 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:53:13.709 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[TRACE] 2024-06-02 13:53:13.709 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.709 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-iso-east-1
+[TRACE] 2024-06-02 13:53:13.709 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.709 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.709 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.us-iso-east-1.c2s.ic.gov
+[TRACE] 2024-06-02 13:53:13.710 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:53:13.710 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-isob-east-1
+[TRACE] 2024-06-02 13:53:13.710 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:53:13.710 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[TRACE] 2024-06-02 13:53:13.711 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:53:13.711 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-isob-east-1
+[TRACE] 2024-06-02 13:53:13.711 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.711 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.711 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace-fips.us-isob-east-1.sc2s.sgov.gov
+[TRACE] 2024-06-02 13:53:13.711 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.711 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-isob-east-1
+[TRACE] 2024-06-02 13:53:13.711 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:53:13.711 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[TRACE] 2024-06-02 13:53:13.712 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.712 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-isob-east-1
+[TRACE] 2024-06-02 13:53:13.712 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.712 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.712 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://metering.marketplace.us-isob-east-1.sc2s.sgov.gov
+[TRACE] 2024-06-02 13:53:13.713 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.713 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Endpoint = https://example.com
+[TRACE] 2024-06-02 13:53:13.713 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-east-1
+[TRACE] 2024-06-02 13:53:13.713 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.713 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.713 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://example.com
+[TRACE] 2024-06-02 13:53:13.713 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.713 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Endpoint = https://example.com
+[TRACE] 2024-06-02 13:53:13.713 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.713 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.713 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint rules engine evaluated the endpoint: https://example.com
+[TRACE] 2024-06-02 13:53:13.714 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 1
+[TRACE] 2024-06-02 13:53:13.714 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Endpoint = https://example.com
+[TRACE] 2024-06-02 13:53:13.714 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-east-1
+[TRACE] 2024-06-02 13:53:13.714 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 0
+[DEBUG] 2024-06-02 13:53:13.714 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[TRACE] 2024-06-02 13:53:13.714 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseFIPS = 0
+[TRACE] 2024-06-02 13:53:13.714 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Endpoint = https://example.com
+[TRACE] 2024-06-02 13:53:13.714 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint str eval parameter: Region = us-east-1
+[TRACE] 2024-06-02 13:53:13.714 Aws::Endpoint::DefaultEndpointProvider [140483623425088] Endpoint bool eval parameter: UseDualStack = 1
+[DEBUG] 2024-06-02 13:53:13.714 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[DEBUG] 2024-06-02 13:53:13.715 AWSEndpointsResolution [140483623425088] Resolved endpoint with status 0
+[INFO] 2024-06-02 13:53:13.715 Aws_Init_Cleanup [140483623425088] Shutdown AWS SDK for C++.
+[INFO] 2024-06-02 13:53:13.715 CurlHandleContainer [140483623425088] Cleaning up CurlHandleContainer.
+[DEBUG] 2024-06-02 13:53:13.715 HttpClientFactory [140483623425088] Cleanup Http Static State
+[DEBUG] 2024-06-02 13:53:13.715 HttpClientFactory [140483623425088] Cleanup Curl Http Client
+[DEBUG] 2024-06-02 13:53:13.716 channel-bootstrap [140483623425088] id=0x55e9b2ae53a0: releasing bootstrap reference
+[DEBUG] 2024-06-02 13:53:13.716 channel-bootstrap [140483623425088] id=0x55e9b2ae53a0: bootstrap destroying
+[INFO] 2024-06-02 13:53:13.716 event-loop [140483581392448] id=0x55e9b2a61530: Destroying event_loop
+[INFO] 2024-06-02 13:53:13.716 event-loop [140483581392448] id=0x55e9b2a61530: Stopping event-loop thread.
+[TRACE] 2024-06-02 13:53:13.716 event-loop [140483581392448] id=0x55e9b2a61530: Scheduling task 0x55e9b2ae4ca8 cross-thread for timestamp 0
+[TRACE] 2024-06-02 13:53:13.716 event-loop [140483581392448] id=0x55e9b2a61530: Waking up event-loop thread
+[TRACE] 2024-06-02 13:53:13.716 event-loop [140483589785152] id=0x55e9b2a61530: wake up with 1 events to process.
+[TRACE] 2024-06-02 13:53:13.716 event-loop [140483589785152] id=0x55e9b2a61530: activity on fd 12, invoking handler.
+[TRACE] 2024-06-02 13:53:13.716 event-loop [140483589785152] id=0x55e9b2a61530: notified of cross-thread tasks to schedule
+[TRACE] 2024-06-02 13:53:13.716 event-loop [140483589785152] id=0x55e9b2a61530: processing cross-thread tasks
+[TRACE] 2024-06-02 13:53:13.716 event-loop [140483589785152] id=0x55e9b2a61530: task 0x55e9b2ae4ca8 pulled to event-loop, scheduling now.
+[DEBUG] 2024-06-02 13:53:13.716 task-scheduler [140483589785152] id=0x55e9b2ae4ca8: Scheduling epoll_event_loop_stop task for immediate execution
+[TRACE] 2024-06-02 13:53:13.716 event-loop [140483589785152] id=0x55e9b2a61530: running scheduled tasks.
+[DEBUG] 2024-06-02 13:53:13.716 task-scheduler [140483589785152] id=0x55e9b2ae4ca8: Running epoll_event_loop_stop task with <Running> status
+[TRACE] 2024-06-02 13:53:13.716 event-loop [140483589785152] id=0x55e9b2a61530: no more scheduled tasks using default timeout.
+[DEBUG] 2024-06-02 13:53:13.716 event-loop [140483589785152] id=0x55e9b2a61530: exiting main loop
+[TRACE] 2024-06-02 13:53:13.716 event-loop [140483589785152] id=0x55e9b2a61530: un-subscribing from events on fd 12
+[TRACE] 2024-06-02 13:53:13.716 event-loop [140483589785152] id=0x55e9b2a61530: scheduling task 0x7fc4d0000c80 in-thread for timestamp 0
+[DEBUG] 2024-06-02 13:53:13.716 task-scheduler [140483589785152] id=0x7fc4d0000c80: Scheduling epoll_event_loop_unsubscribe_cleanup task for immediate execution
+[DEBUG] 2024-06-02 13:53:13.716 task-scheduler [140483581392448] id=0x7fc4d0000c80: Running epoll_event_loop_unsubscribe_cleanup task with <Canceled> status
+[INFO] 2024-06-02 13:53:13.716 event-loop [140483581392448] id=0x55e9b2a5f3a0: Destroying event_loop
+[INFO] 2024-06-02 13:53:13.716 event-loop [140483581392448] id=0x55e9b2a5f3a0: Stopping event-loop thread.
+[TRACE] 2024-06-02 13:53:13.716 event-loop [140483581392448] id=0x55e9b2a5f3a0: Scheduling task 0x55e9b2ae42f8 cross-thread for timestamp 0
+[TRACE] 2024-06-02 13:53:13.716 event-loop [140483581392448] id=0x55e9b2a5f3a0: Waking up event-loop thread
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483598177856] id=0x55e9b2a5f3a0: wake up with 1 events to process.
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483598177856] id=0x55e9b2a5f3a0: activity on fd 10, invoking handler.
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483598177856] id=0x55e9b2a5f3a0: notified of cross-thread tasks to schedule
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483598177856] id=0x55e9b2a5f3a0: processing cross-thread tasks
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483598177856] id=0x55e9b2a5f3a0: task 0x55e9b2ae42f8 pulled to event-loop, scheduling now.
+[DEBUG] 2024-06-02 13:53:13.717 task-scheduler [140483598177856] id=0x55e9b2ae42f8: Scheduling epoll_event_loop_stop task for immediate execution
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483598177856] id=0x55e9b2a5f3a0: running scheduled tasks.
+[DEBUG] 2024-06-02 13:53:13.717 task-scheduler [140483598177856] id=0x55e9b2ae42f8: Running epoll_event_loop_stop task with <Running> status
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483598177856] id=0x55e9b2a5f3a0: no more scheduled tasks using default timeout.
+[DEBUG] 2024-06-02 13:53:13.717 event-loop [140483598177856] id=0x55e9b2a5f3a0: exiting main loop
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483598177856] id=0x55e9b2a5f3a0: un-subscribing from events on fd 10
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483598177856] id=0x55e9b2a5f3a0: scheduling task 0x7fc4cc000c80 in-thread for timestamp 0
+[DEBUG] 2024-06-02 13:53:13.717 task-scheduler [140483598177856] id=0x7fc4cc000c80: Scheduling epoll_event_loop_unsubscribe_cleanup task for immediate execution
+[DEBUG] 2024-06-02 13:53:13.717 task-scheduler [140483581392448] id=0x7fc4cc000c80: Running epoll_event_loop_unsubscribe_cleanup task with <Canceled> status
+[INFO] 2024-06-02 13:53:13.717 event-loop [140483581392448] id=0x55e9b2a5e920: Destroying event_loop
+[INFO] 2024-06-02 13:53:13.717 event-loop [140483581392448] id=0x55e9b2a5e920: Stopping event-loop thread.
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483581392448] id=0x55e9b2a5e920: Scheduling task 0x55e9b2ae3948 cross-thread for timestamp 0
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483581392448] id=0x55e9b2a5e920: Waking up event-loop thread
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483606570560] id=0x55e9b2a5e920: wake up with 1 events to process.
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483606570560] id=0x55e9b2a5e920: activity on fd 8, invoking handler.
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483606570560] id=0x55e9b2a5e920: notified of cross-thread tasks to schedule
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483606570560] id=0x55e9b2a5e920: processing cross-thread tasks
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483606570560] id=0x55e9b2a5e920: task 0x55e9b2ae3948 pulled to event-loop, scheduling now.
+[DEBUG] 2024-06-02 13:53:13.717 task-scheduler [140483606570560] id=0x55e9b2ae3948: Scheduling epoll_event_loop_stop task for immediate execution
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483606570560] id=0x55e9b2a5e920: running scheduled tasks.
+[DEBUG] 2024-06-02 13:53:13.717 task-scheduler [140483606570560] id=0x55e9b2ae3948: Running epoll_event_loop_stop task with <Running> status
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483606570560] id=0x55e9b2a5e920: no more scheduled tasks using default timeout.
+[DEBUG] 2024-06-02 13:53:13.717 event-loop [140483606570560] id=0x55e9b2a5e920: exiting main loop
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483606570560] id=0x55e9b2a5e920: un-subscribing from events on fd 8
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483606570560] id=0x55e9b2a5e920: scheduling task 0x7fc4d8000c80 in-thread for timestamp 0
+[DEBUG] 2024-06-02 13:53:13.717 task-scheduler [140483606570560] id=0x7fc4d8000c80: Scheduling epoll_event_loop_unsubscribe_cleanup task for immediate execution
+[DEBUG] 2024-06-02 13:53:13.717 task-scheduler [140483581392448] id=0x7fc4d8000c80: Running epoll_event_loop_unsubscribe_cleanup task with <Canceled> status
+[INFO] 2024-06-02 13:53:13.717 event-loop [140483581392448] id=0x55e9b2a5d900: Destroying event_loop
+[INFO] 2024-06-02 13:53:13.717 event-loop [140483581392448] id=0x55e9b2a5d900: Stopping event-loop thread.
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483581392448] id=0x55e9b2a5d900: Scheduling task 0x55e9b2ae3048 cross-thread for timestamp 0
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483581392448] id=0x55e9b2a5d900: Waking up event-loop thread
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483614963264] id=0x55e9b2a5d900: wake up with 1 events to process.
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483614963264] id=0x55e9b2a5d900: activity on fd 6, invoking handler.
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483614963264] id=0x55e9b2a5d900: notified of cross-thread tasks to schedule
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483614963264] id=0x55e9b2a5d900: processing cross-thread tasks
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483614963264] id=0x55e9b2a5d900: task 0x55e9b2ae3048 pulled to event-loop, scheduling now.
+[DEBUG] 2024-06-02 13:53:13.717 task-scheduler [140483614963264] id=0x55e9b2ae3048: Scheduling epoll_event_loop_stop task for immediate execution
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483614963264] id=0x55e9b2a5d900: running scheduled tasks.
+[DEBUG] 2024-06-02 13:53:13.717 task-scheduler [140483614963264] id=0x55e9b2ae3048: Running epoll_event_loop_stop task with <Running> status
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483614963264] id=0x55e9b2a5d900: no more scheduled tasks using default timeout.
+[DEBUG] 2024-06-02 13:53:13.717 event-loop [140483614963264] id=0x55e9b2a5d900: exiting main loop
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483614963264] id=0x55e9b2a5d900: un-subscribing from events on fd 6
+[TRACE] 2024-06-02 13:53:13.717 event-loop [140483614963264] id=0x55e9b2a5d900: scheduling task 0x7fc4d4000c80 in-thread for timestamp 0
+[DEBUG] 2024-06-02 13:53:13.717 task-scheduler [140483614963264] id=0x7fc4d4000c80: Scheduling epoll_event_loop_unsubscribe_cleanup task for immediate execution
+[DEBUG] 2024-06-02 13:53:13.717 task-scheduler [140483581392448] id=0x7fc4d4000c80: Running epoll_event_loop_unsubscribe_cleanup task with <Canceled> status
