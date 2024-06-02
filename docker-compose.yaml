@@ -15,34 +15,23 @@ services:
           - postgres
 
     miet-video-backend-container:
-        image: ghcr.io/userver-framework/ubuntu-userver-build-base:v1
+        image: ghcr.io/userver-framework/ubuntu-userver-build-base:v2
         privileged: true
         environment:
           - POSTGRES_DB=miet_video_db
           - POSTGRES_USER=user
           - POSTGRES_PASSWORD=password
           - PREFIX=${PREFIX:-~/.local}
-          - CC
-          - LD_LIBRARY_PATH
           - CCACHE_DIR=/miet_video/.ccache
-          - CCACHE_HASHDIR
-          - CCACHE_NOHASHDIR
-          - CCACHE_PREFIX
-          - CCACHE_SIZE
-          - CMAKE_OPTS
           - CORES_DIR=/cores
-          - CXX
-          - MAKE_OPTS
-          - CMAKE_COMMON_FLAGS
         volumes:
           - .:/miet_video:rw
-          - ./third_party/userver/tools/docker:/tools:ro
           - ${TC_CORES_DIR:-./.cores}:/cores:rw
         ports:
           - 8080:8080
         working_dir: /miet_video
         entrypoint:
-          - /miet_video/build_debug/miet-video-backend
+          - ./tests/run_as_user.sh
         depends_on:
           - postgres
         networks:

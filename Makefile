@@ -74,7 +74,7 @@ format:
 
 # Internal hidden targets that are used only in docker environment
 --in-docker-start-debug --in-docker-start-release: --in-docker-start-%: install-%
-	psql 'postgresql://user:password@service-postgres:5432/miet-video-backend_db-1' -f ./postgresql/data/initial_data.sql
+	psql 'postgresql://user:password@0.0.0.0:5432/miet_video_db' -f ./postgres/data/initial_data.sql
 	/home/user/.local/bin/miet-video-backend \
 		--config /home/user/.local/etc/miet-video-backend/static_config.yaml \
 		--config_vars /home/user/.local/etc/miet-video-backend/config_vars.docker.yaml

@@ -3,4 +3,4 @@ VALUES
 ("123", "123", "DimaTest1", "123", "Password1")
 ("1234", "1234", "DimaTest2", "12345", "Password2")
 ("12345", "12345", "DimaTest3", "12345", "Password3")
-ON CONFLICT DO NOTHIND345
+ON CONFLICT DO NOTHING
