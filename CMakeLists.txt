@@ -14,6 +14,8 @@ set(USERVER_FEATURE_REDIS_HI_MALLOC ON CACHE BOOL "" FORCE)
 
 
 
+find_package(AWSSDK REQUIRED COMPONENTS s3 sts)
+
 add_subdirectory(third_party/userver)
 userver_setup_environment()
 
@@ -68,10 +70,13 @@ set(MIET_VIDEO_MODELS_SOURCE
 
 set(MIET_VIDEO_CLIENTS_SOURCE
     ${MIET_VIDEO_CLIENTS_DIR}/abstract/orioks_client_base.hpp
-    ${MIET_VIDEO_CLIENTS_DIR}/abstract/orioks_client_base.cpp    
+    ${MIET_VIDEO_CLIENTS_DIR}/abstract/orioks_client_base.cpp  
+    ${MIET_VIDEO_CLIENTS_DIR}/abstract/s3_client_base.hpp 
 
     ${MIET_VIDEO_CLIENTS_DIR}/orioks_client.hpp
     ${MIET_VIDEO_CLIENTS_DIR}/orioks_client.cpp
+    ${MIET_VIDEO_CLIENTS_DIR}/s3_client.hpp
+    ${MIET_VIDEO_CLIENTS_DIR}/s3_client.cpp
 )
 
 set(MIET_VIDEO_HANDLERS_SOURCE
@@ -134,7 +139,11 @@ add_library(${PROJECT_NAME}_objs OBJECT
     ${MIET_VIDEO_ERRORS_SOURCE}    
 )
 target_include_directories(${PROJECT_NAME}_objs PUBLIC src)
-target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-postgresql)
+target_link_libraries(${PROJECT_NAME}_objs PUBLIC
+        userver-postgresql
+        ${AWSSDK_LINK_LIBRARIES}
+        ${AWSSDK_PLATFORM_DEPS}
+)
 
 
 

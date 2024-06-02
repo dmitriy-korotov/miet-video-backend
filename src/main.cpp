@@ -15,6 +15,7 @@
 #include <miet/db/managers/postgres/comments_manager.hpp>
 #include <miet/queues/comments_notification_queue.hpp>
 #include <miet/clients/orioks_client.hpp>
+#include <miet/clients/s3_client.hpp>
 #include <miet/handlers/registration_handler.hpp>
 #include <miet/handlers/authorization_handler.hpp>
 #include <miet/handlers/user_info_handler.hpp>
@@ -44,6 +45,7 @@ int main(int argc, char* argv[]) {
                             .Append<userver::clients::dns::Component>()
                             .Append<userver::components::HttpClient>()
                             .Append<miet::clients::OrioksClient>()
+                            .Append<miet::clients::S3Client>()
                             .Append<miet::handlers::RegistrationHandler>()
                             .Append<miet::handlers::AuthorizationHandler>()
                             .Append<miet::handlers::UserInfoHandler>()

@@ -45,6 +45,12 @@ components_manager:
             user-agent: miet-video/0.0.1 GNU/Linux 22.04-Ubuntu
             http-timeout: 10s
 
+        s3-client:
+            load-enabled: true
+            endpoint: hb.ru-msk.vkcs.cloud
+            access-key: avEKwzXfMcM1myoBRrL2Ut
+            secret-key: 4kVRJFmNCHhfq88GuNyVpKb27n85qC7f5FyDUoqu8nbt
+
         tests-control:
             load-enabled: $is-testing
             path: /tests/{action}

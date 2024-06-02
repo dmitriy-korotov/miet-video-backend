@@ -51,6 +51,12 @@ namespace miet::handlers
                         fmt::format("Session lifetime has expired (token = '{}')", args.session_token)));
         }
 
+        {
+            auto info = deps.s3_client->GetBucketInfo("miet_video");
+            LOG_INFO() << info;
+            return;
+        }
+
         models::VideoUploadData video;
         video.video_id = userver::utils::generators::GenerateUuidV7();
         video.title = std::move(args.title);
@@ -79,7 +85,8 @@ namespace miet::handlers
             UploadLectureHandleDeps deps
             {
                 .sessions_manager = m_sessions_manager,
-                .lectures_manager = m_lectures_manager
+                .lectures_manager = m_lectures_manager,
+                .s3_client = m_s3_client
             };
 
             DoUploadLectureHandle(args, deps);
