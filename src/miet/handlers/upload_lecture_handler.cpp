@@ -42,7 +42,7 @@ namespace miet::handlers
         }
     }
 
-    auto DoUploadLectureHandle(const UploadLectureHandleArgs& args, const UploadLectureHandleDeps& deps) -> void
+    auto DoUploadLectureHandle(UploadLectureHandleArgs&& args, const UploadLectureHandleDeps& deps) -> void
     {
         auto user_id_opt = deps.sessions_manager->GetUserIDIfSessionAlive(args.session_token);
         if (!user_id_opt.has_value()) {
@@ -51,18 +51,28 @@ namespace miet::handlers
                         fmt::format("Session lifetime has expired (token = '{}')", args.session_token)));
         }
 
-        {
-            auto info = deps.s3_client->GetBucketInfo("miet_video");
-            LOG_INFO() << info;
-            return;
+        std::string video_filename = userver::utils::generators::GenerateUuidV7();
+        std::optional<std::string> preview_filename = std::nullopt;
+
+        if (!deps.s3_client->UploadFile(video_filename, std::move(args.video_data))) {
+            throw server::handlers::InternalServerError(
+                server::handlers::InternalMessage("Can't upload video"));
+        }
+
+        if (args.preview_data) {
+            preview_filename = userver::utils::generators::GenerateUuidV7();
+            if (!deps.s3_client->UploadFile(*preview_filename, std::move(*args.preview_data))) {
+                throw server::handlers::InternalServerError(
+                    server::handlers::InternalMessage("Can't upload preview image"));
+            }
         }
 
         models::VideoUploadData video;
         video.video_id = userver::utils::generators::GenerateUuidV7();
         video.title = std::move(args.title);
         video.description = std::move(args.description);
-        video.video_src = args.video_data;
-        video.preview_src = args.preview_data;
+        video.video_src = std::move(video_filename);
+        video.preview_src = std::move(preview_filename);
         video.author_id = std::move(user_id_opt).value();
 
         models::LectureUploadData lecture
@@ -89,7 +99,7 @@ namespace miet::handlers
                 .s3_client = m_s3_client
             };
 
-            DoUploadLectureHandle(args, deps);
+            DoUploadLectureHandle(std::move(args), deps);
             return {};
         });
     }

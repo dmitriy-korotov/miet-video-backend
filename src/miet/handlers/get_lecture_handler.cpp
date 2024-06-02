@@ -35,7 +35,12 @@ namespace miet::handlers
                 server::handlers::InternalMessage(
                         fmt::format("Session lifetime has expired (token = '{}')", args.session_token)));
         }
-        return deps.lectures_manager->GetLecture(args.lecture_id);
+        auto lecture = deps.lectures_manager->GetLecture(args.lecture_id);
+        lecture.video.video_src = deps.s3_client->GetFileUrl(lecture.video.video_src);
+        if (lecture.video.preview_src) {
+            lecture.video.preview_src = deps.s3_client->GetFileUrl(*lecture.video.preview_src);
+        }
+        return lecture;
     }
 
     auto GetLectureHandler::HandleRequestThrow(const server::http::HttpRequest& request,
@@ -49,7 +54,8 @@ namespace miet::handlers
             GetLectureHandleDeps deps
             {
                 .sessions_manager = m_sessions_manager,
-                .lectures_manager = m_lectures_manager
+                .lectures_manager = m_lectures_manager,
+                .s3_client = m_s3_client
             };
 
             auto lecture = DoGetLectureHandle(args, deps);

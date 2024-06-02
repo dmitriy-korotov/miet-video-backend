@@ -47,9 +47,10 @@ components_manager:
 
         s3-client:
             load-enabled: true
-            endpoint: hb.ru-msk.vkcs.cloud
-            access-key: avEKwzXfMcM1myoBRrL2Ut
-            secret-key: 4kVRJFmNCHhfq88GuNyVpKb27n85qC7f5FyDUoqu8nbt
+            endpoint: $s3-endpoint
+            access-key: $s3-access-key
+            secret-key: $s3-secret-key
+            bucket-name: $s3-bucket-name
 
         tests-control:
             load-enabled: $is-testing

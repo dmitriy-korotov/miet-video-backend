@@ -4,6 +4,8 @@
 #include <miet/db/managers/postgres/sessions_manager.hpp>
 #include <miet/db/managers/postgres/lectures_manager.hpp>
 
+#include <miet/clients/s3_client.hpp>
+
 #include <userver/components/component.hpp>
 #include <userver/server/handlers/http_handler_base.hpp>
 
@@ -24,6 +26,7 @@ namespace miet::handlers
                 : HttpHandlerBase(config, component_context)
                 , m_sessions_manager(utils::CreateViewSharedPtr(&component_context.FindComponent<db::managers::pg::SessionsManager>()))
                 , m_lectures_manager(utils::CreateViewSharedPtr(&component_context.FindComponent<db::managers::pg::LecturesManager>()))
+                , m_s3_client(utils::CreateViewSharedPtr(&component_context.FindComponent<clients::S3Client>()))
         { }
 
         std::string HandleRequestThrow(const server::http::HttpRequest& request,
@@ -33,6 +36,7 @@ namespace miet::handlers
 
         std::shared_ptr<db::managers::SessionsManagerBase> m_sessions_manager;
         std::shared_ptr<db::managers::LecturesManagerBase> m_lectures_manager;
+        std::shared_ptr<clients::S3ClientBase> m_s3_client;
 
     };
 
@@ -46,6 +50,7 @@ namespace miet::handlers
     {
         std::shared_ptr<db::managers::SessionsManagerBase> sessions_manager;
         std::shared_ptr<db::managers::LecturesManagerBase> lectures_manager;
+        std::shared_ptr<clients::S3ClientBase> s3_client;
     };
 
     models::LectureData DoGetLectureHandle(const GetLectureHandleArgs& args, const GetLectureHandleDeps& deps);

@@ -7,7 +7,7 @@
 #include <aws/s3/S3Client.h>
 #include <aws/s3/model/CreateBucketConfiguration.h>
 #include <aws/s3/model/ListObjectsRequest.h>
-#include <aws/s3/model/PutObjectRequest.h>
+#include <aws/s3/model/PutObjectRequest.h>  
 
 
 
@@ -52,6 +52,7 @@ namespace miet::clients
             , m_endpoint(config["endpoint"].As<std::string>())
             , m_access_key(config["access-key"].As<std::string>())
             , m_secrect_key(config["secret-key"].As<std::string>())
+            , m_bucket_name(config["bucket-name"].As<std::string>())
     {
         Aws::InitAPI(m_options);
     }
@@ -77,6 +78,9 @@ namespace miet::clients
                 secret-key:
                     type: string
                     description: secret key for getting access to s3 storage
+                bucket-name:
+                    type: string
+                    description: bucket name for videos and previews
         )");
     }
 
@@ -91,5 +95,54 @@ namespace miet::clients
         FindTheBucket(s3_client, bucket_name);
 
         return "";
+    }
+
+    auto S3Client::UploadFile(const std::string& filename, std::string&& data) const -> bool
+    {
+        Aws::Client::ClientConfiguration aws_config;
+        aws_config.endpointOverride = Aws::String(m_endpoint);
+        Aws::S3::S3Client s3_client(aws_config);
+
+        Aws::S3::Model::PutObjectRequest request;
+        request.SetBucket(m_bucket_name);
+        request.SetKey(filename);
+
+        auto body_ptr = std::make_shared<Aws::StringStream>();
+        body_ptr->write(data.data(), data.size());
+
+        request.SetBody(body_ptr);
+
+        Aws::S3::Model::PutObjectOutcome outcome = s3_client.PutObject(request);
+
+        if (!outcome.IsSuccess()) {
+            LOG_ERROR() << "Error: PutObject: " << outcome.GetError().GetMessage();
+        }
+        else {
+            LOG_INFO() << "Added object '" << filename << "' to bucket '" << m_bucket_name << "'.";
+        }
+        return outcome.IsSuccess();
+    }
+
+    auto S3Client::GetFileUrl(const std::string& filename, uint64_t expirationSeconds) const -> std::string
+    {
+        {
+            auto locked_data = m_files_url_cache.SharedLock();
+            if (locked_data->contains(filename)) {
+                return locked_data->at(filename);
+            }
+        }
+
+        Aws::Client::ClientConfiguration aws_config;
+        aws_config.endpointOverride = Aws::String(m_endpoint);
+        Aws::S3::S3Client s3_client(aws_config);
+        auto url = s3_client.GeneratePresignedUrl(m_bucket_name, filename, Aws::Http::HttpMethod::HTTP_GET, expirationSeconds);
+        if (url.empty()) {
+            return url;
+        }
+        {
+            auto locked_data = m_files_url_cache.Lock();
+            locked_data->emplace(filename, url);
+        }
+        return url;
     }
 }
