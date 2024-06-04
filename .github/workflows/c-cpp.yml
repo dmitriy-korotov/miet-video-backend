@@ -13,11 +13,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: build aws sdk
-      working-directory: ./third_party/sdk_build
-      run: |
-        pip3 install cmake
-        make
     - name: install aws sdk
       working-directory: ./third_party/sdk_build
       run: make install
