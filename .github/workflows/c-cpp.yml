@@ -13,10 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: cd aws
-      run: cd third_party/sdk_build
     - name: build aws sdk
-      run: make
+      run: make ./third_party/sdk_build
     - name: install aws sdk
       run: make install
     - name: build service
